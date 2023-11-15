@@ -15,12 +15,12 @@ Il est également demandé de suivre les règles suivantes:
  Le code doit également être le plus modulable que possible
 
 ## Organisation des fichiers
-`src/`: Contient tous les fichiers sources (.cpp, .hpp)
-`build/`: Contient tous les fichiers compilés (pas dans le repo parce que produit par `make`)
-`docs/`: Contient toute la documentation
-`res/`: Contient les ressources, tel que les images, polices, etc.
-`test/`: Contient les tests unitaires
-`M̀akefile`: Makefile à modifier progressivement au cours du projet
+ - `src/`: Contient tous les fichiers sources (.cpp, .hpp)
+ - `build/`: Contient tous les fichiers compilés (pas dans le repo parce que produit par `make`)
+ - `docs/`: Contient toute la documentation
+ - `res/`: Contient les ressources, tel que les images, polices, etc.
+ - `test/`: Contient les tests unitaires
+ - `M̀akefile`: Makefile à modifier progressivement au cours du projet
 
 ## Compiler le projet
 Le projet peut être compilé avec la commande `m̀ake` a la racine du projet. L'exécutable se trouvera dans le dossier `build/`.
