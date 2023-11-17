@@ -1,4 +1,4 @@
-#include "Model/player.h"
+#include "Model/Player.h"
 #include "Model/Map.h"
 
 class Game {
