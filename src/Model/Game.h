@@ -1,5 +1,5 @@
-#include "Model/Player.h"
-#include "Model/Map.h"
+#include "Player.h"
+#include "Map.h"
 
 class Game {
 private:
