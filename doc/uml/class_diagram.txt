@@ -54,5 +54,6 @@ Game "1" -d- "1" Player
 Game -l- Controller
 Position -u- Player
 MainWindow -- GameRender
-GameRender -- Game 
+GameRender -- Game
+MainWindow -- Controller: envoie les inputs utilisateurs >
 @enduml
