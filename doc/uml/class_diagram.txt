@@ -1,3 +1,57 @@
 @startuml
-class mainWindow
+class Game {
+  -Map map 
+  -Player joueur
+  +modifyPlayer()
+  +changeMap()
+}
+
+class Map {
+  -Environment[] environments 
+}
+abstract Environment {
+  +void HandlePlayer
+}
+class SideWalk {
+  +void HandlePlayer
+}
+class Water {
+  +void HandlePlayer
+}
+class Grass {
+  +void HandlePlayer
+}
+
+class Controller {
+  -Game game
+}
+
+class Player {
+  -Position pos
+}
+
+struct Position {
+  +int x
+  +int y
+}
+
+class MainWindow {
+  -GameRender renderer
+}
+
+class GameRender {
+  -Game game
+  +void draw
+}
+
+Game "1" - "1" Map 
+Map "13" - "*" Environment
+Environment <|-- SideWalk
+Environment <|-- Water 
+Environment <|-- Grass 
+Game "1" -d- "1" Player
+Game -l- Controller
+Position -u- Player
+MainWindow -- GameRender
+GameRender -- Game 
 @enduml
