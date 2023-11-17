@@ -1,5 +1,5 @@
 # 🐸 Frogger
-Frogger est un jeu crée en 1981. Dans ce jeu, vous controlez une grenouille qui commence en bas de l'écran que vous devez emmener sur le nénuphar libre en haut de l'écran
+Frogger est un jeu crée en 1981. Dans ce jeu, vous controlez une grenouille qui commence en bas de l'écran que vous devez emmener sur le nénuphar libre en haut de l'écran.
 
 ## Modèle de conception
 Pour ce projet, il est demandé d'utiliser le modèle de conception *Modèle-Vue-Controlleur*.
