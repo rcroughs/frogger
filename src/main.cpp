@@ -1,6 +1,6 @@
-#include <iostream>
+#include "MainWindow.h"
 
 int main() {
-  
-  return 0;
+    MainWindow window();
+    return 0;
 }
