@@ -28,6 +28,7 @@ class Controller {
 
 class Player {
   -Position pos
+  -Direction last_direction
 }
 
 struct Position {
