@@ -1,3 +1,6 @@
+#ifndef _GAME_H
+#define _GAME_H
+
 #include "Player.h"
 #include "Map.h"
 
@@ -6,8 +9,7 @@ private:
     Player player;
     Map map;
 public:
-    Game(Player player, Map map) : player{player}, map{map} {}
-    virtual ~Game();
+    Game(Player player, Map map) : player{player}, map{map} {};
 
     virtual Player getPlayer() {return this->player;}
     virtual void setPlayer(Player new_player) {player = new_player;}
@@ -15,4 +17,4 @@ public:
     virtual void setMap(Map new_map) {map = new_map;}
 };
 
-
+#endif

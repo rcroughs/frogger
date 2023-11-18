@@ -1,6 +1,7 @@
 #include "MainWindow.h"
 
 int main() {
-    MainWindow window();
-    return 0;
+    MainWindow window;
+    window.show();
+    return Fl::run();
 }

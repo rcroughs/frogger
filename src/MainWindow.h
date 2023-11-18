@@ -1,0 +1,19 @@
+#include <FL/Fl.H>
+#include <FL/Fl_Double_Window.H>
+#include "View/GameRenderer.h"
+#include "Model/Game.h"
+
+
+class MainWindow : public Fl_Window {
+private:
+    Game game;
+    GameRenderer renderer;
+public:
+    MainWindow() : Fl_Window(1000,1000, 1000, 1000, "Frogger"), game{Player({100,100}, down), Map()}, renderer{this->game} {
+        Fl::add_timeout(1.0 / 60.0, timer_handler, this);
+        resizable(this);
+    }
+    static void timer_handler(void* user_data);
+    int handle(int event) override;
+    void draw() override;
+};

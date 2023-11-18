@@ -7,7 +7,6 @@ private:
     Direction current_direction;
 public:
     Player(Position position, Direction direction) : current_position{position}, current_direction{direction} {}
-    virtual ~Player();
 
     virtual Position getPosition() {return this->current_position;}
     virtual void setPosition(Position new_position) {current_position = new_position;}
