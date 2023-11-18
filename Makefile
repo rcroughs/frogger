@@ -1,14 +1,32 @@
-CC=g++
-FLAGS=-Wall -Wextra -O2 -std=c++17 -Wpedantic
-SOURCEPATH=src/
-TESTPATH=test/
-BUILDPATH=build/
-OBJS=
+OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o
+SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp
+HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h
+OUT	= build/frogger
+CC	 = g++
+FLAGS	 = -g -c -Wall -Wextra -lfltk
+LFLAGS	 = -lfltk
 
-all: frogger test
+all: $(OBJS)
+	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+	rm -f $(OBJS)
 
-frogger: $(SOURCEPATH)main.cpp
-	$(CC) $(FLAGS) $(SOURCEPATH)main.cpp -o $(BUILDPATH)frogger
+main.o: src/main.cpp
+	$(CC) $(FLAGS) src/main.cpp -std=c++17
 
-test: $(TESTPATH)main.cpp
-	$(CC) $(FLAGS) $(TESTPATH)main.cpp -o $(BUILDPATH)test
+MainWindow.o: src/MainWindow.cpp
+	$(CC) $(FLAGS) src/MainWindow.cpp -std=c++17
+
+Game.o: src/Model/Game.cpp
+	$(CC) $(FLAGS) src/Model/Game.cpp -std=c++17
+
+Map.o: src/Model/Map.cpp
+	$(CC) $(FLAGS) src/Model/Map.cpp -std=c++17
+
+Player.o: src/Model/Player.cpp
+	$(CC) $(FLAGS) src/Model/Player.cpp -std=c++17
+
+GameRenderer.o: src/View/GameRenderer.cpp
+	$(CC) $(FLAGS) src/View/GameRenderer.cpp -std=c++17
+
+clean:
+	rm -f $(OBJS) $(OUT)
