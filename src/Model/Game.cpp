@@ -9,9 +9,9 @@ void Game::modifyPlayer(char move) {
             player.setPosition(Position{player.getPosition().x - 100, player.getPosition().y});
             break;
         case 'w':
-            player.setPosition(Position{player.getPosition().x, player.getPosition().y + 100});
+            player.setPosition(Position{player.getPosition().x, player.getPosition().y - 100});
             break;
         case 's':
-            player.setPosition(Position{player.getPosition().x, player.getPosition().y - 100});
+            player.setPosition(Position{player.getPosition().x, player.getPosition().y + 100});
     }
 }
