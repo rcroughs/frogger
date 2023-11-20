@@ -1,6 +1,6 @@
-OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o
-SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp
-HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h
+OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o GameController.o
+SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp
+HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h
 OUT	= build/frogger
 CC	 = g++
 FLAGS	 = -g -c -Wall -Wextra -lfltk
@@ -27,6 +27,9 @@ Player.o: src/Model/Player.cpp
 
 GameRenderer.o: src/View/GameRenderer.cpp
 	$(CC) $(FLAGS) src/View/GameRenderer.cpp -std=c++17
+
+GameController.o: src/Controller/GameController.cpp
+	$(CC) $(FLAGS) src/Controller/GameController.cpp -std=c++17
 
 clean:
 	rm -f $(OBJS) $(OUT)
