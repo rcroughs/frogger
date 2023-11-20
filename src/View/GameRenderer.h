@@ -5,8 +5,8 @@
 
 class GameRenderer {
 private:
-    Game game;
+    Game* game;
 public:
-    GameRenderer(Game &game): game{game} {}
+    GameRenderer(Game* game): game{game} {}
     virtual void draw();
 };

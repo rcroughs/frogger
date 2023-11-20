@@ -13,6 +13,5 @@ void Game::modifyPlayer(char move) {
             break;
         case 's':
             player.setPosition(Position{player.getPosition().x, player.getPosition().y - 100});
-        default:{}
     }
 }
