@@ -1,5 +1,6 @@
 #include "Position.h"
 #include "Direction.h"
+#include <iostream>
 
 class Player {
 private:

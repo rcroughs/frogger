@@ -2,14 +2,17 @@
 #include <FL/Fl_Double_Window.H>
 #include "View/GameRenderer.h"
 #include "Model/Game.h"
+#include "Controller/GameController.h"
 
 
 class MainWindow : public Fl_Window {
 private:
     Game game;
     GameRenderer renderer;
+    GameController controller;
 public:
-    MainWindow() : Fl_Window(1000,1000, 1000, 1000, "Frogger"), game{Player({100,100}, down), Map()}, renderer{this->game} {
+    MainWindow() : Fl_Window(1000,1000, 1000, 1000, "Frogger"), game{Player({100,100}, down), Map()}, renderer{this->game},
+                   controller{this->game} {
         Fl::add_timeout(1.0 / 60.0, timer_handler, this);
         resizable(this);
     }

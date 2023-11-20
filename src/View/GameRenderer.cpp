@@ -1,4 +1,5 @@
 #include "GameRenderer.h"
+#include <iostream>
 
 void GameRenderer::draw() {
     Position player_position = game.getPlayer().getPosition();

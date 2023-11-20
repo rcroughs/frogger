@@ -9,13 +9,13 @@ void MainWindow::timer_handler(void* user_data) {
 int MainWindow::handle(int event) {
     switch (event) {
         case FL_MOVE:
-            // Envoyer vers le controlleur
+            controller.mouseMove(Fl::event_x(), Fl::event_y());
             return 1;
         case FL_PUSH:
-            // Envoyer au controlleur
+            controller.mouseClick(Fl::event_x(), Fl::event_y());
             return 1;
         case FL_KEYDOWN:
-            // Envoyer au controlleur
+            controller.keyPressed(Fl::event_key());
             return 1;
         default:
             return 0;
@@ -24,5 +24,6 @@ int MainWindow::handle(int event) {
 }
 
 void MainWindow::draw() {
+    Fl_Window::draw(); // A rajouter ??
     renderer.draw();
 }
