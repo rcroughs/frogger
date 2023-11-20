@@ -5,9 +5,9 @@
 
 class GameController {
 private:
-    Game game;
+    Game* game;
 public:
-    GameController(Game &game) : game{game} {}
+    GameController(Game* game) : game{game} {}
 
     virtual void mouseMove(short loc_x, short loc_y) {};
     virtual void mouseClick(short loc_x, short loc_y) {};
