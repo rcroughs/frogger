@@ -16,4 +16,6 @@ public:
 
     virtual void move_up();
     virtual void move_down();
+    virtual void move_right();
+    virtual void move_left();
 };
