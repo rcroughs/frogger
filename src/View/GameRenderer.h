@@ -12,6 +12,5 @@ public:
     GameRenderer(Game* game, int h, int w): game{game}, WINDOW_HEIGHT{h}, WINDOW_WIDTH{w} {}
 
     virtual Position getWindowPosition(Position gamePosition);
-
     virtual void draw();
 };
