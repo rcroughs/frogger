@@ -16,7 +16,6 @@ void Player::move_right() {
     // Au maximum 650 : 700 * 65 / 70 = 650 et le carré est de longueur 50
     if (current_position.x < 65) {
         current_position.x = current_position.x + 1;
-        std::cout << current_position.x << std::endl;
     }
 }
 
