@@ -1,7 +1,7 @@
 #include "GameRenderer.h"
 
 Position GameRenderer::getWindowPosition(Position gamePosition) {
-    Position res = {int(WINDOW_WIDTH * (float(gamePosition.x) / 100.0)) ,int((WINDOW_HEIGHT - 65) - ((float(gamePosition.y) / 13.0) * WINDOW_HEIGHT)) };
+    Position res = {int(WINDOW_WIDTH * (float(gamePosition.x) / (WINDOW_WIDTH/10.0))) ,int((WINDOW_HEIGHT) - ((float(gamePosition.y) / 13.0) * WINDOW_HEIGHT)) };
     return res;
 }
 

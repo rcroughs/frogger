@@ -11,7 +11,7 @@ private:
     GameRenderer renderer;
     GameController controller;
 public:
-    MainWindow() : Fl_Window(1000,1000, 1000, 1000, "Frogger"), game{Player({50,0}, down), Map()}, renderer{&this->game, 1000,1000},
+    MainWindow() : Fl_Window(700, 700, 700, 700, "Frogger"), game{Player({0,0}, down), Map()}, renderer{&this->game, 700,700},
                    controller{&this->game} {
         Fl::add_timeout(1.0 / 60.0, timer_handler, this);
         resizable(this);
