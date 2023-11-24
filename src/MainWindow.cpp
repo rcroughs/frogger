@@ -17,6 +17,9 @@ int MainWindow::handle(int event) {
         case FL_KEYDOWN:
             controller.keyPressed(Fl::event_key());
             return 1;
+        case FL_KEYUP:
+            controller.keyReleased(Fl::event_key());
+            return 1;
         default:
             return 0;
     }
@@ -24,6 +27,7 @@ int MainWindow::handle(int event) {
 }
 
 void MainWindow::draw() {
-    Fl_Window::draw(); // A rajouter ??
+    Fl_Window::draw();
+    controller.updateMovement();
     renderer.draw();
 }

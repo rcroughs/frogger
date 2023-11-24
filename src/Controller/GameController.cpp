@@ -3,10 +3,12 @@
 void GameController::keyPressed(int keycode) {
     switch (keycode) {
         case 'd':
+            rightPressed = true;
             game->getPlayer()->move_right();
             game->getPlayer()->setDirection(right);
             break;
         case 'a':
+            leftPressed = true;
             game->getPlayer()->move_left();
             game->getPlayer()->setDirection(left);
             break;
@@ -20,3 +22,22 @@ void GameController::keyPressed(int keycode) {
     }
 }
 
+void GameController::keyReleased(int keycode) {
+    switch (keycode) {
+        case 'd':
+            rightPressed = false;
+            break;
+        case 'a':
+            leftPressed = false;
+            break;
+    }
+}
+
+void GameController::updateMovement() {
+    if (rightPressed) {
+        game->getPlayer()->move_right();
+    }
+    if (leftPressed) {
+        game->getPlayer()->move_left();
+    }
+}
