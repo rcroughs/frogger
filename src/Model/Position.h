@@ -1,5 +1,5 @@
 struct Position {
 public:
-    int x;
+    float x;
     int y;
 };

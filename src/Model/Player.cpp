@@ -15,12 +15,12 @@ void Player::move_down() {
 void Player::move_right() {
     // Au maximum 650 : 700 * 65 / 70 = 650 et le carré est de longueur 50
     if (current_position.x < 65) {
-        current_position.x = current_position.x + 1;
+        current_position.x = current_position.x + 0.5f;
     }
 }
 
 void Player::move_left() {
     if (current_position.x > 0) {
-        current_position.x = current_position.x - 1;
+        current_position.x = current_position.x - 0.5f;
     }
 }
