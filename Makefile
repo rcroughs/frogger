@@ -1,6 +1,6 @@
-OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o GameController.o SideWalk.o Water.o Log.o
-SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Props/Log.cpp
-HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Props/Log.h
+OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o GameController.o SideWalk.o Water.o Log.o Prop.o
+SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp
+HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h
 OUT	= build/frogger
 CC	 = g++
 FLAGS	 = -g -c -Wall -Wextra -lfltk
@@ -36,6 +36,9 @@ SideWalk.o: src/Model/Environments/SideWalk.cpp
 
 Water.o: src/Model/Environments/Water.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Water.cpp -std=c++17
+
+Prop.o : src/Model/Environments/Props/Prop.cpp
+	$(CC) $(FLAGS) src/Model/Environments/Props/Prop.cpp -std=c++17
 
 Log.o: src/Model/Environments/Props/Log.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Props/Log.cpp -std=c++17

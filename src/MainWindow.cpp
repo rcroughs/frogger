@@ -29,5 +29,6 @@ int MainWindow::handle(int event) {
 void MainWindow::draw() {
     Fl_Window::draw();
     controller.updateMovement();
+    game.update();
     renderer.draw();
 }

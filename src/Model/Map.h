@@ -13,6 +13,9 @@ public:
     Map() : environments{} {}
     virtual Environment* getEnvironment(int index) {return environments.at(index);}
     virtual void setEnvironment(int index, Environment* new_environment) {environments[index] = new_environment;}
+
+    virtual void updateProps();
+    virtual void handleGame(Game* currentGame);
 };
 
 #endif

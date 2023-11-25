@@ -9,3 +9,8 @@ Game::Game() : player{{50, 0}, up}, map{}, isWinning{false}, isLoosing{false} {
     }
     map.setEnvironment(12, new SideWalk());
 };
+
+void Game::update() {
+    map.updateProps();
+    map.handleGame(this);
+}

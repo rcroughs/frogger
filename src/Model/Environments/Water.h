@@ -11,14 +11,14 @@
 class Water : virtual public Environment {
 private:
     Fl_Color color;
-    std::array<Log, 5> logs;
+    std::array<Prop*, 5> logs;
     bool isMoving;
 public:
-    Water(): color{FL_BLUE}, logs{0, 20, 40, 60 ,80}, isMoving{true} {}
-
+    Water();
     virtual Fl_Color getColor() {return color;}
     void setColor(Fl_Color new_color) {color = new_color;}
 
+    virtual std::array<Prop*, 5>* getProps() override;
     virtual void handleGame(Game* currentGame) override;
     void updateProps() override;
 };

@@ -22,6 +22,8 @@ public:
     virtual void setMap(Map new_map) {map = new_map;}
     virtual void changeWinningState() {isWinning = !isWinning;};
     virtual void changeLoosingState() {isLoosing = !isLoosing;};
+
+    virtual void update();
 };
 
 #endif

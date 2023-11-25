@@ -3,6 +3,7 @@
 
 #include "FL/Fl.H"
 #include "../Environment.h"
+#include "Props/Prop.h"
 
 class Game;
 
@@ -16,6 +17,7 @@ public:
     virtual Fl_Color getColor() {return color;}
     virtual void setColor(Fl_Color new_color) {color = new_color;}
 
+    virtual std::array<Prop*, 5> *getProps() override;
     virtual void handleGame(Game* currentGame) override;
     virtual void updateProps() override;
 };
