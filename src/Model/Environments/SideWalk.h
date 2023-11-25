@@ -1,9 +1,9 @@
-#ifndef ENVIRONMENT_H
-#define ENVIRONMENT_H
+#ifndef SIDEWALK_H
+#define SIDEWALK_H
 
 #include "FL/Fl.H"
-#include "../Game.h"
 #include "../Environment.h"
+#include "../Game.h"
 
 class SideWalk : public Environment {
 private:

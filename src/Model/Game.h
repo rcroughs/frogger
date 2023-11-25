@@ -1,8 +1,6 @@
 #ifndef GAME_H
 #define GAME_H
 
-class Environment;
-
 #include "Player.h"
 #include "Map.h"
 

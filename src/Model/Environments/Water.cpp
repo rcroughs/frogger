@@ -10,11 +10,11 @@ void Water::handleGame(Game *currentGame) {
     if (onLog) {
         isMoving = false;
     } else {
-        game->changeLoosingState();
+        currentGame->changeLoosingState();
     }
 }
 
-void Water::updateLogs() {
+void Water::updateProps() {
     if (isMoving) {
         for (auto &log : logs) {
             log.moveRight();

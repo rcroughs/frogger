@@ -5,8 +5,6 @@ class Game;
 
 class Environment {
 public:
-    virtual ~Environment() =0;
-
     virtual void handleGame(Game* currentGame) =0;
     virtual void updateProps() =0;
 };

@@ -1,3 +1,6 @@
+#ifndef WATER_H
+#define WATER_H
+
 #include "../Environment.h"
 #include "FL/Fl.H"
 #include "../Game.h"
@@ -18,3 +21,5 @@ public:
     virtual void handleGame(Game* currentGame) override;
     void updateProps() override;
 };
+
+#endif
