@@ -3,6 +3,10 @@
 
 #include "Player.h"
 #include "Map.h"
+#include "Environments/SideWalk.h"
+#include "Environments/Water.h"
+
+class Water;
 
 class Game {
 private:
@@ -11,11 +15,10 @@ private:
     bool isWinning;
     bool isLoosing;
 public:
-    Game(Player player, Map map) : player{player}, map{map}, isWinning{false}, isLoosing{false} {};
-
+    Game();
     virtual Player* getPlayer() {return &this->player;}
     virtual void setPlayer(Player new_player) {player = new_player;}
-    virtual Map getMap() {return this->map;}
+    virtual Map* getMap() {return &this->map;}
     virtual void setMap(Map new_map) {map = new_map;}
     virtual void changeWinningState() {isWinning = !isWinning;};
     virtual void changeLoosingState() {isLoosing = !isLoosing;};

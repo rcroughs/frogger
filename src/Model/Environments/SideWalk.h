@@ -3,19 +3,21 @@
 
 #include "FL/Fl.H"
 #include "../Environment.h"
-#include "../Game.h"
 
-class SideWalk : public Environment {
+class Game;
+
+class SideWalk : virtual public Environment {
 private:
     Fl_Color color;
 
-private:
-    SideWalk() : color{FL_GRAY} {}
+public:
+    SideWalk() : color{FL_BLACK} {}
 
-    Fl_Color getColor() {return color;}
-    void setColor(Fl_Color new_color) {color = new_color;}
+    virtual Fl_Color getColor() {return color;}
+    virtual void setColor(Fl_Color new_color) {color = new_color;}
 
-    virtual void handleGame(Game* currentGame);
+    virtual void handleGame(Game* currentGame) override;
+    virtual void updateProps() override;
 };
 
 #endif
