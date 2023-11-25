@@ -1,3 +1,6 @@
+#ifndef _PLAYER_H
+#define _PLAYER_H
+
 #include "Position.h"
 #include "Direction.h"
 
@@ -18,3 +21,5 @@ public:
     virtual void move_right();
     virtual void move_left();
 };
+
+#endif

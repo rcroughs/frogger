@@ -1,3 +1,6 @@
+#ifndef _GAME_RENDERER_H
+#define _GAME_RENDERER_H
+
 #include "../Model/Game.h"
 #include "FL/Fl.H"
 #include "FL/Fl_Box.H"
@@ -14,3 +17,5 @@ public:
     virtual Position getWindowPosition(Position gamePosition);
     virtual void draw();
 };
+
+#endif
