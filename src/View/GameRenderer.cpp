@@ -51,13 +51,12 @@ void GameRenderer::drawMap() {
     for (int i = 0; i < 13; i++) {
         Environment* currentEnvironment = game->getMap()->getEnvironment(i);
         fl_draw_box(FL_FLAT_BOX, 0, (WINDOW_HEIGHT - (WINDOW_HEIGHT / 13.0f)) - (i * (WINDOW_HEIGHT / 13.0)), WINDOW_WIDTH, int(float(WINDOW_HEIGHT) / 13.0f), currentEnvironment->getColor());
-        std::array<Prop*, 5>* propsPtr = currentEnvironment->getProps();
-        if (propsPtr != nullptr) {
-            std::array<Prop*, 5> props = *(propsPtr);
-            for (int j = 0; j < 5; j++) {
+        std::vector<Prop*> props = currentEnvironment->getProps();
+        if (!props.empty()) {
+            for (int j = 0; j < props.size(); j++) {
                 float propPosition = props[j]->getPosition();
                 Position windowPosition = getWindowPosition(Position{propPosition, i});
-                fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y, 80, 50, props[j]->getColor());
+                fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y, (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 50, props[j]->getColor());
             }
         }
     }

@@ -5,20 +5,20 @@
 #include "../Game.h"
 #include "FL/Fl.H"
 #include "Props/Log.h"
-#include "array"
+#include "vector"
 
 
 class Water : virtual public Environment {
 private:
     Fl_Color color;
-    std::array<Prop*, 5> logs;
+    std::vector<Prop*> logs;
     bool isMoving;
 public:
     Water();
     virtual Fl_Color getColor() {return color;}
     void setColor(Fl_Color new_color) {color = new_color;}
 
-    virtual std::array<Prop*, 5>* getProps() override;
+    virtual std::vector<Prop*>& getProps() override;
     virtual void handleGame(Game* currentGame) override;
     void updateProps() override;
 };

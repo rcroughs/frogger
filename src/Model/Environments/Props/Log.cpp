@@ -1,24 +1,24 @@
 #include "Log.h"
 
 bool Log::contains(float playerPosition) {
-    if ((center - size / 2) <= playerPosition && playerPosition >= (center + size /2)) {
+    if ((leftCorner) <= playerPosition && playerPosition <= (leftCorner + size)) {
         return true;
     }
     return false;
 }
 
 void Log::moveRight() {
-    if (center >= 100) {
-        center = 0 - size;
+    if (leftCorner >= 100) {
+        leftCorner = 0 - size;
     } else {
-        center = center + 0.2f;
+        leftCorner = leftCorner + 0.2f;
     }
 }
 
 void Log::moveLeft() {
-    if (center <= 0 - size) {
-        center = 100;
+    if (leftCorner <= 0 - size) {
+        leftCorner = 100;
     } else {
-        center = center - 0.2f;
+        leftCorner = leftCorner - 0.2f;
     }
 }

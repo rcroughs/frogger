@@ -1,9 +1,8 @@
 #include "Water.h"
 
-
 Water::Water() : isMoving{true}, color(FL_BLUE) {
     for (int i = 0; i < 5; i++) {
-        logs[i] = new Log(float(i * 20));
+        logs.push_back(new Log(float(i * 20)));
     }
 }
 void Water::handleGame(Game *currentGame) {
@@ -28,6 +27,6 @@ void Water::updateProps() {
     }
 }
 
-std::array<Prop *, 5> *Water::getProps() {
-    return &logs;
+std::vector<Prop*> &Water::getProps() {
+    return logs;
 }
