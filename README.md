@@ -40,7 +40,7 @@ Le projet peut être compilé avec la commande `m̀ake` a la racine du projet. L
     - [ ] Nous mettons des nénuphars a la dernière ligne, lorsqu'une grenouille va sur un nénuphar, une nouvelle grenouille apparait un bas de l'écran et le jeu se finit quand tous les nénuphars sont occupé
     - [ ] Ajout d'un système de vies 
     - [ ] Les tortues peuvent plonger
-    - [ ] La grenouille regarde dans le sens de la direction précedente
+    - [x] La grenouille regarde dans le sens de la direction précedente
     - [ ] Afficher un score (trouver une méthode pour le calculer)
     - [ ] Afficher un meilleur score
     - [ ] Ecran d'acceuil où on voit notre nom qui s'affiche pendant une seconde
