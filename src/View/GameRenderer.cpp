@@ -7,6 +7,18 @@ Position GameRenderer::getWindowPosition(Position gamePosition) {
     return res;
 }
 
+void GameRenderer::drawVictory() {
+    fl_draw_box(FL_FLAT_BOX, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_GREEN);
+    fl_color(FL_BLACK);
+    fl_draw("Victoire !", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_ALIGN_CENTER);
+}
+
+void GameRenderer::drawGameOver() {
+    fl_draw_box(FL_FLAT_BOX, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_RED);
+    fl_color(FL_BLACK);
+    fl_draw("Game Over !", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_ALIGN_CENTER);
+}
+
 void GameRenderer::drawPlayer() {
     Position player_position = game->getPlayer()->getPosition();
     Position windowPosition = getWindowPosition(player_position);
@@ -63,6 +75,13 @@ void GameRenderer::drawMap() {
 }
 
 void GameRenderer::draw() {
-    drawMap();
-    drawPlayer();
+    if (game->isLosing()) {
+        drawGameOver();
+    }
+    else if (game->isWinning()) {
+        drawVictory();
+    } else {
+        drawMap();
+        drawPlayer();
+    }
 }
