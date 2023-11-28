@@ -8,7 +8,7 @@ private:
     float leftCorner;
     Fl_Color color;
 public:
-    Log(float initPosition) : size{15}, leftCorner{initPosition}, color{FL_RED} {};
+    Log(float initPosition) : size{15}, leftCorner{initPosition}, color{fl_rgb_color(150, 75, 0)} {};
 
     virtual float getPosition() override {return leftCorner;}
     virtual Fl_Color getColor() override {return color;}
