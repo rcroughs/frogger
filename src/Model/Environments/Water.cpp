@@ -5,16 +5,17 @@ Water::Water() : isMoving{true}, color(FL_BLUE) {
         logs.push_back(new Log(float(i * 20)));
     }
 }
+
 void Water::handleGame(Game *currentGame) {
     bool onLog = false;
     for (auto &log: logs) {
         if (log->contains(currentGame->getPlayer()->getPosition().x)) {
             onLog = true;
+            Player *player = currentGame->getPlayer();
+            player->setPosition(Position{player->getPosition().x + 0.2f, player->getPosition().y});
         }
     }
-    if (onLog) {
-        isMoving = false;
-    } else {
+    if (!onLog) {
         currentGame->changeLoosingState();
     }
 }
