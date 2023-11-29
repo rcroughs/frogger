@@ -2,6 +2,7 @@
 #define FROGGER_PROP_H
 
 #include "FL/Fl.H"
+#include <random>
 
 
 class Prop {
