@@ -68,7 +68,7 @@ void GameRenderer::drawMap() {
             for (int j = 0; j < props.size(); j++) {
                 float propPosition = props[j]->getPosition();
                 Position windowPosition = getWindowPosition(Position{propPosition, i});
-                fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y, (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 50, props[j]->getColor());
+                fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y + 10, (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 35, props[j]->getColor());
             }
         }
     }
