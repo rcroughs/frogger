@@ -1,4 +1,5 @@
 #include "Water.h"
+#include <ctime>
 
 Water::Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {
     int usedSpace = 0;
