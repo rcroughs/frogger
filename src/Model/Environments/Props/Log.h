@@ -6,9 +6,10 @@ class Log : public Prop {
 private:
     float size;
     float leftCorner;
+    float speed;
     Fl_Color color;
 public:
-    Log(float size, float initPosition) : size{size}, leftCorner{initPosition}, color{fl_rgb_color(150, 75, 0)} {};
+    Log(float size, float initPosition, float speed) : size{size}, leftCorner{initPosition}, speed{speed}, color{fl_rgb_color(150, 75, 0)} {};
 
     virtual float getPosition() override {return leftCorner;}
     virtual float getRightCorner() override {return leftCorner + size;}

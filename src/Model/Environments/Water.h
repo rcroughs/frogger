@@ -13,8 +13,9 @@ private:
     Fl_Color color;
     std::vector<Prop*> logs;
     bool isMoving;
+    float flow;
 public:
-    Water();
+    Water(float speed);
     virtual Fl_Color getColor() {return color;}
     void setColor(Fl_Color new_color) {color = new_color;}
 

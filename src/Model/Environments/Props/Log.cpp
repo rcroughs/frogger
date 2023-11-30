@@ -11,7 +11,7 @@ void Log::moveRight() {
     if (getRightCorner() >= 130) {
         leftCorner = 0 - size;
     } else {
-        leftCorner = leftCorner + 0.2f;
+        leftCorner = leftCorner + speed * (0.2f);
     }
 }
 
