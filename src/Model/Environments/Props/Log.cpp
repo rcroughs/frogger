@@ -8,7 +8,7 @@ bool Log::contains(float playerPosition) {
 }
 
 void Log::moveRight() {
-    if (leftCorner >= 100) {
+    if (getRightCorner() >= 130) {
         leftCorner = 0 - size;
     } else {
         leftCorner = leftCorner + 0.2f;

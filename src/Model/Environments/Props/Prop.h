@@ -8,6 +8,7 @@
 class Prop {
 public:
     virtual float getPosition() =0;
+    virtual float getRightCorner() =0;
     virtual Fl_Color getColor() =0;
     virtual float getSize() =0;
     virtual bool contains(float playerPosition) =0;
