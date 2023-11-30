@@ -20,4 +20,7 @@ Game::Game() : player{{50, 0}, up}, map{}, winning{false}, loosing{false} {
 void Game::update() {
     map.updateProps();
     map.handleGame(this);
+    if (!player.isInScreen()) {
+        changeLoosingState();
+    }
 }

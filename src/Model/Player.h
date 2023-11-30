@@ -15,6 +15,7 @@ public:
     virtual void setPosition(Position new_position) {current_position = new_position;}
     virtual Direction getDirection() {return this->current_direction;}
     virtual void setDirection(Direction new_direction) {current_direction = new_direction;}
+    virtual bool isInScreen();
 
     virtual void move_up();
     virtual void move_down();
