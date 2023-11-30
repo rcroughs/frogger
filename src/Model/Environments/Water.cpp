@@ -26,7 +26,7 @@ Water::Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {
 void Water::handleGame(Game *currentGame) {
     bool onLog = false;
     for (auto &log: logs) {
-        if (log->contains(currentGame->getPlayer()->getPosition().x)) {
+        if (log->contains(currentGame->getPlayer()->getPosition().x + 5)) {
             onLog = true;
             Player *player = currentGame->getPlayer();
             player->setPosition(Position{player->getPosition().x + (flow * 0.2f), player->getPosition().y});
