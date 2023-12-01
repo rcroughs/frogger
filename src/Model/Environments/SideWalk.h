@@ -21,6 +21,7 @@ public:
     virtual std::vector<Prop*> &getProps() override;
     virtual void handleGame(Game* currentGame) override;
     virtual void updateProps() override;
+    virtual void generateProps(short id) override {}
 };
 
 #endif

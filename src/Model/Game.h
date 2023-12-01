@@ -3,23 +3,22 @@
 
 #include "Player.h"
 #include "Map.h"
-#include "Environments/SideWalk.h"
-#include "Environments/Water.h"
 
 class Water;
+class Map;
 
 class Game {
 private:
-    Player player;
-    Map map;
+    Player* player {};
+    Map* map;
     bool winning;
     bool loosing;
 public:
     Game();
-    virtual Player* getPlayer() {return &this->player;}
-    virtual void setPlayer(Player new_player) {player = new_player;}
-    virtual Map* getMap() {return &this->map;}
-    virtual void setMap(Map new_map) {map = new_map;}
+    virtual Player* getPlayer() {return this->player;}
+    virtual void setPlayer(Player* new_player) {player = new_player;}
+    virtual Map* getMap() {return this->map;}
+    virtual void setMap(Map* new_map) {map = new_map;}
     virtual void changeWinningState() {winning = !winning;};
     virtual void changeLoosingState() {loosing  = !loosing;};
     virtual bool isWinning() {return winning;};

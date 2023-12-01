@@ -2,8 +2,10 @@
 #define FROGGER_PROP_H
 
 #include "FL/Fl.H"
+#include "../../Game.h"
 #include <random>
 
+class Game;
 
 class Prop {
 public:
@@ -14,6 +16,7 @@ public:
     virtual bool contains(float playerPosition) =0;
     virtual void moveRight() =0;
     virtual void moveLeft() =0;
+    virtual void handleGame(Game* currentGame) =0;
 };
 
 

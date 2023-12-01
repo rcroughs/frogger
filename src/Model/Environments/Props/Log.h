@@ -1,5 +1,6 @@
 #include "Prop.h"
 #include "../../Position.h"
+#include "../../Game.h"
 #include "FL/Fl.H"
 
 class Log : public Prop {
@@ -18,4 +19,6 @@ public:
     virtual bool contains(float playerPosition) override;
     virtual void moveRight() override;
     virtual void moveLeft() override;
+
+    virtual void handleGame(Game* currentGame);
 };

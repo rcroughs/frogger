@@ -1,6 +1,6 @@
-OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o GameController.o SideWalk.o Water.o Log.o Prop.o
-SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp
-HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h
+OBJS	= main.o MainWindow.o Game.o Map.o Player.o GameRenderer.o GameController.o SideWalk.o Water.o Log.o Prop.o LilyPad.o
+SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp src/Model/Environments/Props/LilyPad.cpp
+HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h src/Model/Environments/Props/LilyPad.h
 OUT	= build/frogger
 CC	 = g++
 FLAGS	 = -g -c -Wall -Wextra -lfltk
@@ -42,6 +42,9 @@ Prop.o : src/Model/Environments/Props/Prop.cpp
 
 Log.o: src/Model/Environments/Props/Log.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Props/Log.cpp -std=c++17
+
+LilyPad.o: src/Model/Environments/Props/LilyPad.cpp
+	$(CC) $(FLAGS) src/Model/Environments/Props/LilyPad.cpp -std=c++17
 
 clean:
 	rm -f $(OBJS) $(OUT)

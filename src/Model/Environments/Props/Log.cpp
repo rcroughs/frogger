@@ -1,4 +1,6 @@
 #include "Log.h"
+#include "../../Player.h"
+#include "../../Game.h"
 
 bool Log::contains(float playerPosition) {
     if ((leftCorner) <= playerPosition && playerPosition <= (leftCorner + size)) {
@@ -21,4 +23,9 @@ void Log::moveLeft() {
     } else {
         leftCorner = leftCorner - 0.2f;
     }
+}
+
+void Log::handleGame(Game *currentGame) {
+    Player *player = currentGame->getPlayer();
+    player->setPosition(Position{player->getPosition().x + (speed * 0.2f), player->getPosition().y});
 }
