@@ -15,6 +15,7 @@ private:
     bool loosing;
 public:
     Game();
+    ~Game();
     virtual Player* getPlayer() {return this->player;}
     virtual void setPlayer(Player* new_player) {player = new_player;}
     virtual Map* getMap() {return this->map;}

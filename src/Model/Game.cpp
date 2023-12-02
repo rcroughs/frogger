@@ -19,6 +19,12 @@ Game::Game() : player{new Player({50, 0}, up)}, map{new Map()}, winning{false}, 
     map->getEnvironment(12)->generateProps(1);
 }
 
+Game::~Game() {
+    for (int i = 0; i < 13; i++) {
+        delete map->getEnvironment(i);
+    }
+}
+
 void Game::update() {
     map->updateProps();
     map->handleGame(this);
