@@ -30,13 +30,13 @@ Le projet peut être compilé avec la commande `m̀ake` a la racine du projet. L
 ```
 
 ## Etapes du projet
- - [ ] Taches de bases
+ - [x] Taches de bases
     - [x] Grenouille: Avoir une grenouille fonctionnelle qui peut se déplacer avec ZQSD et WASD.
-    - [ ] 13 rangées: 1 et 7 sont des trottoirs, 2 à 6 sont des routes avec des voitures qui se déplacent, 8 à 13 sont des rangées d'eau, avec des buches, et 13 est une rangée de nénuphar.
-    - [ ] Message de victoire
-    - [ ] Message d'échec
+    - [x] 13 rangées: 1 et 7 sont des trottoirs, 2 à 6 sont des routes avec des voitures qui se déplacent, 8 à 13 sont des rangées d'eau, avec des buches, et 13 est une rangée de nénuphar.
+    - [x] Message de victoire
+    - [x] Message d'échec
  - [ ] Taches additionnelles a faire après celles de bases
-    - [ ] Les rangées d'eau qui sont composées de troncs d'arbres et de tortues
+    - [x] Les rangées d'eau qui sont composées de troncs d'arbres et de tortues
     - [ ] Nous mettons des nénuphars a la dernière ligne, lorsqu'une grenouille va sur un nénuphar, une nouvelle grenouille apparait un bas de l'écran et le jeu se finit quand tous les nénuphars sont occupé
     - [ ] Ajout d'un système de vies 
     - [ ] Les tortues peuvent plonger
