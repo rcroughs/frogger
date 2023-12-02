@@ -17,10 +17,10 @@ public:
     virtual Fl_Color getColor() override {return color;}
     virtual float getSize() override {return size;}
     virtual bool contains(float playerPosition) override {return getPosition() < playerPosition && playerPosition < getRightCorner();}
-    virtual void moveRight() {};
-    virtual void moveLeft() {};
-
+    virtual void move() {};
     virtual void handleGame(Game* currentGame);
+    virtual bool hasImage() override {return false;};
+    virtual Fl_PNG_Image* getImage() {return nullptr;};
 };
 
 

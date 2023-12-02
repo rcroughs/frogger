@@ -28,6 +28,7 @@ public:
 
     virtual void generateLogs();
     virtual void generateLilyPads();
+    virtual void generateTurtles(short id);
 
     virtual std::vector<Prop*>& getProps() override;
     virtual void handleGame(Game* currentGame) override;

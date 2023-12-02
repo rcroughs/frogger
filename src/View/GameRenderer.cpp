@@ -1,4 +1,6 @@
 #include "GameRenderer.h"
+#include "FL/Fl_PNG_Image.H"
+#include "iostream"
 #include "../Model/Environment.h"
 #include <array>
 
@@ -68,7 +70,12 @@ void GameRenderer::drawMap() {
             for (int j = 0; j < props.size(); j++) {
                 float propPosition = props[j]->getPosition();
                 Position windowPosition = getWindowPosition(Position{propPosition, i});
-                fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y + 10, (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 35, props[j]->getColor());
+                if (props.at(j)->hasImage()) {
+                    props.at(j)->getImage()->draw(windowPosition.x, windowPosition.y, (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 45);
+                } else {
+                    fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y + 10,
+                                (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 35, props[j]->getColor());
+                }
             }
         }
     }

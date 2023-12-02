@@ -3,6 +3,7 @@
 
 #include "FL/Fl.H"
 #include "../../Game.h"
+#include "FL/Fl_PNG_Image.H"
 #include <random>
 
 class Game;
@@ -14,9 +15,10 @@ public:
     virtual Fl_Color getColor() =0;
     virtual float getSize() =0;
     virtual bool contains(float playerPosition) =0;
-    virtual void moveRight() =0;
-    virtual void moveLeft() =0;
+    virtual void move() =0;
     virtual void handleGame(Game* currentGame) =0;
+    virtual bool hasImage() =0;
+    virtual Fl_PNG_Image* getImage() =0;
 };
 
 

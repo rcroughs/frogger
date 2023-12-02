@@ -1,6 +1,7 @@
 #include "Water.h"
 #include "Props/Log.h"
 #include "Props/LilyPad.h"
+#include "Props/Turtle.h"
 #include <ctime>
 
 void Water::generateLogs() {
@@ -31,6 +32,12 @@ void Water::generateLilyPads() {
     }
 }
 
+void Water::generateTurtles(short id) {
+    for (int i = 0; i < 3; i++) {
+        props.push_back(new Turtle(i * 30, id));
+    }
+}
+
 void Water::generateProps(short id) {
     switch (id) {
         case 0:
@@ -39,6 +46,11 @@ void Water::generateProps(short id) {
         case 1:
             generateLilyPads();
             break;
+        case 2:
+            generateTurtles(id);
+            break;
+        case 3:
+            generateTurtles(id);
     }
 }
 
@@ -58,7 +70,7 @@ void Water::handleGame(Game *currentGame) {
 void Water::updateProps() {
     if (isMoving) {
         for (auto &prop : props) {
-            prop->moveRight();
+            prop->move();
         }
     }
 }

@@ -9,19 +9,11 @@ bool Log::contains(float playerPosition) {
     return false;
 }
 
-void Log::moveRight() {
+void Log::move() {
     if (getRightCorner() >= 130) {
         leftCorner = 0 - size;
     } else {
         leftCorner = leftCorner + speed * (0.2f);
-    }
-}
-
-void Log::moveLeft() {
-    if (leftCorner <= 0 - size) {
-        leftCorner = 100;
-    } else {
-        leftCorner = leftCorner - 0.2f;
     }
 }
 
