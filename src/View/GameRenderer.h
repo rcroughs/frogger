@@ -19,6 +19,7 @@ public:
     virtual void drawGameOver();
     virtual void drawPlayer();
     virtual void drawMap();
+    virtual void drawHUD();
     virtual void draw();
 };
 
