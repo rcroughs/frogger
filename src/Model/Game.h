@@ -13,6 +13,7 @@ private:
     Map* map;
     bool winning;
     bool loosing;
+    short lives;
 public:
     Game();
     ~Game();
@@ -25,7 +26,10 @@ public:
     virtual bool isWinning() {return winning;};
     virtual bool isLosing() {return loosing;};
     virtual bool isRunning() {return !winning && !loosing;};
-
+    virtual short getLives() {return lives;}
+    virtual void addLife() {++lives;}
+    virtual void restartGame();
+    virtual void killPlayer();
     virtual void update();
 };
 

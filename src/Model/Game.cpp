@@ -3,7 +3,7 @@
 #include "Environments/SideWalk.h"
 #include "Environments/Water.h"
 
-Game::Game() : player{new Player({50, 0}, up)}, map{new Map()}, winning{false}, loosing{false} {
+Game::Game() : player{new Player({50, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3} {
     for (int i = 0; i < 7; i++) {
         map->setEnvironment(i, new SideWalk());
     }
@@ -35,6 +35,16 @@ Game::~Game() {
     for (int i = 0; i < 13; i++) {
         delete map->getEnvironment(i);
     }
+    delete player;
+}
+
+void Game::restartGame() {
+    if (lives > 0) {
+        delete player;
+        player = new Player({50, 0}, up);
+    } else {
+        changeLoosingState();
+    }
 }
 
 void Game::update() {
@@ -43,4 +53,9 @@ void Game::update() {
     if (!player->isInScreen()) {
         changeLoosingState();
     }
+}
+
+void Game::killPlayer() {
+    lives--;
+    restartGame();
 }

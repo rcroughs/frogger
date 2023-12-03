@@ -63,7 +63,7 @@ void Water::handleGame(Game *currentGame) {
         }
     }
     if (!onLog) {
-        currentGame->changeLoosingState();
+        currentGame->killPlayer();
     }
 }
 
