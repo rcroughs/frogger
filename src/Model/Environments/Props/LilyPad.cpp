@@ -5,5 +5,10 @@
 #include "LilyPad.h"
 
 void LilyPad::handleGame(Game* currentGame) {
-    currentGame->changeWinningState();
+    if (hasTurtle) {
+        currentGame->killPlayer();
+    } else {
+        hasTurtle = true;
+        currentGame->win();
+    }
 }

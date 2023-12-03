@@ -10,8 +10,9 @@ private:
     float leftCorner;
     float size{5};
     Fl_Color color{FL_GREEN};
+    bool hasTurtle;
 public:
-    LilyPad(float leftCornerPos) : leftCorner{leftCornerPos} {}
+    LilyPad(float leftCornerPos) : leftCorner{leftCornerPos}, hasTurtle{false} {}
     virtual float getPosition() override {return leftCorner;}
     virtual float getRightCorner() override {return leftCorner + size;}
     virtual Fl_Color getColor() override {return color;}

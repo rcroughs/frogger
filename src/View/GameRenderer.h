@@ -17,7 +17,7 @@ public:
     virtual Position getWindowPosition(Position gamePosition);
     virtual void drawVictory();
     virtual void drawGameOver();
-    virtual void drawPlayer();
+    virtual void drawPlayer(Player* player);
     virtual void drawMap();
     virtual void drawHUD();
     virtual void draw();

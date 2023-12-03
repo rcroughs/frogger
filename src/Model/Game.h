@@ -3,6 +3,7 @@
 
 #include "Player.h"
 #include "Map.h"
+#include "vector"
 
 class Water;
 class Map;
@@ -14,10 +15,12 @@ private:
     bool winning;
     bool loosing;
     short lives;
+    std::vector<Player*> winnerPlayers;
 public:
     Game();
     ~Game();
     virtual Player* getPlayer() {return this->player;}
+    virtual std::vector<Player*> &getWinnerPlayer() {return winnerPlayers;}
     virtual void setPlayer(Player* new_player) {player = new_player;}
     virtual Map* getMap() {return this->map;}
     virtual void setMap(Map* new_map) {map = new_map;}
@@ -30,6 +33,7 @@ public:
     virtual void addLife() {++lives;}
     virtual void restartGame();
     virtual void killPlayer();
+    virtual void win();
     virtual void update();
 };
 

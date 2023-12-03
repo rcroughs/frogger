@@ -2,6 +2,7 @@
 #include <ctime>
 #include "Environments/SideWalk.h"
 #include "Environments/Water.h"
+#include "vector"
 
 Game::Game() : player{new Player({50, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3} {
     for (int i = 0; i < 7; i++) {
@@ -58,4 +59,12 @@ void Game::update() {
 void Game::killPlayer() {
     lives--;
     restartGame();
+}
+
+void Game::win() {
+    winnerPlayers.push_back(player);
+    player = new Player({50, 0}, up);
+    if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {
+        changeWinningState();
+    }
 }

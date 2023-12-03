@@ -3,7 +3,9 @@
 #include "FL/Fl_Image.H"
 #include "iostream"
 #include "../Model/Environment.h"
+#include "../Model/Player.h"
 #include <array>
+#include "vector"
 
 Position GameRenderer::getWindowPosition(Position gamePosition) {
     Position res = {float(WINDOW_WIDTH * (gamePosition.x/100.0f)) ,int((float(WINDOW_HEIGHT) - float(WINDOW_HEIGHT) / 13.0f) - ((float(gamePosition.y) / 13.0f) * WINDOW_HEIGHT)) };
@@ -22,8 +24,8 @@ void GameRenderer::drawGameOver() {
     fl_draw("Game Over !", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_ALIGN_CENTER);
 }
 
-void GameRenderer::drawPlayer() {
-    Position player_position = game->getPlayer()->getPosition();
+void GameRenderer::drawPlayer(Player* player) {
+    Position player_position = player->getPosition();
     Position windowPosition = getWindowPosition(player_position);
     Direction current_direction = game->getPlayer()->getDirection();
 
@@ -111,7 +113,11 @@ void GameRenderer::draw() {
         drawVictory();
     } else {
         drawMap();
-        drawPlayer();
+        drawPlayer(game->getPlayer());
+        std::vector<Player*> winnerPlayer = game->getWinnerPlayer();
+        for (int i = 0; i < winnerPlayer.size(); i++) {
+            drawPlayer(winnerPlayer.at(i));
+        }
         drawHUD();
     }
 }
