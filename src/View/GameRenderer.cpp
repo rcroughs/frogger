@@ -87,19 +87,19 @@ void GameRenderer::drawMap() {
 void GameRenderer::drawHUD() {
     short numberLives = game->getLives();
     if (numberLives == 3) {
-        Fl_PNG_Image lives("res/three_hearts.png");
+        Fl_PNG_Image lives("../res/three_hearts.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(590,10);
     } else if (numberLives == 2) {
-        Fl_PNG_Image lives("res/two_hearts.png");
+        Fl_PNG_Image lives("../res/two_hearts.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(590,10);
     } else if (numberLives == 1) {
-        Fl_PNG_Image lives("res/one_heart.png");
+        Fl_PNG_Image lives("../res/one_heart.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(590,10);
     } else {
-        Fl_PNG_Image lives("res/no_heart.png");
+        Fl_PNG_Image lives("../res/no_heart.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(590,10);
     }
