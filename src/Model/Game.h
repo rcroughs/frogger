@@ -16,6 +16,8 @@ private:
     bool loosing;
     short lives;
     std::vector<Player*> winnerPlayers;
+    float time;
+    float frameLeft;
 public:
     Game();
     ~Game();
@@ -23,6 +25,8 @@ public:
     virtual std::vector<Player*> &getWinnerPlayer() {return winnerPlayers;}
     virtual void setPlayer(Player* new_player) {player = new_player;}
     virtual Map* getMap() {return this->map;}
+    virtual float getTime() {return time;}
+    virtual float getFrameLeft() {return frameLeft;}
     virtual void setMap(Map* new_map) {map = new_map;}
     virtual void changeWinningState() {winning = !winning;};
     virtual void changeLoosingState() {loosing  = !loosing;};
@@ -33,6 +37,8 @@ public:
     virtual void addLife() {++lives;}
     virtual void restartGame();
     virtual void killPlayer();
+    virtual void resetTime() {frameLeft = time*60;}
+    virtual void decreaseTime() {frameLeft--;}
     virtual void win();
     virtual void update();
 };

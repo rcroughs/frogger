@@ -104,6 +104,8 @@ void GameRenderer::drawHUD() {
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(290,710);
     }
+    // Dessin de la barre de temps restant
+    fl_draw_box(FL_FLAT_BOX, 410, 710, 270 - ((game->getTime()*60 - game->getFrameLeft()) * (270/(game->getTime() * 60))), 30, FL_RED);
 }
 
 void GameRenderer::draw() {

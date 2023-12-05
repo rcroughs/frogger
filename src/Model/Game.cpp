@@ -5,7 +5,7 @@
 #include "Environments/Road.h"
 #include "vector"
 
-Game::Game() : player{new Player({45, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3} {
+Game::Game() : player{new Player({45, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3}, time{30}, frameLeft{30*60} {
 
     map->setEnvironment(0, new SideWalk());
     for (int i = 1; i < 6; i++) {
@@ -51,6 +51,7 @@ void Game::restartGame() {
     if (lives > 0) {
         delete player;
         player = new Player({45, 0}, up);
+        resetTime();
     } else {
         changeLoosingState();
     }
@@ -62,6 +63,10 @@ void Game::update() {
     if (!player->isInScreen()) {
         changeLoosingState();
     }
+    if (getFrameLeft() <= 0) {
+        killPlayer();
+    }
+    decreaseTime();
 }
 
 void Game::killPlayer() {
@@ -71,7 +76,8 @@ void Game::killPlayer() {
 
 void Game::win() {
     winnerPlayers.push_back(player);
-    player = new Player({50, 0}, up);
+    player = new Player({45, 0}, up);
+    resetTime();
     if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {
         changeWinningState();
     }
