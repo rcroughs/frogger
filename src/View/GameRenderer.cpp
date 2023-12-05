@@ -27,7 +27,7 @@ void GameRenderer::drawGameOver() {
 void GameRenderer::drawPlayer(Player* player) {
     Position player_position = player->getPosition();
     Position windowPosition = getWindowPosition(player_position);
-    Direction current_direction = game->getPlayer()->getDirection();
+    Direction current_direction = player->getDirection();
 
     int x1, x2, x3;
     int y1, y2, y3;
