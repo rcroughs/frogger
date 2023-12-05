@@ -1,14 +1,21 @@
 OBJS	= build/main.o build/MainWindow.o build/Game.o build/Map.o build/Player.o build/GameRenderer.o build/GameController.o build/SideWalk.o build/Water.o build/Log.o build/Prop.o build/LilyPad.o build/Turtle.o build/Road.o build/Car.o
 SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Road.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp src/Model/Environments/Props/LilyPad.cpp src/Model/Environments/Props/Turtle.cpp src/Model/Environments/Props.cpp src/Model/Environments/Car.cpp
 HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Road.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h src/Model/Environments/Props/LilyPad.h src/Model/Environments/Props/Turtle.h src/Model/Environments/Props/Car.h
-OUT	= build/frogger
+OUT	= frogger
 CC	 = g++
-FLAGS	 = -g -c -Wall -Wextra `fltk-config --cxxflags`
-LFLAGS	 = `fltk-config --ldflags` -lfltk_images
+FLAGS	 = -g -c -Wall -Wextra
+FLAGOSX1 = `fltk-config --cxxflags`
+FLAGOSX2 = `fltk-config --ldflags`
+LFLAGS	 = -lfltk -lfltk_images
 OOUT = -o build/
 
 all: $(OBJS)
 	$(CC) -g $(OBJS) -o $(OUT) $(LFLAGS)
+
+# Target with Flag 1
+osx: FLAGS = -g -c -Wall -Wextra `fltk-config --cxxflags`
+osx: LFLAGS = `fltk-config --ldflags` -lfltk_images
+osx: all
 
 build/main.o: src/main.cpp
 	$(CC) $(FLAGS) src/main.cpp -std=c++17 $(OOUT)main.o

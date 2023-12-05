@@ -20,12 +20,12 @@ public:
     color{FL_RED}, speed{speed} {
         if (colorId == 0) {
             if (direction == 'l') {
-                img = new Fl_PNG_Image("../res/red_car_left.png");
+                img = new Fl_PNG_Image("res/red_car_left.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
             } else {
-                img = new Fl_PNG_Image("../res/red_car_right.png");
+                img = new Fl_PNG_Image("res/red_car_right.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
@@ -33,12 +33,12 @@ public:
         }
         else if (colorId == 1) {
             if (direction == 'l') {
-                img = new Fl_PNG_Image("../res/blue_car_left.png");
+                img = new Fl_PNG_Image("res/blue_car_left.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
             } else {
-                img = new Fl_PNG_Image("../res/blue_car_right.png");
+                img = new Fl_PNG_Image("res/blue_car_right.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
@@ -46,12 +46,12 @@ public:
         }
         else {
             if (direction == 'l') {
-                img = new Fl_PNG_Image("../res/green_car_left.png");
+                img = new Fl_PNG_Image("res/green_car_left.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
             } else {
-                img = new Fl_PNG_Image("../res/green_car_right.png");
+                img = new Fl_PNG_Image("res/green_car_right.png");
                 if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                     std::cout << "Image couln't load";
                 }
