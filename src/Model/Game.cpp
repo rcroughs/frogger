@@ -5,7 +5,7 @@
 #include "Environments/Road.h"
 #include "vector"
 
-Game::Game() : player{new Player({50, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3} {
+Game::Game() : player{new Player({45, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3} {
 
     map->setEnvironment(0, new SideWalk());
     for (int i = 1; i < 6; i++) {
