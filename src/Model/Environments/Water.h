@@ -24,7 +24,7 @@ public:
     virtual Fl_Color getColor() {return color;}
     void setColor(Fl_Color new_color) {color = new_color;}
 
-    void generateProps(short id) override;
+    virtual void generateProps(short id) override;
 
     virtual void generateLogs();
     virtual void generateLilyPads();

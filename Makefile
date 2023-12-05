@@ -1,10 +1,10 @@
-OBJS	= build/main.o build/MainWindow.o build/Game.o build/Map.o build/Player.o build/GameRenderer.o build/GameController.o build/SideWalk.o build/Water.o build/Log.o build/Prop.o build/LilyPad.o build/Turtle.o
-SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp src/Model/Environments/Props/LilyPad.cpp src/Model/Environments/Props/Turtle.cpp
-HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h src/Model/Environments/Props/LilyPad.h src/Model/Environments/Props/Turtle.h
+OBJS	= build/main.o build/MainWindow.o build/Game.o build/Map.o build/Player.o build/GameRenderer.o build/GameController.o build/SideWalk.o build/Water.o build/Log.o build/Prop.o build/LilyPad.o build/Turtle.o build/Road.o build/Car.o
+SOURCE	= src/main.cpp src/MainWindow.cpp src/Model/Game.cpp src/Model/Map.cpp src/Model/Player.cpp src/View/GameRenderer.cpp src/Controller/GameController.cpp src/Model/Environments/SideWalk.cpp src/Model/Environments/Water.cpp src/Model/Environments/Road.cpp src/Model/Environments/Props/Log.cpp src/Model/Environments/Props/Prop.cpp src/Model/Environments/Props/LilyPad.cpp src/Model/Environments/Props/Turtle.cpp src/Model/Environments/Props.cpp src/Model/Environments/Car.cpp
+HEADER	= src/MainWindow.h src/Model/Direction.h src/Model/Game.h src/Model/Map.h src/Model/Player.h src/Model/Position.h src/View/GameRenderer.h src/Controller/GameController.h src/Model/Environment.h src/Model/Environments/SideWalk.h src/Model/Environments/Water.h src/Model/Environments/Road.h src/Model/Environments/Props/Log.h src/Model/Environments/Props/Prop.h src/Model/Environments/Props/LilyPad.h src/Model/Environments/Props/Turtle.h src/Model/Environments/Props/Car.h
 OUT	= build/frogger
 CC	 = g++
-FLAGS	 = -g -c -Wall -Wextra -lfltk
-LFLAGS	 = -lfltk  -lfltk_images
+FLAGS	 = -g -c -Wall -Wextra `fltk-config --cxxflags`
+LFLAGS	 = `fltk-config --ldflags` -lfltk_images
 OOUT = -o build/
 
 all: $(OBJS)
@@ -36,6 +36,9 @@ build/SideWalk.o: src/Model/Environments/SideWalk.cpp
 
 build/Water.o: src/Model/Environments/Water.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Water.cpp -std=c++17 $(OOUT)Water.o
+	
+build/Road.o: src/Model/Environments/Road.cpp
+	$(CC) $(FLAGS) src/Model/Environments/Road.cpp -std=c++17 $(OOUT)Road.o
 
 build/Prop.o : src/Model/Environments/Props/Prop.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Props/Prop.cpp -std=c++17 $(OOUT)Prop.o
@@ -48,6 +51,9 @@ build/LilyPad.o: src/Model/Environments/Props/LilyPad.cpp
 
 build/Turtle.o: src/Model/Environments/Props/Turtle.cpp
 	$(CC) $(FLAGS) src/Model/Environments/Props/Turtle.cpp -std=c++17 $(OOUT)Turtle.o
+
+build/Car.o: src/Model/Environments/Props/Car.cpp
+	$(CC) $(FLAGS) src/Model/Environments/Props/Car.cpp -std=c++17 $(OOUT)Car.o
 
 clean:
 	rm -f $(OBJS) $(OUT)

@@ -14,7 +14,7 @@ public:
     virtual std::vector<Prop*> &getProps() =0;
     virtual void handleGame(Game* currentGame) =0;
     virtual void updateProps() =0;
-    virtual void generateProps(short id) =0;
+    virtual void generateProps(short id = NULL) =0;
 };
 
 #endif

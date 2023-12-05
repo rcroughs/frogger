@@ -16,13 +16,13 @@ private:
 public:
     Turtle(float position, short turtleNumber) : position{position}, color{FL_GREEN} {
         if (turtleNumber == 2) {
-            img = new Fl_PNG_Image("res/two_turtles.png");
+            img = new Fl_PNG_Image("../res/two_turtles.png");
             if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
                 std::cout << "Image couln't load";
             }
             size = 15.0f;
         } else if (turtleNumber == 3) {
-            img = new Fl_PNG_Image("res/three_turtles.png");
+            img = new Fl_PNG_Image("../res/three_turtles.png");
             if (img->fail() == Fl_Image::ERR_FILE_ACCESS) {
                 std::cout << "Image couln't load";
             }
