@@ -50,7 +50,7 @@ Game::~Game() {
 void Game::restartGame() {
     if (lives > 0) {
         delete player;
-        player = new Player({50, 0}, up);
+        player = new Player({45, 0}, up);
     } else {
         changeLoosingState();
     }
