@@ -85,24 +85,27 @@ void GameRenderer::drawMap() {
 }
 
 void GameRenderer::drawHUD() {
+    // Dessin des vies
     short numberLives = game->getLives();
     if (numberLives == 3) {
         Fl_PNG_Image lives("res/three_hearts.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
-        smallerImg->draw(590,10);
+        smallerImg->draw(290,710);
     } else if (numberLives == 2) {
         Fl_PNG_Image lives("res/two_hearts.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
-        smallerImg->draw(590,10);
+        smallerImg->draw(290,710);
     } else if (numberLives == 1) {
         Fl_PNG_Image lives("res/one_heart.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
-        smallerImg->draw(590,10);
+        smallerImg->draw(290,710);
     } else {
         Fl_PNG_Image lives("res/no_heart.png");
         Fl_Image* smallerImg = lives.copy(100, 30);
-        smallerImg->draw(590,10);
+        smallerImg->draw(290,710);
     }
+    // Dessin de la barre de temps restant
+    fl_draw_box(FL_FLAT_BOX, 410, 710, 270 - ((game->getTime()*60 - game->getFrameLeft()) * (270/(game->getTime() * 60))), 30, FL_RED);
 }
 
 void GameRenderer::draw() {
