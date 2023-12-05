@@ -8,11 +8,13 @@ void GameController::keyPressed(int keycode) {
             game->getPlayer()->setDirection(right);
             break;
         case 'a':
+        case 'q':
             leftPressed = true;
             game->getPlayer()->move_left();
             game->getPlayer()->setDirection(left);
             break;
         case 'w':
+        case 'z':
             game->getPlayer()->move_up();
             game->getPlayer()->setDirection(up);
             break;
@@ -28,6 +30,7 @@ void GameController::keyReleased(int keycode) {
             rightPressed = false;
             break;
         case 'a':
+        case 'q':
             leftPressed = false;
             break;
     }

@@ -6,6 +6,8 @@
 #include "View/GameRenderer.h"
 #include "Model/Game.h"
 #include "Controller/GameController.h"
+#include "View/MenuDisplay.h"
+#include "Components/MenuComponents.h"
 
 
 class MainWindow : public Fl_Window {

@@ -2,6 +2,8 @@
 #define SRC_GAMECONTROLLER_H
 
 #include "../Model/Game.h"
+#include "array"
+#include "vector"
 
 class GameController {
 private:
