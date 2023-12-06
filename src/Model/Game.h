@@ -18,6 +18,8 @@ private:
     std::vector<Player*> winnerPlayers;
     float time;
     float frameLeft;
+    int score;
+    int scoreFrameCounter;
 public:
     Game();
     ~Game();
@@ -39,6 +41,8 @@ public:
     virtual void killPlayer();
     virtual void resetTime() {frameLeft = time*60;}
     virtual void decreaseTime() {frameLeft--;}
+    virtual int getScore() {return score;}
+    virtual int getScoreFrameCounter() {return scoreFrameCounter;}
     virtual void win();
     virtual void update();
 };

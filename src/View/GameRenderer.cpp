@@ -110,6 +110,9 @@ void GameRenderer::drawHUD() {
     fl_draw_box(FL_FLAT_BOX, 410 + length, 710, 270-length, 30, FL_WHITE);
     fl_frame("AAAA", 410, 710, 270, 30);
     // Affichage du score
+    Fl_PNG_Image score("res/score.png");
+    score.draw(10,706);
+
 }
 
 void GameRenderer::draw() {
