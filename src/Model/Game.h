@@ -28,8 +28,8 @@ public:
     virtual float getTime() {return time;}
     virtual float getFrameLeft() {return frameLeft;}
     virtual void setMap(Map* new_map) {map = new_map;}
-    virtual void changeWinningState() {winning = !winning;};
-    virtual void changeLoosingState() {loosing  = !loosing;};
+    virtual void changeWinningState() {winning = true;};
+    virtual void changeLoosingState() {loosing  = true;};
     virtual bool isWinning() {return winning;};
     virtual bool isLosing() {return loosing;};
     virtual bool isRunning() {return !winning && !loosing;};
