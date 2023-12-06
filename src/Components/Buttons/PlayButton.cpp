@@ -1,5 +1,6 @@
 #include "PlayButton.h"
 #include "../../Driver.h"
+#include "iostream"
 
 PlayButton::PlayButton(int x, int y, Driver* driver) : x{x}, y{y}, driver{driver} {
     image = new Fl_PNG_Image("res/play.png");
@@ -11,6 +12,5 @@ bool PlayButton::contains(int x, int y) {
 }
 
 void PlayButton::onClick() {
-    driver->deleteMenu();
     driver->launchGame();
 }

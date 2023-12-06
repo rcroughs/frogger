@@ -16,7 +16,7 @@ public:
     virtual Fl_PNG_Image* getImage() override {return image;};
     virtual int getX() {return x;}
     virtual int getY() {return y;}
-    virtual bool contains(int x, int y) {};
+    virtual bool contains(int x, int y);
     virtual void onClick();
 };
 

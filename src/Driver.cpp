@@ -7,8 +7,13 @@
 
 void Driver::launchGame() {
     game = new Game(this);
-    view = new GameRenderer(game, 700, 700);
+    delete controller;
     controller = new GameController(game);
+    delete view;
+    view = new GameRenderer(game, 700, 700);
+    delete menu;
+    hasGame = true;
+    hasMenu = false;
     gameState = ON_GAME;
 }
 
@@ -20,8 +25,19 @@ void Driver::deleteGame() {
 
 void Driver::showMenu() {
     menu = new MenuComponents(this);
+    if (hasGame) {
+        delete view;
+    }
     view = new MenuDisplay(menu);
+    if (hasGame) {
+        delete controller;
+    }
     controller = new MenuController(menu);
+    if (hasGame) {
+        delete game;
+    }
+    hasMenu = true;
+    hasGame = false;
     gameState = MENU;
 }
 
@@ -46,6 +62,7 @@ void Driver::refresh() {
 
 Driver::Driver() {
     showMenu();
+    hasMenu = true;
 }
 
 Driver::~Driver() {

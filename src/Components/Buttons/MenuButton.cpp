@@ -10,6 +10,5 @@ bool MenuButton::contains(int x, int y) {
 }
 
 void MenuButton::onClick() {
-    driver->deleteGame();
     driver->showMenu();
 }

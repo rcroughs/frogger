@@ -3,6 +3,7 @@
 
 #include "Position.h"
 #include "Direction.h"
+#include <iostream>
 
 class Player {
 private:
@@ -14,7 +15,7 @@ public:
     virtual Position getPosition() {return this->current_position;}
     virtual void setPosition(Position new_position) {current_position = new_position;}
     virtual Direction getDirection() {return this->current_direction;}
-    virtual void setDirection(Direction new_direction) {current_direction = new_direction;}
+    virtual void setDirection(Direction new_direction) {if (up <= new_direction <= right) current_direction = new_direction;}
     virtual bool isInScreen();
 
     virtual void move_up();

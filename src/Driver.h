@@ -20,6 +20,8 @@ private:
         ON_GAME
     };
     GAME_STATE gameState {MENU};
+    bool hasMenu {false};
+    bool hasGame {false};
 public:
     Driver();
     ~Driver();
