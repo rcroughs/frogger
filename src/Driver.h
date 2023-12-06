@@ -17,11 +17,11 @@ private:
     MenuComponents* menu;
     enum GAME_STATE {
         MENU,
-        ON_GAME
+        ON_GAME,
+        HOME_SCREEN
     };
-    GAME_STATE gameState {MENU};
-    bool hasMenu {false};
-    bool hasGame {false};
+    GAME_STATE gameState {HOME_SCREEN};
+    int homescreen;
 public:
     Driver();
     ~Driver();
@@ -29,13 +29,14 @@ public:
     virtual void deleteGame();
     virtual void showMenu();
     virtual void deleteMenu();
+    virtual void showHomeScreen();
     virtual void refresh();
 
-    virtual void mouseMove(short loc_x, short loc_y) {controller->mouseMove(loc_x, loc_y);}
-    virtual void mouseClick(short loc_x, short loc_y) {controller->mouseClick(loc_x, loc_y);}
-    virtual void keyPressed(int keycode) {controller->keyPressed(keycode);}
-    virtual void keyReleased(int keycode) {controller->keyReleased(keycode);}
-    virtual void updateMovement() {controller->updateMovement();}
+    virtual void mouseMove(short loc_x, short loc_y) {if (controller != nullptr) controller->mouseMove(loc_x, loc_y);}
+    virtual void mouseClick(short loc_x, short loc_y) {if (controller != nullptr) controller->mouseClick(loc_x, loc_y);}
+    virtual void keyPressed(int keycode) {if (controller != nullptr) controller->keyPressed(keycode);}
+    virtual void keyReleased(int keycode) {if (controller != nullptr) controller->keyReleased(keycode);}
+    virtual void updateMovement() {if (controller != nullptr) controller->updateMovement();}
 };
 
 

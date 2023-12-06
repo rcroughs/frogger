@@ -1,5 +1,6 @@
 #include "Driver.h"
 #include "View/GameRenderer.h"
+#include "View/ViewHomeScreen.h"
 #include "View/MenuDisplay.h"
 #include "Controller/GameController.h"
 #include "Controller/MenuController.h"
@@ -12,8 +13,6 @@ void Driver::launchGame() {
     delete view;
     view = new GameRenderer(game, 700, 700);
     delete menu;
-    hasGame = true;
-    hasMenu = false;
     gameState = ON_GAME;
 }
 
@@ -25,19 +24,17 @@ void Driver::deleteGame() {
 
 void Driver::showMenu() {
     menu = new MenuComponents(this);
-    if (hasGame) {
+    if (gameState == ON_GAME || gameState == HOME_SCREEN) {
         delete view;
     }
     view = new MenuDisplay(menu);
-    if (hasGame) {
+    if (gameState == ON_GAME) {
         delete controller;
     }
     controller = new MenuController(menu);
-    if (hasGame) {
+    if (gameState == ON_GAME) {
         delete game;
     }
-    hasMenu = true;
-    hasGame = false;
     gameState = MENU;
 }
 
@@ -45,6 +42,10 @@ void Driver::deleteMenu() {
     delete menu;
     delete view;
     delete controller;
+}
+
+void Driver::showHomeScreen() {
+    view = new ViewHomeScreen();
 }
 
 void Driver::refresh() {
@@ -57,12 +58,17 @@ void Driver::refresh() {
         }
         view->draw();
         updateMovement();
+    } else if (gameState == HOME_SCREEN) {
+        view->draw();
+        homescreen++;
+        if (homescreen == 60) {
+            showMenu();
+        }
     }
 }
 
 Driver::Driver() {
-    showMenu();
-    hasMenu = true;
+    showHomeScreen();
 }
 
 Driver::~Driver() {
