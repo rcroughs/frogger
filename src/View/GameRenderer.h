@@ -5,8 +5,9 @@
 #include "FL/Fl.H"
 #include "FL/Fl_Box.H"
 #include "FL/fl_draw.H"
+#include "View.h"
 
-class GameRenderer {
+class GameRenderer : public View {
 private:
     Game* game;
     const int WINDOW_HEIGHT;
@@ -20,7 +21,7 @@ public:
     virtual void drawPlayer(Player* player);
     virtual void drawMap();
     virtual void drawHUD();
-    virtual void draw();
+    void draw() override;
 };
 
 #endif
