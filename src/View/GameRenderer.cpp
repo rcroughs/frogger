@@ -105,7 +105,11 @@ void GameRenderer::drawHUD() {
         smallerImg->draw(290,710);
     }
     // Dessin de la barre de temps restant
-    fl_draw_box(FL_FLAT_BOX, 410, 710, 270 - ((game->getTime()*60 - game->getFrameLeft()) * (270/(game->getTime() * 60))), 30, FL_RED);
+    float length = 270 - ((game->getTime()*60 - game->getFrameLeft()) * (270/(game->getTime() * 60)));
+    fl_draw_box(FL_FLAT_BOX, 410, 710, length, 30, FL_RED);
+    fl_draw_box(FL_FLAT_BOX, 410 + length, 710, 270-length, 30, FL_WHITE);
+    fl_frame("AAAA", 410, 710, 270, 30);
+    // Affichage du score
 }
 
 void GameRenderer::draw() {
