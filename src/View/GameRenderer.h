@@ -21,6 +21,7 @@ public:
     virtual void drawPlayer(Player* player);
     virtual void drawMap();
     virtual void drawHUD();
+    virtual void drawMenu();
     void draw() override;
 };
 

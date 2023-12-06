@@ -6,6 +6,7 @@
 #include "../Model/Player.h"
 #include <array>
 #include "vector"
+#include "../Model/GameMenu.h"
 
 Position GameRenderer::getWindowPosition(Position gamePosition) {
     Position res = {float(WINDOW_WIDTH * (gamePosition.x/100.0f)) ,int((float(WINDOW_HEIGHT) - float(WINDOW_HEIGHT) / 13.0f) - ((float(gamePosition.y) / 13.0f) * WINDOW_HEIGHT)) };
@@ -115,6 +116,14 @@ void GameRenderer::drawHUD() {
 
 }
 
+void GameRenderer::drawMenu() {
+    GameMenu* gameMenu = game->getMenu();
+    gameMenu->getImage()->draw(gameMenu->getX(), gameMenu->getY());
+    for (auto &button: gameMenu->getButtons()) {
+        button->getImage()->draw(button->getX(), button->getY());
+    }
+}
+
 void GameRenderer::draw() {
     if (game->isLosing()) {
         drawGameOver();
@@ -129,5 +138,8 @@ void GameRenderer::draw() {
             drawPlayer(winnerPlayer.at(i));
         }
         drawHUD();
+        if (game->isOnPause()) {
+            drawMenu();
+        }
     }
 }

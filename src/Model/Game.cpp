@@ -5,8 +5,8 @@
 #include "Environments/Road.h"
 #include "vector"
 
-Game::Game() : player{new Player({45, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3}, time{30}, frameLeft{30*60} {
-
+Game::Game(Driver* driver) : driver{driver}, player{new Player({45, 0}, up)}, map{new Map()}, winning{false}, loosing{false}, lives{3}, time{30}, frameLeft{30*60}, inMenu{false} {
+    gameMenu = new GameMenu(150, 100, driver);
     map->setEnvironment(0, new SideWalk());
     for (int i = 1; i < 6; i++) {
         char circulation = '\0';
@@ -81,4 +81,8 @@ void Game::win() {
     if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {
         changeWinningState();
     }
+}
+
+void Game::triggerMenu() {
+    inMenu = !inMenu;
 }

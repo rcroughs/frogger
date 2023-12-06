@@ -6,7 +6,7 @@
 #include "iostream"
 
 void Driver::launchGame() {
-    game = new Game();
+    game = new Game(this);
     view = new GameRenderer(game, 700, 700);
     controller = new GameController(game);
     gameState = ON_GAME;
@@ -36,7 +36,9 @@ void Driver::refresh() {
         menu->update();
         view->draw();
     } else if (gameState == ON_GAME) {
-        game->update();
+        if (!game->isOnPause()) {
+            game->update();
+        }
         view->draw();
         updateMovement();
     }

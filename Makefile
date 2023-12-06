@@ -2,8 +2,8 @@ SRC_DIR = src/
 BUILD_DIR = build/
 
 OBJS    = $(patsubst ${SRC_DIR}%.cpp,${BUILD_DIR}%.o,${SOURCES})
-HEADERS = $(shell find ${SRC_DIR} -name '*.h')
-SOURCES = $(shell find ${SRC_DIR} -name '*.cpp')
+HEADERS = $(shell find src -name '*.h')
+SOURCES = $(shell find src -name '*.cpp')
 OUT	= frogger
 CC	 = g++
 FLAGS	 = -g -c -Wall -Wextra

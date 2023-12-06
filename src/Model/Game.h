@@ -4,14 +4,20 @@
 #include "Player.h"
 #include "Map.h"
 #include "vector"
+#include "GameMenu.h"
+#include "../Driver.h"
 
 class Water;
 class Map;
+class Driver;
+class GameMenu;
 
 class Game {
 private:
     Player* player {};
     Map* map;
+    GameMenu* gameMenu;
+    Driver* driver;
     bool winning;
     bool loosing;
     short lives;
@@ -20,12 +26,15 @@ private:
     float frameLeft;
     int score;
     int scoreFrameCounter;
+    bool inMenu;
 public:
-    Game();
+    Game(Driver* driver);
     ~Game();
     virtual Player* getPlayer() {return this->player;}
     virtual std::vector<Player*> &getWinnerPlayer() {return winnerPlayers;}
     virtual void setPlayer(Player* new_player) {player = new_player;}
+    virtual GameMenu* getMenu() {return gameMenu;}
+    virtual bool isOnPause() {return inMenu;}
     virtual Map* getMap() {return this->map;}
     virtual float getTime() {return time;}
     virtual float getFrameLeft() {return frameLeft;}
@@ -44,6 +53,7 @@ public:
     virtual int getScore() {return score;}
     virtual int getScoreFrameCounter() {return scoreFrameCounter;}
     virtual void win();
+    virtual void triggerMenu();
     virtual void update();
 };
 

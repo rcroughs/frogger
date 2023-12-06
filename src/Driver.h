@@ -7,6 +7,7 @@
 #include "Components/MenuComponents.h"
 
 class MenuComponents;
+class Game;
 
 class Driver {
 private:
