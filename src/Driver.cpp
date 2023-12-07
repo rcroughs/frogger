@@ -67,7 +67,7 @@ void Driver::refresh() {
     }
 }
 
-Driver::Driver() {
+Driver::Driver() : controller{nullptr} {
     showHomeScreen();
 }
 
