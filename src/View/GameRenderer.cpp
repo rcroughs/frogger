@@ -7,6 +7,7 @@
 #include <array>
 #include "vector"
 #include "../Model/GameMenu.h"
+#include <string>
 
 Position GameRenderer::getWindowPosition(Position gamePosition) {
     Position res = {float(WINDOW_WIDTH * (gamePosition.x/100.0f)) ,int((float(WINDOW_HEIGHT) - float(WINDOW_HEIGHT) / 13.0f) - ((float(gamePosition.y) / 13.0f) * WINDOW_HEIGHT)) };
@@ -85,8 +86,7 @@ void GameRenderer::drawMap() {
     }
 }
 
-void GameRenderer::drawHUD() {
-    // Dessin des vies
+void GameRenderer::drawLives() {
     short numberLives = game->getLives();
     if (numberLives == 3) {
         Fl_PNG_Image lives("res/three_hearts.png");
@@ -105,15 +105,29 @@ void GameRenderer::drawHUD() {
         Fl_Image* smallerImg = lives.copy(100, 30);
         smallerImg->draw(290,710);
     }
-    // Dessin de la barre de temps restant
+}
+
+void GameRenderer::drawTime() {
     float length = 270 - ((game->getTime()*60 - game->getFrameLeft()) * (270/(game->getTime() * 60)));
     fl_draw_box(FL_FLAT_BOX, 410, 710, length, 30, FL_RED);
     fl_draw_box(FL_FLAT_BOX, 410 + length, 710, 270-length, 30, FL_WHITE);
     fl_frame("AAAA", 410, 710, 270, 30);
-    // Affichage du score
+}
+
+void GameRenderer::drawScore() {
     Fl_PNG_Image score("res/score.png");
     score.draw(10,706);
+    fl_font(FL_HELVETICA_BOLD, 50);
+    fl_draw(std::to_string(game->getScore()).c_str(), 160, 740);
+}
 
+void GameRenderer::drawHUD() {
+    // Dessin des vies
+    drawLives();
+    // Dessin de la barre de temps restant
+    drawTime();
+    // Affichage du score
+    drawScore();
 }
 
 void GameRenderer::drawMenu() {

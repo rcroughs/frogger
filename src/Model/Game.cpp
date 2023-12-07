@@ -5,7 +5,7 @@
 #include "Environments/Road.h"
 #include "vector"
 
-Game::Game(Driver* driver) : driver{driver}, map{new Map()}, winning{false}, loosing{false}, lives{3}, time{30}, frameLeft{30*60}, inMenu{false} {
+Game::Game(Driver* driver) : driver{driver}, map{new Map()}, winning{false}, loosing{false}, lives{3}, time{30}, frameLeft{30*60}, score{0}, timeOut{0}, combo{1}, highestPosition{0}, inMenu{false} {
     gameMenu = new GameMenu(150, 100, driver);
     Direction newDirection = up;
     player = new Player({45, 0}, newDirection);
@@ -59,7 +59,18 @@ void Game::restartGame() {
     }
 }
 
+void Game::handleScore() {
+    if (getPlayer()->getPosition().y < 12 && getHighestPosition() < getPlayer()->getPosition().y) {
+        if (getTimeOut() > 0) {
+            addCombo();
+        }
+        modifyHeight();
+        score += getCombo() * 20;
+    }
+}
+
 void Game::update() {
+    decreaseTimeOut();
     map->updateProps();
     map->handleGame(this);
     if (!player->isInScreen()) {
@@ -80,6 +91,7 @@ void Game::win() {
     winnerPlayers.push_back(player);
     player = new Player({45, 0}, up);
     resetTime();
+    resetHeight();
     if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {
         changeWinningState();
     }

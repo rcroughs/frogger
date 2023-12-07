@@ -15,6 +15,7 @@ void GameController::keyPressed(int keycode) {
             case 'w':
             case 'z':
                 game->getPlayer()->move_up();
+                game->handleScore();
                 break;
             case 's':
                 game->getPlayer()->move_down();

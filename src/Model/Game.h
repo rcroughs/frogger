@@ -25,7 +25,9 @@ private:
     float time;
     float frameLeft;
     int score;
-    int scoreFrameCounter;
+    int timeOut;
+    short combo;
+    short highestPosition;
     bool inMenu;
 public:
     Game(Driver* driver);
@@ -50,8 +52,17 @@ public:
     virtual void killPlayer();
     virtual void resetTime() {frameLeft = time*60;}
     virtual void decreaseTime() {frameLeft--;}
+    virtual short getCombo() {return combo;}
+    virtual short addCombo() {combo++;}
+    virtual void resetCombo() {combo = 1;}
     virtual int getScore() {return score;}
-    virtual int getScoreFrameCounter() {return scoreFrameCounter;}
+    virtual int getTimeOut() {return timeOut;}
+    virtual short getHighestPosition() {return highestPosition;}
+    virtual void handleScore();
+    virtual void resetTimeOut() {timeOut = 60;}
+    virtual void modifyHeight() {highestPosition++; resetTimeOut(); }
+    virtual void resetHeight() {highestPosition = 0;}
+    virtual void decreaseTimeOut() {if (timeOut > 0) {timeOut--;} else {resetCombo();} }
     virtual void win();
     virtual void triggerMenu();
     virtual void update();
