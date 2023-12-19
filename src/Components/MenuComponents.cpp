@@ -10,12 +10,12 @@ MenuComponents::MenuComponents(Driver* driver) : driver{driver} {
     clouds.push_back({ 0, false });
     clouds.push_back({ 150, true });
     buttons.push_back(new PlayButton(250, 300, driver));
-    buttons.push_back(new EditorButton(250, 420));
+    buttons.push_back(new EditorButton(250, 420, driver));
     buttons.push_back(new QuitButton(250, 540));
 }
 
 MenuComponents::~MenuComponents() {
-    delete logo;
+    delete logo; // cause un seg fault à la fermeture du programme
     delete bg;
     for (auto &button : buttons) {
         delete button;

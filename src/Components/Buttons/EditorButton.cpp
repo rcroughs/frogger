@@ -1,6 +1,7 @@
 #include "EditorButton.h"
+#include "../../Driver.h"
 
-EditorButton::EditorButton(int x, int y) : x{x}, y{y} {
+EditorButton::EditorButton(int x, int y, Driver* driver) : x{x}, y{y}, driver{driver} {
     image = new Fl_PNG_Image("res/editor.png");
 }
 
@@ -10,5 +11,5 @@ bool EditorButton::contains(int x, int y) {
 }
 
 void EditorButton::onClick() {
-    exit(1);
+    driver->launchEditor();
 }

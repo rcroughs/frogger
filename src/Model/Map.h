@@ -10,7 +10,7 @@ class Game;
 
 class Map {
 private:
-    std::array<Environment*, 13> environments;
+    std::array<Environment*, 13> environments{nullptr};
 public:
     Map() : environments{} {}
     ~Map() {
@@ -19,7 +19,9 @@ public:
         }
     }
     virtual Environment* getEnvironment(int index) {return environments.at(index);}
-    virtual void setEnvironment(int index, Environment* new_environment) {environments[index] = new_environment;}
+    virtual void deleteEnvironment(int index) {delete environments.at(index);}
+    virtual void setEnvironment(int index, Environment* new_environment) {deleteEnvironment(index); environments[index] = new_environment;}
+    virtual void resetEnvironments();
 
     virtual void updateProps();
     virtual void handleGame(Game* currentGame);

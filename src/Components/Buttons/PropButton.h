@@ -1,18 +1,22 @@
-#ifndef FROGGER_MENUBUTTON_H
-#define FROGGER_MENUBUTTON_H
+#ifndef SRC_PROPBUTTON_H
+#define SRC_PROPBUTTON_H
 
+#include "FL/Fl_PNG_Image.H"
 #include "../Button.h"
-#include "../../Driver.h"
 
-class MenuButton : public Button {
+class Driver;
+
+class PropButton : public Button {
 private:
     Fl_PNG_Image* image;
     Driver* driver;
     int x;
     int y;
+    short id; // 0, 1
+    bool displayed{false};
 public:
-    MenuButton(int x, int y, Driver* driver);
-    ~MenuButton() {
+    PropButton(int x, int y, Driver* driver, short id);
+    ~PropButton() {
         delete image;
     }
     virtual Fl_PNG_Image* getImage() override {return image;};
@@ -22,12 +26,11 @@ public:
     virtual bool canMove() {return false;}
     virtual void onClick();
     virtual void resetPosition() {};
-    virtual bool isDisplayed() {return false;}
     virtual bool isMoving() {return false;}
     virtual void changeMovingState() {}
     virtual void changePosition(int loc_x, int loc_y) {x = loc_x; y = loc_y;}
-    virtual void changeState() {}
+    virtual bool isDisplayed() {return displayed;}
+    virtual void changeState() {displayed = !displayed;}
 };
 
-
-#endif //FROGGER_MENUBUTTON_H
+#endif //SRC_PROPBUTTON_H

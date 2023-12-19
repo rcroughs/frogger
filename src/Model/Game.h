@@ -35,12 +35,13 @@ public:
     virtual Player* getPlayer() {return this->player;}
     virtual std::vector<Player*> &getWinnerPlayer() {return winnerPlayers;}
     virtual void setPlayer(Player* new_player) {player = new_player;}
+    virtual void setMap(Map* new_map) {map = new_map;}
+    virtual void setGameMenu (GameMenu* new_gameMenu) {gameMenu = new_gameMenu;}
     virtual GameMenu* getMenu() {return gameMenu;}
     virtual bool isOnPause() {return inMenu;}
     virtual Map* getMap() {return this->map;}
     virtual float getTime() {return time;}
     virtual float getFrameLeft() {return frameLeft;}
-    virtual void setMap(Map* new_map) {map = new_map;}
     virtual void changeWinningState() {winning = true;};
     virtual void changeLoosingState() {loosing  = true;};
     virtual bool isWinning() {return winning;};

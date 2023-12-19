@@ -23,6 +23,7 @@ public:
     Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {}
     virtual Fl_Color getColor() {return color;}
     void setColor(Fl_Color new_color) {color = new_color;}
+    void setFlow(float new_flow) {flow = new_flow;}
 
     virtual void generateProps(short id) override;
 
