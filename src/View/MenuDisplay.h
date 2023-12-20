@@ -3,14 +3,16 @@
 
 #include "../Components/MenuComponents.h"
 #include "View.h"
+#include <memory>
 
 class MenuDisplay : public View {
-private:
-    MenuComponents* components;
 public:
-    MenuDisplay(MenuComponents* components): components{components} {}
-    void draw() override;
+  MenuDisplay(std::shared_ptr<MenuComponents> components)
+      : _components{std::move(components)} {}
+  void draw() override;
+
+private:
+  std::shared_ptr<MenuComponents> _components;
 };
 
-
-#endif //FROGGER_MENUDISPAY_H
+#endif // FROGGER_MENUDISPAY_H

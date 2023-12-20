@@ -3,8 +3,8 @@
 
 struct Position {
 public:
-    float x;
-    int y;
+  float x;
+  int y;
 };
 
-#endif //POSITION_H
+#endif // POSITION_H

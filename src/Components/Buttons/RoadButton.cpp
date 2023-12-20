@@ -1,8 +1,9 @@
 #include "RoadButton.h"
 #include "../../Driver.h"
 #include "iostream"
+#include <memory>
 
-RoadButton::RoadButton(int x, int y, Driver *driver) : x{x}, y{y}, driver{driver} {
+RoadButton::RoadButton(int x, int y, Driver* driver) : x{x}, y{y}, driver{driver} {
     image = new Fl_PNG_Image("res/road_button.png");
 }
 

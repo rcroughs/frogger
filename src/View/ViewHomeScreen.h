@@ -1,16 +1,17 @@
 #ifndef FROGGER_VIEWHOMESCREEN_H
 #define FROGGER_VIEWHOMESCREEN_H
 
-#include "View.h"
 #include "FL/Fl_PNG_Image.H"
+#include "View.h"
+#include <memory>
 
 class ViewHomeScreen : public View {
-    Fl_PNG_Image* image;
 public:
-    ViewHomeScreen();
-    ~ViewHomeScreen();
-    virtual void draw() override;
+  ViewHomeScreen();
+  virtual void draw() override;
+
+private:
+  std::shared_ptr<Fl_PNG_Image> _image;
 };
 
-
-#endif //FROGGER_VIEWHOMESCREEN_H
+#endif // FROGGER_VIEWHOMESCREEN_H

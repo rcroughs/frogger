@@ -3,8 +3,9 @@
 #include "Buttons/PlayButton.h"
 #include "Buttons/QuitButton.h"
 #include "Buttons/EditorButton.h"
+#include <memory>
 
-MenuComponents::MenuComponents(Driver* driver) : driver{driver} {
+MenuComponents::MenuComponents(Driver* driver) : _driver{driver} {
     logo = new Fl_PNG_Image("res/title.png");
     bg = new Fl_PNG_Image("res/bg.png");
     clouds.push_back({ 0, false });

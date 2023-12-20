@@ -1,35 +1,37 @@
 #ifndef FROGGER_EDITORBUTTON_H
 #define FROGGER_EDITORBUTTON_H
 
-#include "FL/Fl_PNG_Image.H"
 #include "../Button.h"
+#include "FL/Fl_PNG_Image.H"
+#include <memory>
 
 class Driver;
 
-class EditorButton : public Button{
-private:
-    Fl_PNG_Image* image;
-    Driver* driver;
-    int x;
-    int y;
+class EditorButton : public Button {
 public:
-    EditorButton(int x, int y, Driver* driver);
-    ~EditorButton() {
-        delete image;
-    }
-    virtual Fl_PNG_Image* getImage() override {return image;};
-    virtual int getX() {return x;}
-    virtual int getY() {return y;}
-    virtual bool contains(int x, int y);
-    virtual bool canMove() {return false;}
-    virtual void onClick();
-    virtual void resetPosition() {};
-    virtual bool isDisplayed() {return false;}
-    virtual bool isMoving() {return false;}
-    virtual void changeMovingState() {}
-    virtual void changePosition(int loc_x, int loc_y) {x = loc_x; y = loc_y;}
-    virtual void changeState() {};
+  EditorButton(int x, int y, Driver *driver);
+  ~EditorButton() { delete image; }
+  Fl_PNG_Image *getImage() override { return image; };
+  int getX() override { return x; }
+  int getY() override { return y; }
+  bool contains(int x, int y) override;
+  bool canMove() override { return false; }
+  void onClick() override;
+  void resetPosition() override {};
+  bool isDisplayed() override { return false; }
+  bool isMoving() override { return false; }
+  void changeMovingState() override {}
+  void changePosition(int loc_x, int loc_y) override {
+    x = loc_x;
+    y = loc_y;
+  }
+  void changeState() override {};
+
+private:
+  Fl_PNG_Image *image;
+  Driver *driver;
+  int x;
+  int y;
 };
 
-
-#endif //FROGGER_EDITORBUTTON_H
+#endif // FROGGER_EDITORBUTTON_H

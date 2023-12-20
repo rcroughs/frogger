@@ -1,53 +1,65 @@
 #ifndef FROGGER_DRIVER_H
 #define FROGGER_DRIVER_H
 
-#include "View/View.h"
-#include "Controller/Controller.h"
 #include "Components/MenuComponents.h"
+#include "Controller/Controller.h"
 #include "Model/GameEditor.h"
+#include "View/View.h"
+#include <memory>
 
 class MenuComponents;
 class Game;
 class GameEditor;
 
 class Driver {
-private:
-    View* view;
-    Controller* controller;
-    Game* game;
-    GameEditor* editor;
-    MenuComponents* menu;
-    enum GAME_STATE {
-        MENU,
-        ON_GAME,
-        HOME_SCREEN,
-        ON_EDIT
-    };
-    GAME_STATE gameState {HOME_SCREEN};
-    int homescreen;
 public:
-    Driver();
-    ~Driver();
-    virtual void launchGame(Game* new_game);
-    virtual void launchEditor();
-    virtual void deleteGame();
-    virtual void showMenu();
-    virtual void deleteMenu();
-    virtual void showHomeScreen();
-    virtual void refresh();
+  Driver();
+  Driver(const Driver &driver) =default;
+  virtual void launchGame(std::shared_ptr<Game> new_game);
+  virtual void launchEditor();
+  virtual void showMenu();
+  virtual void showHomeScreen();
+  virtual void refresh();
 
-    // Levels
-    virtual Game* CreateLevel1();
+  // Levels
+  virtual std::shared_ptr<Game> CreateLevel1();
 
-    virtual void mouseMove(short loc_x, short loc_y) {if (controller != nullptr) controller->mouseMove(loc_x, loc_y);}
-    virtual void mouseClick(short loc_x, short loc_y) {if (controller != nullptr) controller->mouseClick(loc_x, loc_y);}
-    virtual void mouseReleased(short loc_x, short loc_y) {if (controller != nullptr && gameState == ON_EDIT) controller->mouseRelease(loc_x, loc_y);}
-    virtual void keyPressed(int keycode) {if (controller != nullptr) controller->keyPressed(keycode);}
-    virtual void keyReleased(int keycode) {if (controller != nullptr) controller->keyReleased(keycode);}
-    virtual void updateMovement() {if (controller != nullptr) controller->updateMovement();}
+  virtual void mouseMove(short loc_x, short loc_y) {
+    if (_controller != nullptr)
+      _controller->mouseMove(loc_x, loc_y);
+  }
+  virtual void mouseClick(short loc_x, short loc_y) {
+    if (_controller != nullptr)
+      _controller->mouseClick(loc_x, loc_y);
+  }
+  virtual void mouseReleased(short loc_x, short loc_y) {
+    if (_controller != nullptr && _gameState == ON_EDIT)
+      _controller->mouseRelease(loc_x, loc_y);
+  }
+  virtual void keyPressed(int keycode) {
+    if (_controller != nullptr)
+      _controller->keyPressed(keycode);
+  }
+  virtual void keyReleased(int keycode) {
+    if (_controller != nullptr)
+      _controller->keyReleased(keycode);
+  }
+  virtual void updateMovement() {
+    if (_controller != nullptr)
+      _controller->updateMovement();
+  }
 
-    virtual GameEditor* getEditor() {return editor;}
+  virtual std::shared_ptr<GameEditor> getEditor() { return _editor; }
+
+private:
+  std::shared_ptr<View> _view;
+  std::shared_ptr<Controller> _controller;
+  std::shared_ptr<Game> _game;
+  std::shared_ptr<GameEditor> _editor;
+  std::shared_ptr<MenuComponents> _menu;
+  enum GAME_STATE { MENU, ON_GAME, HOME_SCREEN, ON_EDIT };
+  GAME_STATE _gameState = HOME_SCREEN;
+  int _homescreen;
 };
 
-
-#endif //FROGGER_DRIVER_H
+#endif // FROGGER_DRIVER_H

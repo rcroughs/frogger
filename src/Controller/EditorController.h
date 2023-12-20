@@ -2,25 +2,27 @@
 #define SRC_EDITORCONTROLLER_H
 
 #include "../Model/Game.h"
+#include "../Model/GameEditor.h"
+#include "Controller.h"
 #include "array"
 #include "vector"
-#include "Controller.h"
-#include "../Model/GameEditor.h"
+#include <memory>
 
 class GameEditor;
 
-class EditorController : public Controller{
-private:
-    GameEditor* editor;
+class EditorController : public Controller {
 public:
-    EditorController(GameEditor* editor) : editor{editor} {}
+  EditorController(std::shared_ptr<GameEditor> editor) : _editor{std::move(editor)} {}
 
-    virtual void mouseMove(short loc_x, short loc_y) override;
-    virtual void mouseClick(short loc_x, short loc_y) override;
-    virtual void keyPressed(int keycode) override {};
-    virtual void keyReleased(int keycode) override {};
-    virtual void updateMovement() override {};
-    virtual void mouseRelease(short loc_x, short loc_y) {}
+  virtual void mouseMove(short loc_x, short loc_y) override;
+  virtual void mouseClick(short loc_x, short loc_y) override;
+  virtual void keyPressed(int keycode) override{};
+  virtual void keyReleased(int keycode) override{};
+  virtual void updateMovement() override{};
+  virtual void mouseRelease(short loc_x, short loc_y) {}
+  
+private:
+  std::shared_ptr<GameEditor> _editor;
 };
 
-#endif //SRC_EDITORCONTROLLER_H
+#endif // SRC_EDITORCONTROLLER_H

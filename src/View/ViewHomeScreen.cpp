@@ -1,13 +1,8 @@
 #include "ViewHomeScreen.h"
+#include <memory>
 
 ViewHomeScreen::ViewHomeScreen() {
-    image = new Fl_PNG_Image("res/homescreen.png");
+  _image = std::make_shared<Fl_PNG_Image>("res/homescreen.png");
 }
 
-ViewHomeScreen::~ViewHomeScreen() {
-    delete image;
-}
-
-void ViewHomeScreen::draw() {
-    image->draw(0,0);
-}
+void ViewHomeScreen::draw() { _image->draw(0, 0); }

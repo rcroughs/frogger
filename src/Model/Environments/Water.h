@@ -6,34 +6,35 @@
 #include "Props/Prop.h"
 #include "vector"
 
-
 class Water : virtual public Environment {
-private:
-    Fl_Color color;
-    std::vector<Prop*> props;
-    bool isMoving;
-    float flow;
 public:
-    Water() : isMoving{true}, color(FL_BLUE), flow(0) {}
-    ~Water() {
-        for (int i = 0; i < props.size(); i++) {
-            delete props.at(i);
-        }
+  Water() : isMoving{true}, color(FL_BLUE), flow(0) {}
+  ~Water() {
+    for (int i = 0; i < props.size(); i++) {
+      delete props.at(i);
     }
-    Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {}
-    virtual Fl_Color getColor() {return color;}
-    void setColor(Fl_Color new_color) {color = new_color;}
-    void setFlow(float new_flow) {flow = new_flow;}
+  }
+  Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {}
+  virtual Fl_Color getColor() { return color; }
+  void setColor(Fl_Color new_color) { color = new_color; }
+  void setFlow(float new_flow) { flow = new_flow; }
 
-    virtual void generateProps(short id) override;
+  virtual void generateProps(short id) override;
 
-    virtual void generateLogs();
-    virtual void generateLilyPads();
-    virtual void generateTurtles(short id);
+  virtual void generateLogs();
+  virtual void generateLilyPads();
+  virtual void generateTurtles(short id);
 
-    virtual std::vector<Prop*>& getProps() override;
-    virtual void handleGame(Game* currentGame) override;
-    void updateProps() override;
+  virtual std::vector<Prop *> &getProps() override;
+  virtual void handleGame(Game *currentGame) override;
+  void updateProps() override;
+
+private:
+  Fl_Color color;
+  std::vector<Prop *> props;
+  bool isMoving;
+  float flow;
+
 };
 
 #endif

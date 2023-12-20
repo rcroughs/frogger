@@ -6,21 +6,23 @@
 #include "FL/Fl_Box.H"
 #include "FL/fl_draw.H"
 #include "View.h"
+#include <memory>
 
 class GameEditor;
 
 class EditorRenderer : public View {
-private:
-    GameEditor* editor;
-    int width;
-    int height;
-    // Add driver ?
 public:
-    EditorRenderer(GameEditor* editor, int width, int height) : editor{editor}, width{width}, height{height} {}
+  EditorRenderer(std::shared_ptr<GameEditor> editor, int width, int height)
+      : _editor{std::move(editor)}, width{width}, height{height} {}
 
-    virtual GameEditor* getEditor() {return editor;}
+  virtual std::shared_ptr<GameEditor> getEditor() { return _editor; }
 
-    virtual void draw();
+  virtual void draw();
+
+private:
+  std::shared_ptr<GameEditor> _editor;
+  int width;
+  int height;
 };
 
-#endif //SRC_EDITORRENDERER_H
+#endif // SRC_EDITORRENDERER_H

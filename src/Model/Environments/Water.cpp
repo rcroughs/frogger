@@ -1,80 +1,79 @@
 #include "Water.h"
-#include "Props/Log.h"
 #include "Props/LilyPad.h"
+#include "Props/Log.h"
 #include "Props/Turtle.h"
 #include <ctime>
 
 void Water::generateLogs() {
-    int usedSpace = 0;
-    int logCounter = 0;
+  int usedSpace = 0;
+  int logCounter = 0;
 
-    while (usedSpace + 20 < 100) {
-        srand(clock());
-        // Génération de la taille de la bûche
-        int size = (rand() % 3 + 1) * 10;
-        // Génération de la position
-        float position = 0;
-        if (logCounter - 1 >= 0) {
-            position = props.at(logCounter - 1)->getPosition() + (props.at(logCounter - 1)->getSize()) + 20;
-        } else {
-            position = (rand() % 3) * 10;
-        }
-        props.push_back(new Log(float(size), float(position), flow));
-        logCounter++;
-        usedSpace = position + size;
-        srand(clock());
+  while (usedSpace + 20 < 100) {
+    srand(clock());
+    // Génération de la taille de la bûche
+    int size = (rand() % 3 + 1) * 10;
+    // Génération de la position
+    float position = 0;
+    if (logCounter - 1 >= 0) {
+      position = props.at(logCounter - 1)->getPosition() +
+                 (props.at(logCounter - 1)->getSize()) + 20;
+    } else {
+      position = (rand() % 3) * 10;
     }
+    props.push_back(new Log(float(size), float(position), flow));
+    logCounter++;
+    usedSpace = position + size;
+    srand(clock());
+  }
 }
 
 void Water::generateLilyPads() {
-    for (int i = 1; i < 5; i++) {
-        props.push_back(new LilyPad(i * 20));
-    }
+  for (int i = 1; i < 5; i++) {
+    props.push_back(new LilyPad(i * 20));
+  }
 }
 
 void Water::generateTurtles(short id) {
-    for (int i = 0; i < 3; i++) {
-        props.push_back(new Turtle(i * 30, id));
-    }
+  for (int i = 0; i < 3; i++) {
+    props.push_back(new Turtle(i * 30, id));
+  }
 }
 
 void Water::generateProps(short id) {
-    switch (id) {
-        case 0:
-            generateLogs();
-            break;
-        case 1:
-            generateLilyPads();
-            break;
-        case 2:
-            generateTurtles(id);
-            break;
-        case 3:
-            generateTurtles(id);
-    }
+  switch (id) {
+  case 0:
+    generateLogs();
+    break;
+  case 1:
+    generateLilyPads();
+    break;
+  case 2:
+    generateTurtles(id);
+    break;
+  case 3:
+    generateTurtles(id);
+  }
 }
 
 void Water::handleGame(Game *currentGame) {
-    bool onLog = false;
-    for (auto &prop: props) {
-        if (prop->contains(currentGame->getPlayer()->getPosition().x + 5)) {
-            onLog = true;
-            prop->handleGame(currentGame);
-        }
+  bool onLog = false;
+  for (auto &prop : props) {
+    if (prop->contains(currentGame->getPlayer()->getPosition().x + 5)) {
+      onLog = true;
+      prop->handleGame(currentGame);
     }
-    if (!onLog) {
-        currentGame->killPlayer();
-    }
+  }
+  if (!onLog) {
+    currentGame->killPlayer();
+  }
 }
 
 void Water::updateProps() {
-    if (isMoving) {
-        for (auto &prop : props) {
-            prop->move();
-        }
+  if (isMoving) {
+    for (auto &prop : props) {
+      prop->move();
     }
+  }
 }
 
-std::vector<Prop*> &Water::getProps() {
-    return props;
-}
+std::vector<Prop *> &Water::getProps() { return props; }

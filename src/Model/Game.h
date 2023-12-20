@@ -6,6 +6,7 @@
 #include "vector"
 #include "GameMenu.h"
 #include "../Driver.h"
+#include <memory>
 
 class Water;
 class Map;
@@ -13,33 +14,17 @@ class Driver;
 class GameMenu;
 
 class Game {
-private:
-    Player* player {};
-    Map* map;
-    GameMenu* gameMenu;
-    Driver* driver;
-    bool winning;
-    bool loosing;
-    short lives;
-    std::vector<Player*> winnerPlayers;
-    float time;
-    float frameLeft;
-    int score;
-    int timeOut;
-    short combo;
-    short highestPosition;
-    bool inMenu;
 public:
     Game(Driver* driver);
     ~Game();
-    virtual Player* getPlayer() {return this->player;}
-    virtual std::vector<Player*> &getWinnerPlayer() {return winnerPlayers;}
-    virtual void setPlayer(Player* new_player) {player = new_player;}
-    virtual void setMap(Map* new_map) {map = new_map;}
-    virtual void setGameMenu (GameMenu* new_gameMenu) {gameMenu = new_gameMenu;}
-    virtual GameMenu* getMenu() {return gameMenu;}
+    virtual std::shared_ptr<Player> getPlayer() {return this->player;}
+    virtual std::vector<std::shared_ptr<Player>> &getWinnerPlayer() {return winnerPlayers;}
+    virtual void setPlayer(std::shared_ptr<Player> new_player) {player = std::move(new_player);}
+    virtual void setMap(std::shared_ptr<Map> new_map) {map = new_map;}
+    virtual void setGameMenu (std::shared_ptr<GameMenu> new_gameMenu) {gameMenu = new_gameMenu;}
+    virtual std::shared_ptr<GameMenu> getMenu() {return gameMenu;}
     virtual bool isOnPause() {return inMenu;}
-    virtual Map* getMap() {return this->map;}
+    virtual std::shared_ptr<Map> getMap() {return this->map;}
     virtual float getTime() {return time;}
     virtual float getFrameLeft() {return frameLeft;}
     virtual void changeWinningState() {winning = true;};
@@ -67,6 +52,22 @@ public:
     virtual void win();
     virtual void triggerMenu();
     virtual void update();
+private:
+    std::shared_ptr<Player> player;
+    std::shared_ptr<Map> map;
+    std::shared_ptr<GameMenu> gameMenu;
+    Driver* driver;
+    bool winning;
+    bool loosing;
+    short lives;
+    std::vector<std::shared_ptr<Player>> winnerPlayers;
+    float time;
+    float frameLeft;
+    int score;
+    int timeOut;
+    short combo;
+    short highestPosition;
+    bool inMenu;
 };
 
 #endif

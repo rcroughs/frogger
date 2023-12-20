@@ -6,8 +6,9 @@
 #include "../Components/Buttons/SideWalkButton.h"
 #include "../Components/Buttons/SpeedButton.h"
 #include "../Components/Buttons/WaterButton.h"
+#include <memory>
 
-EditorMenu::EditorMenu(Driver *driver) : driver{driver} {
+EditorMenu::EditorMenu(Driver* driver) : driver{driver} {
     // Premier display de selection --> choix des environements
     buttons.push_back(new WaterButton((700/6)-23, 700, driver));
     buttons.push_back(new RoadButton((700/2)-23, 700, driver));
