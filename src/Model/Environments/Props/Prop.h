@@ -18,7 +18,9 @@ public:
   virtual void move() = 0;
   virtual void handleGame(Game *currentGame) = 0;
   virtual bool hasImage() = 0;
+  virtual bool isVisible() = 0;
   virtual Fl_PNG_Image *getImage() = 0;
+  virtual void update() = 0;
 };
 
 #endif // FROGGER_PROP_H

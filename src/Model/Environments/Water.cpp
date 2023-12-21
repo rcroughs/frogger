@@ -71,6 +71,7 @@ void Water::handleGame(Game *currentGame) {
 void Water::updateProps() {
   if (isMoving) {
     for (auto &prop : props) {
+      prop->update();
       prop->move();
     }
   }

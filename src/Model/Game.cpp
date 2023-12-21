@@ -17,7 +17,7 @@ Game::~Game() {
 
 void Game::restartGame() {
   if (lives > 0) {
-    player = std::make_shared<Player>(Position{0, 45}, up);
+    player = std::make_shared<Player>(Position{45, 0}, up);
     resetTime();
   } else {
     changeLoosingState();

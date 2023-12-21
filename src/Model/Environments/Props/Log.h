@@ -18,6 +18,8 @@ public:
   virtual void handleGame(Game *currentGame);
   virtual bool hasImage() override { return false; }
   virtual Fl_PNG_Image *getImage() { return nullptr; };
+  bool isVisible() override { return true; }
+  void update() override {};
 
 private:
   float size;

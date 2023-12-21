@@ -89,11 +89,11 @@ void GameRenderer::drawMap() {
       for (int j = 0; j < props.size(); j++) {
         float propPosition = props[j]->getPosition();
         Position windowPosition = getWindowPosition(Position{propPosition, i});
-        if (props.at(j)->hasImage()) {
+        if (props.at(j)->hasImage() && props.at(j)->isVisible()) {
           props.at(j)->getImage()->draw(
               windowPosition.x, windowPosition.y,
               (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 45);
-        } else {
+        } else if (props.at(j)->isVisible()) {
           fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y + 10,
                       (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 35,
                       props[j]->getColor());

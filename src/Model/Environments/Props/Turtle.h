@@ -10,7 +10,7 @@
 class Turtle : public Prop {
 public:
   Turtle(float position, short turtleNumber)
-      : position{position}, color{FL_GREEN} {
+      : position{position}, color{FL_GREEN}, visible{true}, invisibleTimer{0} {
     if (turtleNumber == 2) {
       img = new Fl_PNG_Image("res/two_turtles.png");
       if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
@@ -34,13 +34,17 @@ public:
   virtual void move() override;
   virtual void handleGame(Game *currentGame) override;
   virtual bool hasImage() override { return true; }
-  virtual Fl_PNG_Image *getImage() { return img; };
+  virtual Fl_PNG_Image *getImage() { return img; }
+  bool isVisible() override { return visible; }
+  void update() override;
 
 private:
   float position;
   float size;
   Fl_Color color;
   Fl_PNG_Image *img;
+  bool visible;
+  unsigned int invisibleTimer;
 };
 
 #endif // FROGGER_TURTLE_H
