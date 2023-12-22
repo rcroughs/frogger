@@ -10,7 +10,7 @@
 
 class GameRenderer : public View {
 public:
-  GameRenderer(std::shared_ptr<Game> game, int h, int w)
+  GameRenderer(std::shared_ptr<Game> game, int h, int w, Driver* driver)
       : _game{std::move(game)}, WINDOW_HEIGHT{h}, WINDOW_WIDTH{w} {}
 
   virtual Position getWindowPosition(Position gamePosition);

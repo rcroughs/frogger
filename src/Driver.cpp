@@ -18,7 +18,7 @@
 
 void Driver::launchGame(std::shared_ptr<Game> new_game) {
   _controller = std::make_shared<GameController>(_game);
-  _view = std::make_shared<GameRenderer>(new_game, 700, 700);
+  _view = std::make_shared<GameRenderer>(new_game, 700, 700, this);
   _menu = nullptr;
   _gameState = ON_GAME;
 }

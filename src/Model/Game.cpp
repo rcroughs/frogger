@@ -5,14 +5,12 @@
 #include <memory>
 
 Game::Game(Driver *driver)
-    : driver{driver}, map{new Map()}, winning{false}, loosing{false}, lives{3},
+    : driver{driver}, map{std::make_shared<Map>()}, winning{false}, loosing{false}, lives{3},
       time{30}, frameLeft{30 * 60}, score{0}, timeOut{0}, combo{1},
-      highestPosition{0}, inMenu{false} {}
+      highestPosition{0}, inMenu{false}, _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
+      _winningMenu{std::make_shared<WinningMenu>(driver)}, gameMenu{} {}
 
 Game::~Game() {
-  for (int i = 0; i < 13; i++) {
-    delete map->getEnvironment(i);
-  }
 }
 
 void Game::restartGame() {
@@ -55,7 +53,7 @@ void Game::killPlayer() {
 
 void Game::win() {
   winnerPlayers.push_back(player);
-  player = std::make_shared<Player>(Position{0, 45}, up);
+  player = std::make_shared<Player>(Position{45, 0}, up);
   resetTime();
   resetHeight();
   if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {

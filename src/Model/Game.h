@@ -5,6 +5,8 @@
 #include "Map.h"
 #include "vector"
 #include "GameMenu.h"
+#include "../Components/GameOverMenu.h"
+#include "../Components/WinningMenu.h"
 #include "../Driver.h"
 #include <memory>
 
@@ -12,6 +14,8 @@ class Water;
 class Map;
 class Driver;
 class GameMenu;
+class GameOverMenu;
+class WinningMenu;
 
 class Game {
 public:
@@ -26,6 +30,8 @@ public:
     virtual bool isOnPause() {return inMenu;}
     virtual std::shared_ptr<Map> getMap() {return this->map;}
     virtual float getTime() {return time;}
+    virtual std::shared_ptr<GameOverMenu> getGameOverMenu() {return _gameOverMenu;}
+    virtual std::shared_ptr<WinningMenu> getWinningMenu() {return _winningMenu;}
     virtual float getFrameLeft() {return frameLeft;}
     virtual void changeWinningState() {winning = true;};
     virtual void changeLoosingState() {loosing  = true;};
@@ -56,6 +62,8 @@ private:
     std::shared_ptr<Player> player;
     std::shared_ptr<Map> map;
     std::shared_ptr<GameMenu> gameMenu;
+    std::shared_ptr<GameOverMenu> _gameOverMenu;
+    std::shared_ptr<WinningMenu> _winningMenu;
     Driver* driver;
     bool winning;
     bool loosing;

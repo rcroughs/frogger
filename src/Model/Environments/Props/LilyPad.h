@@ -4,10 +4,12 @@
 #include "../../Game.h"
 #include "FL/Fl.H"
 #include "Prop.h"
+#include <FL/Fl_PNG_Image.H>
 
 class LilyPad : public Prop {
 public:
-  LilyPad(float leftCornerPos) : leftCorner{leftCornerPos}, hasTurtle{false} {}
+  LilyPad(float leftCornerPos);
+  ~LilyPad() { delete image; }
   virtual float getPosition() override { return leftCorner; }
   virtual float getRightCorner() override { return leftCorner + size; }
   virtual Fl_Color getColor() override { return color; }
@@ -17,12 +19,13 @@ public:
   }
   virtual void move(){};
   virtual void handleGame(Game *currentGame);
-  virtual bool hasImage() override { return false; };
-  virtual Fl_PNG_Image *getImage() { return nullptr; };
+  virtual bool hasImage() override { return true; };
+  virtual Fl_PNG_Image *getImage() { return image; };
   bool isVisible() override { return true; }
   void update() override {};
 
 private:
+  Fl_PNG_Image *image;
   float leftCorner;
   float size{5};
   Fl_Color color{FL_GREEN};

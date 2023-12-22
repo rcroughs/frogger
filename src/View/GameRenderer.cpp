@@ -16,15 +16,17 @@ Position GameRenderer::getWindowPosition(Position gamePosition) {
 }
 
 void GameRenderer::drawVictory() {
-  fl_draw_box(FL_FLAT_BOX, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_GREEN);
-  fl_color(FL_BLACK);
-  fl_draw("Victoire !", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_ALIGN_CENTER);
+  _game->getWinningMenu()->getImage()->draw(0, 0);
+  for (auto &button : _game->getWinningMenu()->getButtons()) {
+    button->getImage()->draw(button->getX(), button->getY());
+  }
 }
 
 void GameRenderer::drawGameOver() {
-  fl_draw_box(FL_FLAT_BOX, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_RED);
-  fl_color(FL_BLACK);
-  fl_draw("Game Over !", 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, FL_ALIGN_CENTER);
+  _game->getGameOverMenu()->getImage()->draw(0, 0);
+  for (auto &button : _game->getGameOverMenu()->getButtons()) {
+    button->getImage()->draw(button->getX(), button->getY());
+  }
 }
 
 void GameRenderer::drawPlayer(std::shared_ptr<Player> player) {
@@ -91,8 +93,7 @@ void GameRenderer::drawMap() {
         Position windowPosition = getWindowPosition(Position{propPosition, i});
         if (props.at(j)->hasImage() && props.at(j)->isVisible()) {
           props.at(j)->getImage()->draw(
-              windowPosition.x, windowPosition.y,
-              (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 45);
+              windowPosition.x, windowPosition.y);
         } else if (props.at(j)->isVisible()) {
           fl_draw_box(FL_FLAT_BOX, windowPosition.x, windowPosition.y + 10,
                       (props.at(j)->getSize() / 100.0f) * WINDOW_WIDTH, 35,

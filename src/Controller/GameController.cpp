@@ -47,6 +47,22 @@ void GameController::mouseClick(short loc_x, short loc_y) {
       }
     }
   }
+  if (game->isLosing()) {
+    for (auto &button : game->getGameOverMenu()->getButtons()) {
+      if (button->contains(loc_x, loc_y)) {
+        button->onClick();
+        break;
+      }
+    }
+  }
+  if (game->isWinning()) {
+    for (auto &button : game->getWinningMenu()->getButtons()) {
+      if (button->contains(loc_x, loc_y)) {
+        button->onClick();
+        break;
+      }
+    }
+  }
 }
 
 void GameController::updateMovement() {
