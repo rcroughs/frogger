@@ -3,11 +3,11 @@
 #include "Props/Log.h"
 #include "Props/Turtle.h"
 #include <ctime>
+#include <string>
 
 void Water::generateLogs() {
   int usedSpace = 0;
   int logCounter = 0;
-
   while (usedSpace + 20 < 100) {
     srand(clock());
     // Génération de la taille de la bûche
@@ -25,6 +25,16 @@ void Water::generateLogs() {
     usedSpace = position + size;
     srand(clock());
   }
+  id += "1";
+  std::string speedLimitId;
+  if (flow == 1) {
+    speedLimitId = "1";
+  } else if (flow == 1.5f) {
+    speedLimitId = "2";
+  } else if (flow == 2.0f) {
+    speedLimitId = "3";
+  }
+  id += speedLimitId;
 }
 
 void Water::generateLilyPads() {
@@ -33,10 +43,21 @@ void Water::generateLilyPads() {
   }
 }
 
-void Water::generateTurtles(short id) {
+void Water::generateTurtles(short turtleId) {
   for (int i = 0; i < 3; i++) {
-    props.push_back(new Turtle(i * 30, id));
+    props.push_back(new Turtle(i * 30, turtleId));
   }
+  id += "2";
+  std::string speedLimitId;
+  if (flow == 1.0f) {
+    speedLimitId = "1";
+  } else if (flow == 1.5f) {
+    speedLimitId = "2";
+  } else if (flow == 2.0f) {
+    speedLimitId = "3";
+  }
+  id += speedLimitId;
+  id += std::to_string(turtleId);
 }
 
 void Water::generateProps(short id) {

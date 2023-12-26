@@ -16,3 +16,11 @@ void Map::resetEnvironments() {
     delete environments.at(i);
   }
 }
+
+std::string Map::getMapId() {
+  std::string id = "";
+  for (int i = 1; i < environments.size() - 1; i++) {
+    id += environments.at(i)->getId();
+  }
+  return id;
+}

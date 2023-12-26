@@ -5,16 +5,20 @@
 #include "FL/Fl.H"
 #include "Props/Prop.h"
 #include "vector"
+#include <string>
 
 class Water : virtual public Environment {
 public:
-  Water() : isMoving{true}, color(FL_BLUE), flow(0) {}
+  Water() : isMoving{true}, color(FL_BLUE), flow(0) {
+    id += "10";
+  }
   ~Water() {
     for (int i = 0; i < props.size(); i++) {
       delete props.at(i);
     }
   }
-  Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {}
+  Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {
+  }
   virtual Fl_Color getColor() { return color; }
   void setColor(Fl_Color new_color) { color = new_color; }
   void setFlow(float new_flow) { flow = new_flow; }
@@ -28,13 +32,14 @@ public:
   virtual std::vector<Prop *> &getProps() override;
   virtual void handleGame(Game *currentGame) override;
   void updateProps() override;
+  std::string getId() override { return id; }
 
 private:
   Fl_Color color;
   std::vector<Prop *> props;
   bool isMoving;
   float flow;
-
+  std::string id;
 };
 
 #endif

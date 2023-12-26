@@ -4,25 +4,27 @@
 #include "Components/MenuComponents.h"
 #include "Controller/Controller.h"
 #include "Model/GameEditor.h"
+#include "Model/MapFactory.h"
 #include "View/View.h"
 #include <memory>
 
 class MenuComponents;
 class Game;
 class GameEditor;
+class MapFactory;
 
 class Driver {
 public:
   Driver();
   Driver(const Driver &driver) =default;
-  virtual void launchGame(std::shared_ptr<Game> new_game);
+  virtual void launchGame();
   virtual void launchEditor();
   virtual void showMenu();
   virtual void showHomeScreen();
   virtual void refresh();
 
   // Levels
-  virtual std::shared_ptr<Game> CreateLevel1();
+  virtual std::shared_ptr<Game> LaunchGameFromFile(std::string filePath);
 
   virtual void mouseMove(short loc_x, short loc_y) {
     if (_controller != nullptr)
@@ -57,6 +59,7 @@ private:
   std::shared_ptr<Game> _game;
   std::shared_ptr<GameEditor> _editor;
   std::shared_ptr<MenuComponents> _menu;
+  std::shared_ptr<MapFactory> _mapFactory;
   enum GAME_STATE { MENU, ON_GAME, HOME_SCREEN, ON_EDIT };
   GAME_STATE _gameState = HOME_SCREEN;
   int _homescreen;

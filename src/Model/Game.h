@@ -20,11 +20,12 @@ class WinningMenu;
 class Game {
 public:
     Game(Driver* driver);
+    Game(Driver *driver, std::shared_ptr<Map> map);
     ~Game();
     virtual std::shared_ptr<Player> getPlayer() {return this->player;}
     virtual std::vector<std::shared_ptr<Player>> &getWinnerPlayer() {return winnerPlayers;}
     virtual void setPlayer(std::shared_ptr<Player> new_player) {player = std::move(new_player);}
-    virtual void setMap(std::shared_ptr<Map> new_map) {map = new_map;}
+    virtual void setMap(std::shared_ptr<Map> new_map) {map = std::move(new_map);}
     virtual void setGameMenu (std::shared_ptr<GameMenu> new_gameMenu) {gameMenu = new_gameMenu;}
     virtual std::shared_ptr<GameMenu> getMenu() {return gameMenu;}
     virtual bool isOnPause() {return inMenu;}

@@ -30,6 +30,8 @@ public:
 
   virtual void updateProps();
   virtual void handleGame(Game *currentGame);
+
+  virtual std::string getMapId();
 };
 
 #endif

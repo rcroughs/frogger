@@ -12,4 +12,4 @@ bool PlayButton::contains(int x, int y) {
   return false;
 }
 
-void PlayButton::onClick() { driver->launchGame(driver->CreateLevel1()); }
+void PlayButton::onClick() { driver->launchGame(); }

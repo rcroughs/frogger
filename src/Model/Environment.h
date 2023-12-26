@@ -15,6 +15,7 @@ public:
   virtual void handleGame(Game *currentGame) = 0;
   virtual void updateProps() = 0;
   virtual void generateProps(short id = NULL) = 0;
+  virtual std::string getId() = 0;
 };
 
 #endif

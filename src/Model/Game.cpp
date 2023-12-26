@@ -10,6 +10,12 @@ Game::Game(Driver *driver)
       highestPosition{0}, inMenu{false}, _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
       _winningMenu{std::make_shared<WinningMenu>(driver)}, gameMenu{} {}
 
+Game::Game(Driver *driver, std::shared_ptr<Map> map)
+    : driver{driver}, map{std::move(map)}, winning{false}, loosing{false}, lives{3},
+      time{30}, frameLeft{30 * 60}, score{0}, timeOut{0}, combo{1},
+      highestPosition{0}, inMenu{false}, _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
+      _winningMenu{std::make_shared<WinningMenu>(driver)}, gameMenu{} {}
+
 Game::~Game() {
 }
 
@@ -35,8 +41,10 @@ void Game::handleScore() {
 
 void Game::update() {
   decreaseTimeOut();
-  map->updateProps();
-  map->handleGame(this);
+  if (map != nullptr) {
+    map->updateProps();
+    map->handleGame(this);
+  }
   if (!player->isInScreen()) {
     changeLoosingState();
   }

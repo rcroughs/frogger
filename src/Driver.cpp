@@ -15,10 +15,14 @@
 #include "View/MenuDisplay.h"
 #include "View/ViewHomeScreen.h"
 #include <memory>
+#include <iostream>
+#include <fstream>
+#include <string>
 
-void Driver::launchGame(std::shared_ptr<Game> new_game) {
+void Driver::launchGame() {
+  LaunchGameFromFile("maps/1.map");
   _controller = std::make_shared<GameController>(_game);
-  _view = std::make_shared<GameRenderer>(new_game, 700, 700, this);
+  _view = std::make_shared<GameRenderer>(_game, 700, 700, this);
   _menu = nullptr;
   _gameState = ON_GAME;
 }
@@ -33,58 +37,19 @@ void Driver::launchEditor() {
   // A la fin : launchGame(game) dans GameEditor qui appelle via le driver
 }
 
-std::shared_ptr<Game> Driver::CreateLevel1() {
-  _game = std::make_shared<Game>(this);
+std::shared_ptr<Game> Driver::LaunchGameFromFile(std::string filePath) {
+  std::ifstream inputFile(filePath);
+  std::string mapName, mapId;
+
+  std::getline(inputFile, mapName);
+  std::getline(inputFile, mapId);
+
+  std::shared_ptr<Map> map = _mapFactory->createMap(mapId);
+  _game = std::make_shared<Game>(this, map);
   _game->setGameMenu(std::make_shared<GameMenu>(150, 100, this));
   Direction newDirection = up;
   _game->setPlayer(std::make_shared<Player>(Position{45, 0}, newDirection));
-  _game->getMap()->setEnvironment(0, new SideWalk());
-  for (int i = 1; i < 6; i++) {
-    char circulation = '\0';
-    float speedLimit = float(rand() % 3);
-    if (speedLimit == 0) {
-      speedLimit = 1;
-    } else {
-      speedLimit += 0.5;
-    }
-    if (i % 2 == 0) {
-      circulation = 'r';
-    } else {
-      circulation = 'l';
-    }
-    _game->getMap()->setEnvironment(i, new Road(circulation, speedLimit));
-    _game->getMap()->getEnvironment(i)->generateProps();
-  }
-  _game->getMap()->setEnvironment(6, new SideWalk());
-  for (int i = 7; i < 9; i++) {
-    srand(clock());
-    float speed = float(rand() % 3);
-    if (speed == 0) {
-      speed = 1;
-    } else {
-      speed -= 0.5;
-    }
-    _game->getMap()->setEnvironment(
-        i, reinterpret_cast<Environment *>(new Water(speed)));
-    _game->getMap()->getEnvironment(i)->generateProps(0);
-  }
-  _game->getMap()->setEnvironment(9, new Water());
-  _game->getMap()->getEnvironment(9)->generateProps(2);
-  for (int i = 10; i < 11; i++) {
-    srand(clock());
-    int random = rand();
-    float speed = float((i + random) % 3 + 0.5);
-    if (speed == 0) {
-      speed = 1;
-    }
-    _game->getMap()->setEnvironment(
-        i, reinterpret_cast<Environment *>(new Water(speed)));
-    _game->getMap()->getEnvironment(i)->generateProps(0);
-  }
-  _game->getMap()->setEnvironment(11, new Water());
-  _game->getMap()->getEnvironment(11)->generateProps(3);
-  _game->getMap()->setEnvironment(12, new Water());
-  _game->getMap()->getEnvironment(12)->generateProps(1);
+  inputFile.close();
   return _game;
 }
 

@@ -6,11 +6,12 @@
 #include "Fl/Fl_PNG_Image.H"
 #include "Prop.h"
 #include "iostream"
+#include <string>
 
 class Turtle : public Prop {
 public:
   Turtle(float position, short turtleNumber)
-      : position{position}, color{FL_GREEN}, visible{true}, invisibleTimer{0} {
+      : position{position}, color{FL_GREEN}, visible{true}, invisibleTimer{0}, turtleNumber{turtleNumber} {
     if (turtleNumber == 2) {
       img = new Fl_PNG_Image("res/two_turtles.png");
       if (img->fail() == Fl_Image::ERR_NO_IMAGE) {
@@ -41,6 +42,7 @@ public:
 private:
   float position;
   float size;
+  short turtleNumber;
   Fl_Color color;
   Fl_PNG_Image *img;
   bool visible;
