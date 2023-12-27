@@ -1,9 +1,9 @@
 #include "Driver.h"
 
+#include "Components/LevelSelector.h"
 #include "Components/MenuComponents.h"
-#include "Model/Environments/Road.h"
+#include "Controller/LevelController.h"
 #include "Model/Environments/SideWalk.h"
-#include "Model/Environments/Water.h"
 
 #include "Controller/EditorController.h"
 #include "Controller/GameController.h"
@@ -12,51 +12,50 @@
 #include "Model/Map.h"
 #include "View/EditorRenderer.h"
 #include "View/GameRenderer.h"
+#include "View/LevelSelectorDisplay.h"
 #include "View/MenuDisplay.h"
 #include "View/ViewHomeScreen.h"
 #include <memory>
-#include <iostream>
 #include <fstream>
 #include <string>
 
-void Driver::launchGame() {
-  LaunchGameFromFile("maps/1.map");
-  _controller = std::make_shared<GameController>(_game);
-  _view = std::make_shared<GameRenderer>(_game, 700, 700, this);
-  _menu = nullptr;
-  _gameState = ON_GAME;
-}
-
 void Driver::launchEditor() {
-  _game = nullptr;
   _editor = std::make_shared<GameEditor>(this, 700, 700);
   _controller = std::make_shared<EditorController>(_editor);
   _view = std::make_shared<EditorRenderer>(_editor, 700, 700);
-  _menu = nullptr;
+  _game = nullptr;
   _gameState = ON_EDIT;
   // A la fin : launchGame(game) dans GameEditor qui appelle via le driver
 }
 
-std::shared_ptr<Game> Driver::LaunchGameFromFile(std::string filePath) {
+void Driver::launchLevelSelection() {
+  _levelSelector = std::make_shared<LevelSelector>(this);
+  _view = std::make_shared<LevelSelectorDisplay>(_levelSelector);
+  _controller = std::make_shared<LevelController>(_levelSelector);
+  _gameState = LEVEL_SELECTION;
+}
+
+void Driver::LaunchGameFromFile(std::string filePath) {
   std::ifstream inputFile(filePath);
-  std::string mapName, mapId;
+  std::string mapName, mapAuthor, mapId;
 
   std::getline(inputFile, mapName);
+  std::getline(inputFile, mapAuthor);
   std::getline(inputFile, mapId);
 
   std::shared_ptr<Map> map = _mapFactory->createMap(mapId);
+  _editor = nullptr;
   _game = std::make_shared<Game>(this, map);
-  _game->setGameMenu(std::make_shared<GameMenu>(150, 100, this));
-  Direction newDirection = up;
-  _game->setPlayer(std::make_shared<Player>(Position{45, 0}, newDirection));
+  _view = std::make_shared<GameRenderer>(_game, 700,750, this);
+  _controller = std::make_shared<GameController>(_game);
+  _gameState = ON_GAME;
   inputFile.close();
-  return _game;
 }
 
 void Driver::showMenu() {
-  _menu = std::make_shared<MenuComponents>(this);
-  _view = std::make_shared<MenuDisplay>(_menu);
-  _controller = std::make_shared<MenuController>(_menu);
+  _menuComponents = std::make_shared<MenuComponents>(this);
+  _view = std::make_shared<MenuDisplay>(_menuComponents);
+  _controller = std::make_shared<MenuController>(_menuComponents);
   _gameState = MENU;
 }
 
@@ -64,7 +63,7 @@ void Driver::showHomeScreen() { _view = std::make_shared<ViewHomeScreen>(); }
 
 void Driver::refresh() {
   if (_gameState == MENU) {
-    _menu->update();
+    _menuComponents->update();
     _view->draw();
   } else if (_gameState == ON_GAME) {
     if (!_game->isOnPause()) {
@@ -82,6 +81,8 @@ void Driver::refresh() {
     // Pour le moment
     _view->draw();
     // updateMovement();
+  } else if (_gameState == LEVEL_SELECTION) {
+    _view->draw();
   }
 }
 

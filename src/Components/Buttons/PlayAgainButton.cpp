@@ -12,4 +12,4 @@ bool PlayAgainButton::contains(int x, int y) {
   return false;
 }
 
-void PlayAgainButton::onClick() { driver->launchGame(); }
+void PlayAgainButton::onClick() { driver->LaunchGameFromFile("maps/1.map"); }

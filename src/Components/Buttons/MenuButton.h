@@ -5,6 +5,8 @@
 #include "../Button.h"
 #include <memory>
 
+class Driver;
+
 class MenuButton : public Button {
 public:
   MenuButton(int x, int y, Driver *driver);
