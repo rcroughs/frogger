@@ -1,23 +1,29 @@
 #include "GameController.h"
+#include <FL/Enumerations.H>
+#include <FL/Fl.H>
 
 void GameController::keyPressed(int keycode) {
   if (!game->isOnPause()) {
     switch (keycode) {
     case 'd':
+    case FL_Right:
       rightPressed = true;
       game->getPlayer()->move_right();
       break;
     case 'a':
     case 'q':
+    case FL_Left:
       leftPressed = true;
       game->getPlayer()->move_left();
       break;
     case 'w':
     case 'z':
+    case FL_Up:
       game->getPlayer()->move_up();
       game->handleScore();
       break;
     case 's':
+    case FL_Down:
       game->getPlayer()->move_down();
       break;
     }
@@ -30,10 +36,12 @@ void GameController::keyPressed(int keycode) {
 void GameController::keyReleased(int keycode) {
   switch (keycode) {
   case 'd':
+  case FL_Right:
     rightPressed = false;
     break;
   case 'a':
   case 'q':
+  case FL_Left:
     leftPressed = false;
     break;
   }
