@@ -4,6 +4,7 @@
 #include <memory>
 #include "View.h"
 #include "../Components/LevelSelector.h"
+#include "../Components/AddMapMenu.h"
 
 class LevelSelectorDisplay : public View {
 public:

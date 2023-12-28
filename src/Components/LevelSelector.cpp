@@ -1,4 +1,5 @@
 #include "LevelSelector.h"
+#include "AddMapMenu.h"
 #include "Buttons/MenuButton.h"
 #include <dirent.h>
 #include <FL/Fl.H>
@@ -9,6 +10,7 @@
 LevelSelector::LevelSelector(Driver* driver) : _driver{driver} {
     _bg = new Fl_PNG_Image("res/bg.png");
     _menuButton = std::make_shared<MenuButton>(250, 600, _driver);
+    _addMapMenu = std::make_shared<AddMapMenu>();
     std::vector<std::string> files = getFiles("maps");
     for (int i = 0; i < files.size(); i++) {
         _buttons.push_back(std::make_shared<LevelButton>(
@@ -38,6 +40,10 @@ std::vector<std::shared_ptr<LevelButton>> LevelSelector::getButtons() const {
 
 std::shared_ptr<MenuButton> LevelSelector::getMenuButton() const {
     return _menuButton;
+}
+
+std::shared_ptr<AddMapMenu> LevelSelector::getAddMapMenu() const {
+    return _addMapMenu;
 }
 
 Fl_PNG_Image *LevelSelector::getBg() const {

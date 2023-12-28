@@ -5,6 +5,7 @@
 #include <memory>
 #include <vector>
 
+#include "AddMapMenu.h"
 #include "Buttons/LevelButton.h"
 #include "Buttons/MenuButton.h"
 #include "../Driver.h"
@@ -19,6 +20,7 @@ public:
 
   std::vector<std::shared_ptr<LevelButton>> getButtons() const;
   std::shared_ptr<MenuButton> getMenuButton() const;
+  std::shared_ptr<AddMapMenu> getAddMapMenu() const;
   Fl_PNG_Image *getBg() const;
   void scrollUp();
   void scrollDown();
@@ -29,6 +31,8 @@ private:
   std::vector<std::string> getFiles(std::string path);
   std::vector<std::shared_ptr<LevelButton>> _buttons;
   std::shared_ptr<MenuButton> _menuButton;
+  std::shared_ptr<AddMapMenu> _addMapMenu;
+  bool isAddingMap;
   Driver* _driver;
   Fl_PNG_Image *_bg;
 };
