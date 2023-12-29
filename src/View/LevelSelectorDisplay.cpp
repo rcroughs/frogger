@@ -16,7 +16,13 @@ void LevelSelectorDisplay::draw() {
         _levelSelector->getAddMapMenu()->getImage()->draw(50, 30);
         for (auto &textInput : _levelSelector->getAddMapMenu()->getTextInputs()) {
             textInput->getImage()->draw(textInput->getX(), textInput->getY());
-            fl_draw(textInput->getInput().c_str(), textInput->getX() + 10, textInput->getY() + 10);
+            if (textInput->isEmpty() && !textInput->isActive())
+              fl_draw(textInput->getLabel().c_str(), textInput->getX() + 10,
+                      textInput->getY() + 10);
+            else {
+              fl_draw(textInput->getInput().c_str(), textInput->getX() + 10,
+                      textInput->getY() + 10);
+            }
         }
         for (auto &button : _levelSelector->getAddMapMenu()->getButtons()) {
             button->getImage()->draw(button->getX(), button->getY());

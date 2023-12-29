@@ -5,7 +5,7 @@
 
 class IntInput : public TextInput {
 public:
-    IntInput(int x, int y);
+    IntInput(int x, int y, std::string label);
     void addChar(char c) override;
 };
 
