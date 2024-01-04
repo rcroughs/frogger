@@ -86,6 +86,10 @@ void Driver::refresh() {
   }
 }
 
+void Driver::saveNickname(std::string nickname) { _nickname = nickname; }
+
+std::string Driver::getNickname() { return _nickname; }
+
 Driver::Driver()
     : _editor{nullptr}, _view{nullptr}, _controller{nullptr}, _game{nullptr} {
   showHomeScreen();

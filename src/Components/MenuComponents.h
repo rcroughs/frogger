@@ -7,6 +7,7 @@
 #include "Cloud.h"
 #include "FL/Fl_PNG_Image.H"
 #include "../Driver.h"
+#include "ProfileMenu.h"
 
 class Driver;
 
@@ -18,6 +19,8 @@ public:
     Fl_PNG_Image* getBackground() {return bg;}
     std::vector<Button*> getButtons() {return buttons;}
     std::vector<Cloud>& getClouds() {return clouds;};
+    std::shared_ptr<ProfileMenu> getProfileMenu() {return profileMenu;}
+    void openProfileMenu();
 
     void update();
 
@@ -26,6 +29,7 @@ private:
     Fl_PNG_Image* bg;
     std::vector<Cloud> clouds;
     std::vector<Button*> buttons;
+    std::shared_ptr<ProfileMenu> profileMenu;
     Driver* _driver;
 };
 

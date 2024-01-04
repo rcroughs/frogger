@@ -8,6 +8,7 @@
 #include "Model/MapFactory.h"
 #include "View/View.h"
 #include <memory>
+#include <vector>
 
 class MapFactory;
 class LevelSelector;
@@ -26,6 +27,9 @@ public:
 
   // Levels
   void LaunchGameFromFile(std::string filePath);
+
+  void saveNickname(std::string nickname);
+  std::string getNickname();
 
   virtual void mouseMove(short loc_x, short loc_y) {
     if (_controller != nullptr)
@@ -65,6 +69,7 @@ private:
   enum GAME_STATE { MENU, ON_GAME, HOME_SCREEN, ON_EDIT, LEVEL_SELECTION };
   GAME_STATE _gameState = HOME_SCREEN;
   int _homescreen;
+  std::string _nickname;
 };
 
 #endif // FROGGER_DRIVER_H
