@@ -7,6 +7,10 @@
 
 class Map;
 
+enum EnvironmentType { LOG = '1', TURTLE = '2', ROAD = '3', SIDEWALK = '4'};
+enum Directions { LEFT = '0', RIGHT = '1' };
+enum Speed { SLOW = 1, MEDIUM = 2 , FAST = 3};
+
 class MapFactory {
 public:
   std::shared_ptr<Map> createMap(std::string mapId);

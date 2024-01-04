@@ -10,13 +10,13 @@ bool MapFactory::createLogEnvironment(std::string mapId, int& stringCount, std::
     int speed = std::stoi(std::string(&mapId.at(stringCount), 1));
     float flow;
     switch (speed) {
-        case 1:
+        case SLOW:
             flow = 1.0f;
             break;
-        case 2:
+        case MEDIUM:
             flow = 1.5f;
             break;
-        case 3:
+        case FAST:
             flow = 2.0f;
             break;
         default:
@@ -42,13 +42,13 @@ bool MapFactory::createRoadEnvironment(std::string mapId, int& stringCount, std:
     int speed = std::stoi(std::string(&mapId.at(stringCount), 1));
     float flow;
     switch (speed) {
-        case 1:
+        case SLOW:
             flow = 1.0f;
             break;
-        case 2:
+        case MEDIUM:
             flow = 1.5f;
             break;
-        case 3:
+        case FAST:
             flow = 2.0f;
             break;
         default:
@@ -69,19 +69,19 @@ std::shared_ptr<Map> MapFactory::createMap(std::string mapId) {
         if (environmentCount == 13) {
             return nullptr;
         }
-        if (mapId.at(stringCount) == '1') {
+        if (mapId.at(stringCount) == LOG) {
             stringCount++;
             createLogEnvironment(mapId, stringCount, map, environmentCount);
             environmentCount++;
-        } else if (mapId.at(stringCount) == '2') {
+        } else if (mapId.at(stringCount) == TURTLE) {
             stringCount++;
             createTurtleEnvironment(mapId, stringCount, map, environmentCount);
             environmentCount++;
-        } else if (mapId.at(stringCount) == '3') {
+        } else if (mapId.at(stringCount) == ROAD) {
             stringCount++;
             createRoadEnvironment(mapId, stringCount, map, environmentCount);
             environmentCount++;
-        } else if (mapId.at(stringCount) == '4') {
+        } else if (mapId.at(stringCount) == SIDEWALK) {
             stringCount++;
             map->setEnvironment(environmentCount, new SideWalk());
             environmentCount++;
