@@ -89,14 +89,14 @@ void Water::generateProps(short id) {
 }
 
 void Water::handleGame(Game *currentGame) {
-  bool onLog = false;
+  bool onProp = false;
   for (auto &prop : _props) {
     if (prop->contains(currentGame->getPlayer()->getPosition().x + 5)) {
-      onLog = true;
+      onProp = true;
       prop->handleGame(currentGame);
     }
   }
-  if (!onLog) {
+  if (!onProp) {
     currentGame->killPlayer();
   }
 }
