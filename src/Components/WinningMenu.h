@@ -3,6 +3,7 @@
 
 #include "Button.h"
 #include <FL/Fl_PNG_Image.H>
+#include <memory>
 #include <vector>
 
 class Driver;
@@ -11,13 +12,13 @@ class WinningMenu {
 public:
   WinningMenu(Driver *driver);
   ~WinningMenu();
-  Fl_PNG_Image *getImage() { return image; }
-  std::vector<Button *> getButtons() { return buttons; }
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const;
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;
 
 private:
-  Driver *driver;
-  std::vector<Button *> buttons;
-  Fl_PNG_Image *image;
+  Driver *_driver;
+  std::vector<std::shared_ptr<Button>> _buttons;
+  Fl_PNG_Image *_image;
 };
 
 #endif // _FROGGER_WINNINGMENU_H_

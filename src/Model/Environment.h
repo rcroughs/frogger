@@ -3,6 +3,7 @@
 
 #include "Environments/Props/Prop.h"
 #include "FL/Fl.H"
+#include <memory>
 #include <vector>
 
 class Game;
@@ -10,12 +11,12 @@ class Prop;
 
 class Environment {
 public:
-  virtual Fl_Color getColor() = 0;
-  virtual std::vector<Prop *> &getProps() = 0;
+  [[nodiscard]] virtual Fl_Color getColor() const = 0;
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Prop>> getProps() const = 0;
   virtual void handleGame(Game *currentGame) = 0;
   virtual void updateProps() = 0;
-  virtual void generateProps(short id = NULL) = 0;
-  virtual std::string getId() = 0;
+  virtual void generateProps(short id) = 0;
+  [[nodiscard]] virtual std::string getId() const = 0;
 };
 
 #endif

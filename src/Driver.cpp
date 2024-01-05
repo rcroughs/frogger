@@ -46,7 +46,7 @@ void Driver::LaunchGameFromFile(std::string filePath) {
   std::shared_ptr<Map> map = _mapFactory->createMap(mapId);
   _editor = nullptr;
   _game = std::make_shared<Game>(this, map);
-  _view = std::make_shared<GameRenderer>(_game, 700,750, this);
+  _view = std::make_shared<GameRenderer>(_game, 700,750);
   _controller = std::make_shared<GameController>(_game);
   _gameState = ON_GAME;
   inputFile.close();
@@ -86,7 +86,39 @@ void Driver::refresh() {
   }
 }
 
+void Driver::mouseMove(short loc_x, short loc_y) {
+  if (_controller != nullptr)
+    _controller->mouseMove(loc_x, loc_y);
+}
+
+void Driver::mouseClick(short loc_x, short loc_y) {
+  if (_controller != nullptr)
+    _controller->mouseClick(loc_x, loc_y);
+}
+
+void Driver::mouseReleased(short loc_x, short loc_y) {
+  if (_controller != nullptr && _gameState == ON_EDIT)
+    _controller->mouseRelease(loc_x, loc_y);
+}
+
+void Driver::keyPressed(int keycode) {
+  if (_controller != nullptr)
+    _controller->keyPressed(keycode);
+}
+
+void Driver::keyReleased(int keycode) {
+  if (_controller != nullptr)
+    _controller->keyReleased(keycode);
+}
+
+void Driver::updateMovement() {
+  if (_controller != nullptr)
+    _controller->updateMovement();
+}
+
+std::shared_ptr<GameEditor> Driver::getEditor() { return _editor; }
+
 Driver::Driver()
-    : _editor{nullptr}, _view{nullptr}, _controller{nullptr}, _game{nullptr} {
+    : _view{nullptr}, _controller{nullptr}, _editor{nullptr}, _game{nullptr} {
   showHomeScreen();
 }

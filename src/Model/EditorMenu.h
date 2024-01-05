@@ -13,12 +13,12 @@ class EditorMenu {
 public:
   EditorMenu(Driver* driver);
 
-  std::vector<Button *> getButtons() { return buttons; }
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;
   // virtual void updatePosition(Position mouseloc) {};
 
 private:
-  std::vector<Button *> buttons;
-  Driver* driver;
+  std::vector<std::shared_ptr<Button>> _buttons;
+  Driver* _driver;
 };
 
 #endif // SRC_EDITORMENU_H

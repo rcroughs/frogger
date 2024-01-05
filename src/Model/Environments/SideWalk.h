@@ -5,27 +5,28 @@
 #include "FL/Fl.H"
 #include "Props/Prop.h"
 #include "vector"
+#include <memory>
 
 class Game;
 
 class SideWalk : virtual public Environment {
-private:
-  Fl_Color color;
-  std::vector<Prop *> props;
-  std::string id;
-
 public:
-  SideWalk() : color{FL_BLACK}, props{}, id{"4"} {}
+  SideWalk();
   ~SideWalk() = default;
 
-  virtual Fl_Color getColor() { return color; }
-  virtual void setColor(Fl_Color new_color) { color = new_color; }
+  [[nodiscard]]virtual Fl_Color getColor() const override;
+  virtual void setColor(Fl_Color new_color);
 
-  virtual std::vector<Prop *> &getProps() override;
+  [[nodiscard]]virtual std::vector<std::shared_ptr<Prop>> getProps() const override;
   virtual void handleGame(Game *currentGame) override;
   virtual void updateProps() override;
-  virtual void generateProps(short id) override {}
-  std::string getId() override { return id; }
+  virtual void generateProps(short id) override;
+  [[nodiscard]] virtual std::string getId() const override;
+
+private:
+  Fl_Color _color;
+  std::vector<std::shared_ptr<Prop>> _props;
+  std::string _id;
 };
 
 #endif

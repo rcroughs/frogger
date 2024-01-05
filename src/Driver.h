@@ -27,32 +27,14 @@ public:
   // Levels
   void LaunchGameFromFile(std::string filePath);
 
-  virtual void mouseMove(short loc_x, short loc_y) {
-    if (_controller != nullptr)
-      _controller->mouseMove(loc_x, loc_y);
-  }
-  virtual void mouseClick(short loc_x, short loc_y) {
-    if (_controller != nullptr)
-      _controller->mouseClick(loc_x, loc_y);
-  }
-  virtual void mouseReleased(short loc_x, short loc_y) {
-    if (_controller != nullptr && _gameState == ON_EDIT)
-      _controller->mouseRelease(loc_x, loc_y);
-  }
-  virtual void keyPressed(int keycode) {
-    if (_controller != nullptr)
-      _controller->keyPressed(keycode);
-  }
-  virtual void keyReleased(int keycode) {
-    if (_controller != nullptr)
-      _controller->keyReleased(keycode);
-  }
-  virtual void updateMovement() {
-    if (_controller != nullptr)
-      _controller->updateMovement();
-  }
+  virtual void mouseMove(short loc_x, short loc_y);
+  virtual void mouseClick(short loc_x, short loc_y);
+  virtual void mouseReleased(short loc_x, short loc_y);
+  virtual void keyPressed(int keycode);
+  virtual void keyReleased(int keycode);
+  virtual void updateMovement();
 
-  virtual std::shared_ptr<GameEditor> getEditor() { return _editor; }
+  virtual std::shared_ptr<GameEditor> getEditor();
 
 private:
   std::shared_ptr<View> _view;

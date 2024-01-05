@@ -6,15 +6,15 @@
 
 class Button {
 public:
-  virtual Fl_PNG_Image *getImage() = 0;
-  virtual int getX() = 0;
-  virtual int getY() = 0;
-  virtual bool contains(int x, int y) = 0;
-  virtual bool canMove() = 0;
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const = 0;
+  [[nodiscard]] virtual int getX() const = 0;
+  [[nodiscard]] virtual int getY() const = 0;
+  [[nodiscard]] virtual bool contains(int x, int y) const = 0;
+  [[nodiscard]] virtual bool canMove() const = 0;
+  [[nodiscard]] virtual bool isDisplayed() const = 0;
+  [[nodiscard]] virtual bool isMoving() const = 0;
   virtual void onClick() = 0;
   virtual void resetPosition() = 0;
-  virtual bool isDisplayed() = 0;
-  virtual bool isMoving() = 0;
   virtual void changeMovingState() = 0;
   virtual void changeState() = 0;
   virtual void changePosition(int loc_x, int loc_y) = 0;

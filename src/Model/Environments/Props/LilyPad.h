@@ -9,27 +9,24 @@
 class LilyPad : public Prop {
 public:
   LilyPad(float leftCornerPos);
-  ~LilyPad() { delete image; }
-  virtual float getPosition() override { return leftCorner; }
-  virtual float getRightCorner() override { return leftCorner + size; }
-  virtual Fl_Color getColor() override { return color; }
-  virtual float getSize() override { return size; }
-  virtual bool contains(float playerPosition) override {
-    return getPosition() < playerPosition && playerPosition < getRightCorner();
-  }
-  virtual void move(){};
-  virtual void handleGame(Game *currentGame);
-  virtual bool hasImage() override { return true; };
-  virtual Fl_PNG_Image *getImage() { return image; };
-  bool isVisible() override { return true; }
-  void update() override {};
+  ~LilyPad();
+  [[nodiscard]] virtual float getPosition() const override;
+  [[nodiscard]] virtual float getRightCorner() const override;
+  [[nodiscard]] virtual Fl_Color getColor() const override;
+  [[nodiscard]] virtual float getSize() const override;
+  [[nodiscard]] virtual bool contains(float playerPosition) const override;
+  virtual void move() override;
+  virtual void handleGame(Game *currentGame) override;
+  [[nodiscard]] virtual bool hasImage() const override;
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
+  [[nodiscard]] virtual bool isVisible() const override;
+  virtual void update() override;
 
 private:
-  Fl_PNG_Image *image;
-  float leftCorner;
-  float size{5};
-  Fl_Color color{FL_GREEN};
-  bool hasTurtle;
+  Fl_PNG_Image *_image;
+  float _leftCorner;
+  float _size{5};
+  bool _hasTurtle;
 
 };
 

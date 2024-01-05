@@ -5,31 +5,35 @@
 #include "FL/Fl_Image.H"
 #include "FL/Fl_PNG_Image.H"
 #include "vector"
+#include <cstddef>
 #include <memory>
 #include <string>
 
-Position GameRenderer::getWindowPosition(Position gamePosition) {
+GameRenderer::GameRenderer(std::shared_ptr<Game> game, int h, int w)
+    : _game{std::move(game)}, WINDOW_HEIGHT{h}, WINDOW_WIDTH{w} {}
+
+Position GameRenderer::getWindowPosition(Position gamePosition) const {
   Position res = {float(WINDOW_WIDTH * (gamePosition.x / 100.0f)),
                   int((float(WINDOW_HEIGHT) - float(WINDOW_HEIGHT) / 13.0f) -
                       ((float(gamePosition.y) / 13.0f) * WINDOW_HEIGHT))};
   return res;
 }
 
-void GameRenderer::drawVictory() {
+void GameRenderer::drawVictory() const {
   _game->getWinningMenu()->getImage()->draw(0, 0);
   for (auto &button : _game->getWinningMenu()->getButtons()) {
     button->getImage()->draw(button->getX(), button->getY());
   }
 }
 
-void GameRenderer::drawGameOver() {
+void GameRenderer::drawGameOver() const {
   _game->getGameOverMenu()->getImage()->draw(0, 0);
   for (auto &button : _game->getGameOverMenu()->getButtons()) {
     button->getImage()->draw(button->getX(), button->getY());
   }
 }
 
-void GameRenderer::drawPlayer(std::shared_ptr<Player> player) {
+void GameRenderer::drawPlayer(std::shared_ptr<Player> player) const {
   Position player_position = player->getPosition();
   Position windowPosition = getWindowPosition(player_position);
   Direction current_direction = player->getDirection();
@@ -78,17 +82,17 @@ void GameRenderer::drawPlayer(std::shared_ptr<Player> player) {
   fl_end_polygon();
 }
 
-void GameRenderer::drawMap() {
+void GameRenderer::drawMap() const {
   for (int i = 0; i < 13; i++) {
-    Environment *currentEnvironment = _game->getMap()->getEnvironment(i);
+    std::shared_ptr<Environment> currentEnvironment = _game->getMap()->getEnvironment(i);
     fl_draw_box(FL_FLAT_BOX, 0,
                 (WINDOW_HEIGHT - (WINDOW_HEIGHT / 13.0f)) -
                     (i * (WINDOW_HEIGHT / 13.0)),
                 WINDOW_WIDTH, int(float(WINDOW_HEIGHT) / 13.0f),
                 currentEnvironment->getColor());
-    std::vector<Prop *> props = currentEnvironment->getProps();
+    std::vector<std::shared_ptr<Prop>> props = currentEnvironment->getProps();
     if (!props.empty()) {
-      for (int j = 0; j < props.size(); j++) {
+      for (size_t j = 0; j < props.size(); j++) {
         float propPosition = props[j]->getPosition();
         Position windowPosition = getWindowPosition(Position{propPosition, i});
         if (props.at(j)->hasImage() && props.at(j)->isVisible()) {
@@ -104,7 +108,7 @@ void GameRenderer::drawMap() {
   }
 }
 
-void GameRenderer::drawLives() {
+void GameRenderer::drawLives() const {
   short numberLives = _game->getLives();
   if (numberLives == 3) {
     Fl_PNG_Image lives("res/three_hearts.png");
@@ -125,7 +129,7 @@ void GameRenderer::drawLives() {
   }
 }
 
-void GameRenderer::drawTime() {
+void GameRenderer::drawTime() const {
   float length = 270 - ((_game->getTime() * 60 - _game->getFrameLeft()) *
                         (270 / (_game->getTime() * 60)));
   fl_draw_box(FL_FLAT_BOX, 410, 710, length, 30, FL_RED);
@@ -133,14 +137,14 @@ void GameRenderer::drawTime() {
   fl_frame("AAAA", 410, 710, 270, 30);
 }
 
-void GameRenderer::drawScore() {
+void GameRenderer::drawScore() const {
   Fl_PNG_Image score("res/score.png");
   score.draw(10, 706);
   fl_font(FL_HELVETICA_BOLD, 50);
   fl_draw(std::to_string(_game->getScore()).c_str(), 160, 740);
 }
 
-void GameRenderer::drawHUD() {
+void GameRenderer::drawHUD() const {
   // Dessin des vies
   drawLives();
   // Dessin de la barre de temps restant
@@ -149,7 +153,7 @@ void GameRenderer::drawHUD() {
   drawScore();
 }
 
-void GameRenderer::drawMenu() {
+void GameRenderer::drawMenu() const {
   std::shared_ptr<GameMenu> gameMenu = _game->getMenu();
   gameMenu->getImage()->draw(gameMenu->getX(), gameMenu->getY());
   for (auto &button : gameMenu->getButtons()) {
@@ -157,7 +161,7 @@ void GameRenderer::drawMenu() {
   }
 }
 
-void GameRenderer::draw() {
+void GameRenderer::draw() const {
   if (_game->isLosing()) {
     drawGameOver();
   } else if (_game->isWinning()) {
@@ -166,7 +170,7 @@ void GameRenderer::draw() {
     drawMap();
     drawPlayer(_game->getPlayer());
     std::vector<std::shared_ptr<Player>> winnerPlayer = _game->getWinnerPlayer();
-    for (int i = 0; i < winnerPlayer.size(); i++) {
+    for (size_t i = 0; i < winnerPlayer.size(); i++) {
       drawPlayer(winnerPlayer.at(i));
     }
     drawHUD();

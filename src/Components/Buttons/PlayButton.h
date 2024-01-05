@@ -9,28 +9,26 @@ class Driver;
 class PlayButton : public Button {
 public:
   PlayButton(int x, int y, Driver *driver);
-  ~PlayButton() { delete image; }
-  virtual Fl_PNG_Image *getImage() override { return image; };
-  virtual int getX() { return x; }
-  virtual int getY() { return y; }
-  virtual bool contains(int x, int y);
-  virtual bool canMove() { return false; }
-  virtual void onClick();
-  virtual void resetPosition(){};
-  virtual bool isDisplayed() { return false; }
-  virtual bool isMoving() { return false; }
-  virtual void changeMovingState() {}
-  virtual void changePosition(int loc_x, int loc_y) {
-    x = loc_x;
-    y = loc_y;
-  }
-  virtual void changeState() {}
+  ~PlayButton();
+
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
+  [[nodiscard]] virtual int getX() const override;
+  [[nodiscard]] virtual int getY() const override;
+  [[nodiscard]] virtual bool isDisplayed() const override;
+  [[nodiscard]] virtual bool canMove() const override;
+  [[nodiscard]] virtual bool isMoving() const override;
+  [[nodiscard]] virtual bool contains(int x, int y) const override;
+  virtual void onClick() override;
+  virtual void resetPosition() override;
+  virtual void changeMovingState() override;
+  virtual void changePosition(int loc_x, int loc_y) override;
+  virtual void changeState() override;
 
 private:
-  Fl_PNG_Image *image;
-  Driver *driver;
-  int x;
-  int y;
+  Fl_PNG_Image *_image;
+  Driver *_driver;
+  int _x;
+  int _y;
 };
 
 #endif // FROGGER_PLAYBUTTON_H

@@ -6,29 +6,24 @@
 #include <iostream>
 
 class Player {
-private:
-  Position current_position;
-  Direction current_direction;
-
 public:
   Player(Position position, Direction direction)
       : current_position{position}, current_direction{direction} {}
 
-  virtual Position getPosition() { return this->current_position; }
-  virtual void setPosition(Position new_position) {
-    current_position = new_position;
-  }
-  virtual Direction getDirection() { return this->current_direction; }
-  virtual void setDirection(Direction new_direction) {
-    if (up <= new_direction && new_direction <= right)
-      current_direction = new_direction;
-  }
-  virtual bool isInScreen();
+  [[nodiscard]] virtual Position getPosition() const;
+  virtual void setPosition(Position new_position);
+  [[nodiscard]] virtual Direction getDirection() const;
+  virtual void setDirection(Direction new_direction);
+  [[nodiscard]] virtual bool isInScreen() const;
 
   virtual void move_up();
   virtual void move_down();
   virtual void move_right();
   virtual void move_left();
+
+private:
+  Position current_position;
+  Direction current_direction;
 };
 
 #endif //_PLAYER_H

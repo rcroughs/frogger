@@ -1,30 +1,37 @@
 #include "MenuComponents.h"
-#include "Fl/Fl_PNG_Image.H"
+#include "Buttons/EditorButton.h"
 #include "Buttons/PlayButton.h"
 #include "Buttons/QuitButton.h"
-#include "Buttons/EditorButton.h"
+#include "Fl/Fl_PNG_Image.H"
 #include <memory>
 
-MenuComponents::MenuComponents(Driver* driver) : _driver{driver} {
-    logo = new Fl_PNG_Image("res/title.png");
-    bg = new Fl_PNG_Image("res/bg.png");
-    clouds.push_back({ 0, false });
-    clouds.push_back({ 150, true });
-    buttons.push_back(new PlayButton(250, 300, driver));
-    buttons.push_back(new EditorButton(250, 420, driver));
-    buttons.push_back(new QuitButton(250, 540));
+MenuComponents::MenuComponents(Driver *driver) : _driver{driver} {
+  _logo = new Fl_PNG_Image("res/title.png");
+  _bg = new Fl_PNG_Image("res/bg.png");
+  _clouds.push_back(std::make_shared<Cloud>(0, false));
+  _clouds.push_back(std::make_shared<Cloud>(150, true));
+  _buttons.push_back(std::make_shared<PlayButton>(250, 300, driver));
+  _buttons.push_back(std::make_shared<EditorButton>(250, 420, driver));
+  _buttons.push_back(std::make_shared<QuitButton>(250, 540));
 }
 
 MenuComponents::~MenuComponents() {
-    delete logo; // cause un seg fault à la fermeture du programme
-    delete bg;
-    for (auto &button : buttons) {
-        delete button;
-    }
+  delete _logo;
+  delete _bg;
 }
 
+Fl_PNG_Image *MenuComponents::getLogo() const { return _logo; }
+
+Fl_PNG_Image *MenuComponents::getBackground() const { return _bg; }
+
+std::vector<std::shared_ptr<Button>> MenuComponents::getButtons() const {
+  return _buttons;
+}
+
+std::vector<std::shared_ptr<Cloud>> MenuComponents::getClouds() const { return _clouds; };
+
 void MenuComponents::update() {
-    for (auto &cloud : clouds) {
-        cloud.update();
-    }
+  for (auto &cloud : _clouds) {
+    cloud->update();
+  }
 }

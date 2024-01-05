@@ -1,37 +1,29 @@
-#ifndef _MAP_H
-#define _MAP_H
+#ifndef FROGGER_MAP_H
+#define FROGGER_MAP_H
 
 #include "Game.h"
 #include "array"
+#include <memory>
 
 class Environment;
 class Game;
 
 class Map {
-private:
-  std::array<Environment *, 13> environments{nullptr};
-
 public:
   Map() : environments{} {}
-  ~Map() {
-    for (int i = 0; i < environments.size(); i++) {
-      delete environments.at(i);
-    }
-  }
-  virtual Environment *getEnvironment(int index) {
-    return environments.at(index);
-  }
-  virtual void deleteEnvironment(int index) { delete environments.at(index); }
-  virtual void setEnvironment(int index, Environment *new_environment) {
-    deleteEnvironment(index);
-    environments[index] = new_environment;
-  }
+  [[nodiscard]] virtual std::shared_ptr<Environment> getEnvironment(int index) const;
+  virtual void deleteEnvironment(int index);
+  virtual void setEnvironment(int index,
+                              std::shared_ptr<Environment> new_environment);
   virtual void resetEnvironments();
 
-  virtual void updateProps();
-  virtual void handleGame(Game *currentGame);
+  virtual void updateProps() const;
+  virtual void handleGame(Game *currentGame) const;
 
-  virtual std::string getMapId();
+  virtual std::string getMapId() const;
+
+private:
+  std::array<std::shared_ptr<Environment>, 13> environments{nullptr};
 };
 
-#endif
+#endif // FROGGER_MAP_H

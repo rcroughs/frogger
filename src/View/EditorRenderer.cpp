@@ -2,7 +2,15 @@
 
 class button;
 
-void EditorRenderer::draw() {
+EditorRenderer::EditorRenderer(std::shared_ptr<GameEditor> editor, int width,
+                               int height)
+    : _editor{std::move(editor)}, _width{width}, _height{height} {}
+
+std::shared_ptr<GameEditor> EditorRenderer::getEditor() const {
+  return _editor;
+}
+
+void EditorRenderer::draw() const {
   // Draw background
   for (int i = 0; i < 13; i++) {
     Fl_Color *color = getEditor()->getColor(i);
@@ -10,10 +18,10 @@ void EditorRenderer::draw() {
       color = new Fl_Color(FL_YELLOW);
     }
     fl_draw_box(FL_FLAT_BOX, 0,
-                (height - (height / 13.0f)) - (i * (height / 13.0)), width,
-                int(float(height) / 13.0f), *color);
-    fl_frame("AAAA", 0, (width - (height / 13.0f)) - (i * (height / 13.0)),
-             width, int(float(height) / 13.0f));
+                (_height - (_height / 13.0f)) - (i * (_height / 13.0)), _width,
+                int(float(_height) / 13.0f), *color);
+    fl_frame("AAAA", 0, (_width - (_height / 13.0f)) - (i * (_height / 13.0)),
+             _width, int(float(_height) / 13.0f));
   }
   // Draw Buttons
   for (auto &button : _editor->getMenu()->getButtons()) {

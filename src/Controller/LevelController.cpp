@@ -1,6 +1,13 @@
 #include "LevelController.h"
 
-void LevelController::mouseMove(short loc_x, short loc_y) {}
+LevelController::LevelController(std::shared_ptr<LevelSelector> levelSelector)
+    : _levelSelector{std::move(levelSelector)} {}
+
+void LevelController::mouseMove(short loc_x, short loc_y) {
+  // unused parameters
+  static_cast<void>(loc_x);
+  static_cast<void>(loc_y);
+}
 
 void LevelController::mouseClick(short loc_x, short loc_y) {
     if(_levelSelector->getMenuButton()->contains(loc_x, loc_y)) {
@@ -15,7 +22,10 @@ void LevelController::mouseClick(short loc_x, short loc_y) {
     }
 }
 
-void LevelController::mouseRelease(short loc_x, short loc_y) {}
+void LevelController::mouseRelease(short loc_x, short loc_y) {
+  static_cast<void>(loc_x);
+  static_cast<void>(loc_y);
+}
 
 void LevelController::keyPressed(int keycode) {
     if (keycode == FL_Up) {
@@ -25,6 +35,6 @@ void LevelController::keyPressed(int keycode) {
     }
 }
 
-void LevelController::keyReleased(int keycode) {}
+void LevelController::keyReleased(int keycode) { static_cast<void>(keycode);}
 
 void LevelController::updateMovement() {}

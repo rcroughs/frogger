@@ -1,6 +1,19 @@
 #include "Player.h"
 
-bool Player::isInScreen() {
+Position Player::getPosition() const { return this->current_position; }
+
+void Player::setPosition(Position new_position) {
+  current_position = new_position;
+}
+
+Direction Player::getDirection() const { return this->current_direction; }
+
+void Player::setDirection(Direction new_direction) {
+  if (up <= new_direction && new_direction <= right)
+    current_direction = new_direction;
+}
+
+bool Player::isInScreen() const {
   if (current_position.x > 100 || current_position.x < -10)
     return false;
   return true;

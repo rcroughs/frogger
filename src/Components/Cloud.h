@@ -6,18 +6,20 @@
 class Cloud {
 public:
   Cloud(int y, bool goingRight);
-  int getX() { return x; }
-  int getY() { return y; }
-  Fl_PNG_Image *getImage() { return image; };
+  ~Cloud();
+
+  [[nodiscard]] virtual int getX() const;
+  [[nodiscard]] virtual int getY() const;
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const;
+
   void update();
 
 private:
-  int x;
-  int base_y;
-  int y;
-  Fl_PNG_Image *image;
-  bool goingRight;
-
+  int _x;
+  int _base_y;
+  int _y;
+  Fl_PNG_Image *_image;
+  bool _goingRight;
 };
 
 #endif // FROGGER_CLOUD_H

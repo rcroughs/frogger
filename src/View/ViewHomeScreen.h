@@ -8,7 +8,7 @@
 class ViewHomeScreen : public View {
 public:
   ViewHomeScreen();
-  virtual void draw() override;
+  virtual void draw() const override;
 
 private:
   std::shared_ptr<Fl_PNG_Image> _image;

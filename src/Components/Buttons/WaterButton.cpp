@@ -1,39 +1,63 @@
 #include "WaterButton.h"
 #include "../../Driver.h"
-#include "iostream"
 #include <memory>
 
 WaterButton::WaterButton(int x, int y, Driver* driver)
-    : x{x}, y{y}, driver{driver} {
-  image = new Fl_PNG_Image("res/water_button.png");
+    : _driver{driver}, _x{x}, _y{y} {
+  _image = new Fl_PNG_Image("res/water_button.png");
 }
 
-bool WaterButton::contains(int x, int y) {
+  WaterButton::~WaterButton() { delete _image; }
+
+  Fl_PNG_Image *WaterButton::getImage() const { return _image; };
+
+  int WaterButton::getX() const { return _x; }
+
+  int WaterButton::getY() const { return _y; }
+
+bool WaterButton::contains(int x, int y) const {
   if (x > getX() - 5 && x < (getX() + 46 + 5) && y > getY() - 5 &&
       y < getY() + 46 + 5)
     return true;
   return false;
 }
 
-void WaterButton::showConfigurationButtons() {
-  // Enable the configuration buttons to display at the right height
-  std::vector<Button *> buttons = driver->getEditor()->getMenu()->getButtons();
-  for (int i = 3; i < 8; i++) {
-    buttons.at(i)->changeState();
-    int height = driver->getEditor()->getWindowHeight();
-    buttons.at(i)->changePosition(
-        buttons.at(i)->getX(),
-        (height - (height / 13.0f)) -
-            (driver->getEditor()->getCurrentRow() * (height / 13.0)));
+bool WaterButton::isDisplayed() const { return _displayed; }
+
+bool WaterButton::canMove() const { return true; }
+
+bool WaterButton::isMoving() const { return _moving; }
+
+void WaterButton::onClick() {
+  if (_driver->getEditor()->getCurrentRow() >= 0 &&
+      _driver->getEditor()->getCurrentRow() <= 12) {
+    _driver->getEditor()->setColor(new Fl_Color(FL_BLUE));
+    _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),
+                                        2);
+    showConfigurationButtons();
   }
 }
 
-void WaterButton::onClick() {
-  if (driver->getEditor()->getCurrentRow() >= 0 &&
-      driver->getEditor()->getCurrentRow() <= 12) {
-    driver->getEditor()->setColor(new Fl_Color(FL_BLUE));
-    driver->getEditor()->addEnvironment(driver->getEditor()->getCurrentRow(),
-                                        2);
-    showConfigurationButtons();
+void WaterButton::resetPosition() { changePosition(((700 / 3) / 2) - 23, 700); }
+
+void WaterButton::changeMovingState() { _moving = !_moving; }
+
+void WaterButton::changeState() { _displayed = !_displayed; }
+
+void WaterButton::changePosition(int loc_x, int loc_y) {
+  _x = loc_x;
+  _y = loc_y;
+}
+
+void WaterButton::showConfigurationButtons() {
+  // Enable the configuration buttons to display at the right height
+  std::vector<std::shared_ptr<Button>> buttons = _driver->getEditor()->getMenu()->getButtons();
+  for (int i = 3; i < 8; i++) {
+    buttons.at(i)->changeState();
+    int height = _driver->getEditor()->getWindowHeight();
+    buttons.at(i)->changePosition(
+        buttons.at(i)->getX(),
+        (height - (height / 13.0f)) -
+            (_driver->getEditor()->getCurrentRow() * (height / 13.0)));
   }
 }

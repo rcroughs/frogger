@@ -5,29 +5,96 @@
 #include "vector"
 #include <memory>
 
-Game::Game(Driver *driver)
-    : driver{driver}, map{std::make_shared<Map>()}, winning{false}, loosing{false}, lives{3},
-      time{30}, frameLeft{30 * 60}, score{0}, timeOut{0}, combo{1},
-      highestPosition{0}, inMenu{false}, _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
-      _winningMenu{std::make_shared<WinningMenu>(driver)}, gameMenu{} {}
-
 Game::Game(Driver *driver, std::shared_ptr<Map> map)
-    : driver{driver}, map{std::move(map)}, winning{false}, loosing{false}, lives{3},
-      time{30}, frameLeft{30 * 60}, score{0}, timeOut{0}, combo{1},
-      highestPosition{0}, inMenu{false}, _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
-      _winningMenu{std::make_shared<WinningMenu>(driver)}, gameMenu{std::make_shared<GameMenu>(150,100, driver)}, player{std::make_shared<Player>(Position{45,0}, up)} {}
+    : _player{std::make_shared<Player>(Position{45, 0}, up)},
+      _map{std::move(map)},
+      _gameMenu{std::make_shared<GameMenu>(150, 100, driver)},
+      _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
+      _winningMenu{std::make_shared<WinningMenu>(driver)}, _driver{driver},
+      _winning{false}, _loosing{false}, _lives{3}, _time{30},
+      _frameLeft{30 * 60}, _score{0}, _timeOut{0}, _combo{1},
+      _highestPosition{0}, _inMenu{false} {}
 
-Game::~Game() {
+Game::Game(Driver *driver) : Game{driver, std::make_shared<Map>()} {}
+
+Game::~Game() {}
+
+std::shared_ptr<Player> Game::getPlayer() const { return this->_player; }
+
+std::vector<std::shared_ptr<Player>> Game::getWinnerPlayer() const {
+  return _winnerPlayers;
 }
 
+void Game::setPlayer(std::shared_ptr<Player> new_player) {
+  _player = std::move(new_player);
+}
+void Game::setMap(std::shared_ptr<Map> new_map) { _map = std::move(new_map); }
+
+void Game::setGameMenu(std::shared_ptr<GameMenu> new_gameMenu) {
+  _gameMenu = new_gameMenu;
+}
+
+std::shared_ptr<GameMenu> Game::getMenu() const { return _gameMenu; }
+
+bool Game::isOnPause() const { return _inMenu; }
+
+std::shared_ptr<Map> Game::getMap() const { return this->_map; }
+
+float Game::getTime() const { return _time; }
+
+std::shared_ptr<GameOverMenu> Game::getGameOverMenu() const {
+  return _gameOverMenu;
+}
+
+std::shared_ptr<WinningMenu> Game::getWinningMenu() const {
+  return _winningMenu;
+}
+
+float Game::getFrameLeft() const { return _frameLeft; }
+
+void Game::changeWinningState() { _winning = true; };
+
+void Game::changeLoosingState() { _loosing = true; };
+
+bool Game::isWinning() const { return _winning; };
+
+bool Game::isLosing() const { return _loosing; };
+
+bool Game::isRunning() const { return !_winning && !_loosing; };
+
+short Game::getLives() const { return _lives; }
+
+void Game::addLife() { ++_lives; }
+
 void Game::restartGame() {
-  if (lives > 0) {
-    player = std::make_shared<Player>(Position{45, 0}, up);
+  if (_lives > 0) {
+    _player = std::make_shared<Player>(Position{45, 0}, up);
     resetTime();
   } else {
     changeLoosingState();
   }
 }
+
+void Game::killPlayer() {
+  _lives--;
+  restartGame();
+}
+
+void Game::resetTime() { _frameLeft = _time * 60; }
+
+void Game::decreaseTime() { _frameLeft--; }
+
+short Game::getCombo() const { return _combo; }
+
+void Game::addCombo() { _combo++; }
+
+void Game::resetCombo() { _combo = 1; }
+
+int Game::getScore() const { return _score; }
+
+int Game::getTimeOut() const { return _timeOut; }
+
+short Game::getHighestPosition() const { return _highestPosition; }
 
 void Game::handleScore() {
   if (getPlayer()->getPosition().y < 12 &&
@@ -36,17 +103,46 @@ void Game::handleScore() {
       addCombo();
     }
     modifyHeight();
-    score += getCombo() * 20;
+    _score += getCombo() * 20;
   }
 }
 
+void Game::resetTimeOut() { _timeOut = 60; }
+
+void Game::modifyHeight() {
+  _highestPosition++;
+  resetTimeOut();
+}
+
+void Game::resetHeight() { _highestPosition = 0; }
+
+void Game::decreaseTimeOut() {
+  if (_timeOut > 0) {
+    _timeOut--;
+  } else {
+    resetCombo();
+  }
+}
+
+void Game::win() {
+  _winnerPlayers.push_back(_player);
+  _player = std::make_shared<Player>(Position{45, 0}, up);
+  resetTime();
+  resetHeight();
+  if (_winnerPlayers.size() == _map->getEnvironment(12)->getProps().size()) {
+    changeWinningState();
+  }
+}
+
+void Game::triggerMenu() { _inMenu = !_inMenu; }
+
 void Game::update() {
   decreaseTimeOut();
-  if (map != nullptr) {
-    map->updateProps();
-    map->handleGame(this);
+  if (_map != nullptr) {
+    _map->updateProps();
+    _map->handleGame(this);
   }
-  if (!player->isInScreen()) {
+  if (!_player->isInScreen()) {
     changeLoosingState();
   }
   if (getFrameLeft() <= 0) {
@@ -54,20 +150,3 @@ void Game::update() {
   }
   decreaseTime();
 }
-
-void Game::killPlayer() {
-  lives--;
-  restartGame();
-}
-
-void Game::win() {
-  winnerPlayers.push_back(player);
-  player = std::make_shared<Player>(Position{45, 0}, up);
-  resetTime();
-  resetHeight();
-  if (winnerPlayers.size() == map->getEnvironment(12)->getProps().size()) {
-    changeWinningState();
-  }
-}
-
-void Game::triggerMenu() { inMenu = !inMenu; }

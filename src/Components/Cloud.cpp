@@ -3,33 +3,41 @@
 #include <time.h>
 
 Cloud::Cloud(int y, bool goingRight)
-    : base_y{y}, goingRight{goingRight}, x{}, y{} {
-  image = new Fl_PNG_Image("res/cloud.png");
-  if (image->fail() == Fl_Image::ERR_NO_IMAGE) {
+    : _base_y{y}, _goingRight{goingRight} {
+  _image = new Fl_PNG_Image("res/cloud.png");
+  if (_image->fail() == Fl_Image::ERR_NO_IMAGE) {
     std::cout << "Image couln't load" << std::endl;
   }
   srand(clock());
-  this->x = rand() % 700;
+  this->_x = rand() % 700;
   srand(clock());
-  this->y = base_y + (rand() % 150);
+  this->_y = _base_y + (rand() % 150);
 }
 
+Cloud::~Cloud() { delete _image; }
+
+int Cloud::getX() const { return _x; }
+
+int Cloud::getY() const { return _y; }
+
+Fl_PNG_Image *Cloud::getImage() const { return _image; };
+
 void Cloud::update() {
-  if (goingRight) {
-    if (x > 700) {
-      x = -400;
+  if (_goingRight) {
+    if (_x > 700) {
+      _x = -400;
       srand(clock());
-      this->y = base_y + (rand() % 150);
+      this->_y = _base_y + (rand() % 150);
     } else {
-      x++;
+      _x++;
     }
   } else {
-    if ((x + 250) < 0) {
-      x = 900;
+    if ((_x + 250) < 0) {
+      _x = 900;
       srand(clock());
-      this->y = base_y + (rand() % 150);
+      this->_y = _base_y + (rand() % 150);
     } else {
-      x--;
+      _x--;
     }
   }
 }

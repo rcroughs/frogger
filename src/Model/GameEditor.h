@@ -8,6 +8,7 @@
 #include <memory>
 
 class Driver;
+class Environment;
 class EditorMenu;
 class Game;
 
@@ -16,20 +17,20 @@ public:
   GameEditor(Driver* driver, int width, int height);
 
   // IMPORTANT GETTERS
-  virtual Driver* getDriver() { return _driver; }
-  virtual std::shared_ptr<EditorMenu> getMenu() { return _menu; }
-  virtual std::shared_ptr<Game> getGame() { return _game; }
+  [[nodiscard]] virtual Driver* getDriver() const;
+  [[nodiscard]] virtual std::shared_ptr<EditorMenu> getMenu() const;
+  [[nodiscard]] virtual std::shared_ptr<Game> getGame() const;
 
   // Information about the environment's colors (even when not already
   // configured)
-  virtual Fl_Color *getColor(short index) { return colors.at(index); }
-  virtual std::vector<Fl_Color *> getColors() { return colors; }
-  virtual void setColor(Fl_Color *color) { colors.at(getCurrentRow()) = color; }
+  [[nodiscard]] virtual Fl_Color *getColor(short index) const;
+  [[nodiscard]] virtual std::vector<Fl_Color *> getColors() const;
+  virtual void setColor(Fl_Color *color);
 
   // Add & Delete & Get an environment
   virtual void addEnvironment(int index, short id);
   virtual void deleteEnvironment(int index);
-  Environment *getEnvironment(int index);
+  std::shared_ptr<Environment> getEnvironment(int index) const;
 
   // Add a specific environment, use by addEnvironement()
   virtual void addRoad(int index);
@@ -37,37 +38,31 @@ public:
   virtual void addWater(int index);
 
   // Parameters --> Setters and Getters
-  virtual void modifyRoadCirculation(char new_circulation) {
-    RoadCirculation = new_circulation;
-  }
-  virtual void modifyRoadSpeedLimit(float new_speedLimit) {
-    RoadSpeedLimit = new_speedLimit;
-  }
-  virtual void modifyWaterFlow(float new_flow) { WaterFlow = new_flow; }
-  virtual void modifyWaterPropId(short new_prop_id) {
-    WaterPropId = new_prop_id;
-  }
-  virtual char getRoadCirculation() { return RoadCirculation; }
-  virtual float getRoadSpeedLimit() { return RoadSpeedLimit; }
-  virtual float getWaterFlow() { return WaterFlow; }
-  virtual short getWaterPropId() { return WaterPropId; }
+  virtual void modifyRoadCirculation(char new_circulation);
+  virtual void modifyRoadSpeedLimit(float new_speedLimit);
+  virtual void modifyWaterFlow(float new_flow);
+  virtual void modifyWaterPropId(short new_prop_id);
+  [[nodiscard]] virtual char getRoadCirculation() const;
+  [[nodiscard]] virtual float getRoadSpeedLimit() const;
+  [[nodiscard]] virtual float getWaterFlow() const;
+  [[nodiscard]] virtual short getWaterPropId() const;
 
   // Information about the already existing environments
-  virtual int getEnviNumber() { return enviNumber; }
-  virtual void setEnviNumber(int new_number) { enviNumber = new_number; }
-  virtual void increaseEnviNumber() { enviNumber++; }
-  virtual void decreaseEnviNumber() { enviNumber--; }
+  [[nodiscard]] virtual int getEnviNumber() const;
+  virtual void setEnviNumber(int new_number);
+  virtual void increaseEnviNumber();
+  virtual void decreaseEnviNumber();
 
   // Information about the mouse's position --> selection
-  virtual void changeCurrentRow(int new_row) { currentRow = new_row; }
-  virtual int getCurrentRow() { return currentRow; }
+  virtual void changeCurrentRow(int new_row);
+  [[nodiscard]] virtual int getCurrentRow() const;
 
   // Shows/Hides Environment selection buttons
   virtual void triggerEnvironmentButton();
 
   // Getters for the windows's dimensions
-  virtual int getWindowWidth() { return WINDOW_WIDTH; }
-  virtual int getWindowHeight() { return WINDOW_HEIGHT; }
+  [[nodiscard]] virtual int getWindowWidth() const;
+  [[nodiscard]] virtual int getWindowHeight() const;
   
 private:
   std::shared_ptr<Game> _game;

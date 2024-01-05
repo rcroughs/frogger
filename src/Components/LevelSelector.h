@@ -16,14 +16,15 @@ class MenuButton;
 class LevelSelector  {
 public:
   LevelSelector(Driver* driver);
+  ~LevelSelector();
 
-  std::vector<std::shared_ptr<LevelButton>> getButtons() const;
-  std::shared_ptr<MenuButton> getMenuButton() const;
-  Fl_PNG_Image *getBg() const;
-  void scrollUp();
-  void scrollDown();
+  [[nodiscard]] virtual std::vector<std::shared_ptr<LevelButton>> getButtons() const;
+  [[nodiscard]] virtual std::shared_ptr<MenuButton> getMenuButton() const;
+  [[nodiscard]] virtual Fl_PNG_Image *getBg() const;
+  virtual void scrollUp();
+  virtual void scrollDown();
 
-  void update();
+  virtual void update();
 
 private:
   std::vector<std::string> getFiles(std::string path);

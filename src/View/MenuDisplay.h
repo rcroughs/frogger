@@ -7,9 +7,8 @@
 
 class MenuDisplay : public View {
 public:
-  MenuDisplay(std::shared_ptr<MenuComponents> components)
-      : _components{std::move(components)} {}
-  void draw() override;
+  MenuDisplay(std::shared_ptr<MenuComponents> components);
+  virtual void draw() const override;
 
 private:
   std::shared_ptr<MenuComponents> _components;

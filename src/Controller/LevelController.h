@@ -6,8 +6,7 @@
 
 class LevelController : public Controller {
 public:
-  LevelController(std::shared_ptr<LevelSelector> levelSelector)
-      : _levelSelector{std::move(levelSelector)} {}
+  LevelController(std::shared_ptr<LevelSelector> levelSelector);
   void mouseMove(short loc_x, short loc_y);
   void mouseClick(short loc_x, short loc_y);
   void mouseRelease(short loc_x, short loc_y);

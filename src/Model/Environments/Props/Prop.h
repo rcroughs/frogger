@@ -10,16 +10,16 @@ class Game;
 
 class Prop {
 public:
-  virtual float getPosition() = 0;
-  virtual float getRightCorner() = 0;
-  virtual Fl_Color getColor() = 0;
-  virtual float getSize() = 0;
-  virtual bool contains(float playerPosition) = 0;
+  [[nodiscard]] virtual float getPosition() const = 0;
+  [[nodiscard]] virtual float getRightCorner() const = 0;
+  [[nodiscard]] virtual Fl_Color getColor() const = 0;
+  [[nodiscard]] virtual float getSize() const = 0;
+  [[nodiscard]] virtual bool contains(float playerPosition) const = 0;
   virtual void move() = 0;
   virtual void handleGame(Game *currentGame) = 0;
-  virtual bool hasImage() = 0;
-  virtual bool isVisible() = 0;
-  virtual Fl_PNG_Image *getImage() = 0;
+  [[nodiscard]] virtual bool hasImage() const = 0;
+  [[nodiscard]] virtual bool isVisible() const = 0;
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const = 0;
   virtual void update() = 0;
 };
 

@@ -2,17 +2,45 @@
 #include <ctime>
 #include <memory>
 
-bool Turtle::contains(float playerPosition) {
-  if (position < playerPosition && playerPosition < getRightCorner() && visible)
+Turtle::Turtle(float position, short turtleNumber)
+    : _position{position}, _turtleNumber{turtleNumber}, _visible{true},
+      _invisibleTimer{0} {
+  if (turtleNumber == 2) {
+    _img = new Fl_PNG_Image("res/two_turtles.png");
+    if (_img->fail() == Fl_Image::ERR_NO_IMAGE) {
+      std::cout << "Image couln't load";
+    }
+    _size = 15.0f;
+  } else if (turtleNumber == 3) {
+    _img = new Fl_PNG_Image("res/three_turtles.png");
+    if (_img->fail() == Fl_Image::ERR_FILE_ACCESS) {
+      std::cout << "Image couln't load";
+    }
+    _size = 22.0f;
+  }
+}
+
+Turtle::~Turtle() { delete _img; }
+
+float Turtle::getPosition() const { return _position; }
+
+float Turtle::getRightCorner() const { return _position + _size; }
+
+Fl_Color Turtle::getColor() const { return FL_GREEN; }
+
+float Turtle::getSize() const { return _size; }
+
+bool Turtle::contains(float playerPosition) const {
+  if (_position < playerPosition && playerPosition < getRightCorner() && _visible)
     return true;
   return false;
 }
 
 void Turtle::move() {
   if (getRightCorner() < 0) {
-    position = 100;
+    _position = 100;
   } else {
-    position -= 0.2f;
+    _position -= 0.2f;
   }
 }
 
@@ -22,17 +50,23 @@ void Turtle::handleGame(Game *currentGame) {
       Position{player->getPosition().x - 0.2f, player->getPosition().y});
 }
 
+bool Turtle::hasImage() const { return true; }
+
+Fl_PNG_Image *Turtle::getImage() const { return _img; }
+
+bool Turtle::isVisible() const { return _visible; }
+
 void Turtle::update() {
-  if (visible) {
+  if (_visible) {
     srand(clock());
     if (rand() % 600 == 0) {
-      visible = false;
-      invisibleTimer = 180 + (rand() % 120);
+      _visible = false;
+      _invisibleTimer = 180 + (rand() % 120);
     }
   } else {
-    invisibleTimer--;
-    if (invisibleTimer == 0) {
-      visible = true;
+    _invisibleTimer--;
+    if (_invisibleTimer == 0) {
+      _visible = true;
     }
   }
 }

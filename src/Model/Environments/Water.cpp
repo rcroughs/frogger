@@ -3,7 +3,18 @@
 #include "Props/Log.h"
 #include "Props/Turtle.h"
 #include <ctime>
+#include <memory>
 #include <string>
+
+Water::Water(float speed) : _color(FL_BLUE), _isMoving{true}, _flow(speed) {}
+
+Water::Water() : Water{0} {}
+
+Fl_Color Water::getColor() const { return _color; }
+
+void Water::setColor(Fl_Color new_color) { _color = new_color; }
+
+void Water::setFlow(float new_flow) { _flow = new_flow; }
 
 void Water::generateLogs() {
   int usedSpace = 0;
@@ -15,49 +26,50 @@ void Water::generateLogs() {
     // Génération de la position
     float position = 0;
     if (logCounter - 1 >= 0) {
-      position = props.at(logCounter - 1)->getPosition() +
-                 (props.at(logCounter - 1)->getSize()) + 20;
+      position = _props.at(logCounter - 1)->getPosition() +
+                 (_props.at(logCounter - 1)->getSize()) + 20;
     } else {
       position = (rand() % 3) * 10;
     }
-    props.push_back(new Log(float(size), float(position), flow));
+    _props.push_back(
+        std::make_shared<Log>(float(size), float(position), _flow));
     logCounter++;
     usedSpace = position + size;
     srand(clock());
   }
-  id += "1";
+  _id += "1";
   std::string speedLimitId;
-  if (flow == 1) {
+  if (_flow == 1) {
     speedLimitId = "1";
-  } else if (flow == 1.5f) {
+  } else if (_flow == 1.5f) {
     speedLimitId = "2";
-  } else if (flow == 2.0f) {
+  } else if (_flow == 2.0f) {
     speedLimitId = "3";
   }
-  id += speedLimitId;
+  _id += speedLimitId;
 }
 
 void Water::generateLilyPads() {
   for (int i = 1; i < 5; i++) {
-    props.push_back(new LilyPad(i * 20));
+    _props.push_back(std::make_shared<LilyPad>(i * 20));
   }
 }
 
 void Water::generateTurtles(short turtleId) {
   for (int i = 0; i < 3; i++) {
-    props.push_back(new Turtle(i * 30, turtleId));
+    _props.push_back(std::make_shared<Turtle>(i * 30, turtleId));
   }
-  id += "2";
+  _id += "2";
   std::string speedLimitId;
-  if (flow == 1.0f) {
+  if (_flow == 1.0f) {
     speedLimitId = "1";
-  } else if (flow == 1.5f) {
+  } else if (_flow == 1.5f) {
     speedLimitId = "2";
-  } else if (flow == 2.0f) {
+  } else if (_flow == 2.0f) {
     speedLimitId = "3";
   }
-  id += speedLimitId;
-  id += std::to_string(turtleId);
+  _id += speedLimitId;
+  _id += std::to_string(turtleId);
 }
 
 void Water::generateProps(short id) {
@@ -78,7 +90,7 @@ void Water::generateProps(short id) {
 
 void Water::handleGame(Game *currentGame) {
   bool onLog = false;
-  for (auto &prop : props) {
+  for (auto &prop : _props) {
     if (prop->contains(currentGame->getPlayer()->getPosition().x + 5)) {
       onLog = true;
       prop->handleGame(currentGame);
@@ -89,13 +101,15 @@ void Water::handleGame(Game *currentGame) {
   }
 }
 
+std::vector<std::shared_ptr<Prop>> Water::getProps() const { return _props; }
+
 void Water::updateProps() {
-  if (isMoving) {
-    for (auto &prop : props) {
+  if (_isMoving) {
+    for (auto &prop : _props) {
       prop->update();
       prop->move();
     }
   }
 }
 
-std::vector<Prop *> &Water::getProps() { return props; }
+std::string Water::getId() const { return _id; }

@@ -10,20 +10,19 @@
 
 class GameRenderer : public View {
 public:
-  GameRenderer(std::shared_ptr<Game> game, int h, int w, Driver* driver)
-      : _game{std::move(game)}, WINDOW_HEIGHT{h}, WINDOW_WIDTH{w} {}
+  GameRenderer(std::shared_ptr<Game> game, int h, int w);
 
-  virtual Position getWindowPosition(Position gamePosition);
-  virtual void drawVictory();
-  virtual void drawGameOver();
-  virtual void drawPlayer(std::shared_ptr<Player> player);
-  virtual void drawMap();
-  virtual void drawHUD();
-  virtual void drawLives();
-  virtual void drawTime();
-  virtual void drawScore();
-  virtual void drawMenu();
-  void draw() override;
+  virtual Position getWindowPosition(Position gamePosition) const;
+  virtual void drawVictory() const;
+  virtual void drawGameOver() const;
+  virtual void drawPlayer(std::shared_ptr<Player> player) const;
+  virtual void drawMap() const;
+  virtual void drawHUD() const;
+  virtual void drawLives() const;
+  virtual void drawTime() const;
+  virtual void drawScore() const;
+  virtual void drawMenu() const;
+  void draw() const override;
 
 private:
   std::shared_ptr<Game> _game;

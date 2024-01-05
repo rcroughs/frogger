@@ -11,31 +11,29 @@ class Driver;
 class WaterButton : public Button {
 public:
   WaterButton(int x, int y, Driver* driver);
-  ~WaterButton() { delete image; }
-  virtual Fl_PNG_Image *getImage() override { return image; };
-  virtual int getX() { return x; }
-  virtual int getY() { return y; }
-  virtual bool contains(int x, int y);
-  virtual void onClick();
-  virtual void resetPosition() { changePosition(((700 / 3) / 2) - 23, 700); }
-  virtual bool isDisplayed() { return displayed; }
-  virtual bool canMove() { return true; }
-  virtual bool isMoving() { return moving; }
-  virtual void changeMovingState() { moving = !moving; }
-  virtual void changeState() { displayed = !displayed; }
-  virtual void changePosition(int loc_x, int loc_y) {
-    x = loc_x;
-    y = loc_y;
-  }
+  ~WaterButton();
+
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
+  [[nodiscard]] virtual int getX() const override;
+  [[nodiscard]] virtual int getY() const override;
+  [[nodiscard]] virtual bool contains(int x, int y) const override;
+  [[nodiscard]] virtual bool isDisplayed() const override;
+  [[nodiscard]] virtual bool canMove() const override;
+  [[nodiscard]] virtual bool isMoving() const override;
+  virtual void onClick() override;
+  virtual void resetPosition() override;
+  virtual void changeMovingState() override;
+  virtual void changeState() override;
+  virtual void changePosition(int loc_x, int loc_y) override;
   virtual void showConfigurationButtons();
 
 private:
-  Fl_PNG_Image *image;
-  std::shared_ptr<Driver> driver;
-  int x;
-  int y;
-  bool displayed{true};
-  bool moving{false};
+  Fl_PNG_Image *_image;
+  std::shared_ptr<Driver> _driver;
+  int _x;
+  int _y;
+  bool _displayed{true};
+  bool _moving{false};
 };
 
 #endif // SRC_WATERBUTTON_H

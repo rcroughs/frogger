@@ -5,48 +5,31 @@
 #include "FL/Fl.H"
 #include "Props/Prop.h"
 #include "vector"
+#include <memory>
 
 class Road : virtual public Environment {
 public:
-  Road(char circulation, float speedLimit)
-      : color{FL_GRAY}, props{}, circulation{circulation},
-        speedLimit{speedLimit} {
-          id += "3"; 
-          id += circulation == 'l' ? "0" : "1";
-          std::string speedLimitId;
-          if (speedLimit == 1.0f) {
-            speedLimitId = "1";
-          } else if (speedLimit == 1.5f) {
-            speedLimitId = "2";
-          } else if (speedLimit == 2.0f) {
-            speedLimitId = "3";
-          }
-          id += speedLimitId;
-        }
-  ~Road() {
-    for (int i = 0; i < props.size(); i++) {
-      delete props.at(i);
-    }
-  }
+  Road(char circulation, float speedLimit);
+  ~Road() = default;
 
-  virtual Fl_Color getColor() { return color; }
-  char getCirculation() { return circulation; }
+  [[nodiscard]] virtual Fl_Color getColor() const override;
+  [[nodiscard]] virtual char getCirculation() const;
 
   virtual void generateProps(short id) override;
-  void generateCars();
 
-  virtual std::vector<Prop *> &getProps() override;
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Prop>> getProps() const override;
   virtual void handleGame(Game *currentGame) override;
   virtual void updateProps() override;
-  std::string getId() override { return id; }
+  [[nodiscard]] virtual std::string getId() const override;
 
 private:
-  Fl_Color color;
-  std::vector<Prop *> props;
-  char circulation;
-  float speedLimit;
-  std::string id;
+  virtual void generateCars();
 
+  Fl_Color _color;
+  std::vector<std::shared_ptr<Prop>> _props;
+  char _circulation;
+  float _speedLimit;
+  std::string _id;
 };
 
 #endif // SRC_ROAD_H

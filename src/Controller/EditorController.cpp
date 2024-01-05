@@ -1,8 +1,21 @@
 #include "EditorController.h"
+#include <memory>
+
+EditorController::EditorController(std::shared_ptr<GameEditor> editor)
+    : _editor{std::move(editor)} {}
+
+void EditorController::mouseMove(short loc_x, short loc_y) {
+  _editor->changeCurrentRow((700 - (loc_y)) / (int(float(700) / 13.0f)));
+  for (auto &button : _editor->getMenu()->getButtons()) {
+    if (button->isDisplayed() && button->canMove() && button->isMoving()) {
+      button->changePosition(loc_x, loc_y);
+    }
+  }
+}
 
 void EditorController::mouseClick(short loc_x, short loc_y) {
 
-  std::vector<Button *> buttons = _editor->getMenu()->getButtons();
+  std::vector<std::shared_ptr<Button>> buttons = _editor->getMenu()->getButtons();
 
   for (auto &button : buttons) {
     if (button->isDisplayed() && button->contains(loc_x, loc_y)) {
@@ -22,11 +35,13 @@ void EditorController::mouseClick(short loc_x, short loc_y) {
   }
 }
 
-void EditorController::mouseMove(short loc_x, short loc_y) {
-  _editor->changeCurrentRow((700 - (loc_y)) / (int(float(700) / 13.0f)));
-  for (auto &button : _editor->getMenu()->getButtons()) {
-    if (button->isDisplayed() && button->canMove() && button->isMoving()) {
-      button->changePosition(loc_x, loc_y);
-    }
-  }
+void EditorController::keyPressed(int keycode) { static_cast<void>(keycode); }
+
+void EditorController::keyReleased(int keycode) { static_cast<void>(keycode); }
+
+void EditorController::updateMovement() { return; }
+
+void EditorController::mouseRelease(short loc_x, short loc_y) {
+  static_cast<void>(loc_x);
+  static_cast<void>(loc_y);
 }

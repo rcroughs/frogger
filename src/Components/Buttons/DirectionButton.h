@@ -10,32 +10,29 @@ class Driver;
 class DirectionButton : public Button {
 public:
   DirectionButton(int x, int y, Driver *driver, short id);
-  ~DirectionButton() { delete image; }
-  virtual Fl_PNG_Image *getImage() override { return image; };
-  virtual int getX() { return x; }
-  virtual int getY() { return y; }
-  virtual bool contains(int x, int y);
-  virtual void onClick();
-  virtual void resetPosition(){};
-  virtual bool isDisplayed() { return displayed; }
-  virtual bool canMove() { return false; }
-  virtual bool isMoving() { return false; }
-  virtual void changeMovingState() {}
-  virtual void changePosition(int loc_x, int loc_y) {
-    x = loc_x;
-    y = loc_y;
-  }
-  virtual void changeState() { displayed = !displayed; }
+  ~DirectionButton();
+  [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
+  [[nodiscard]] virtual int getX() const override;
+  [[nodiscard]] virtual int getY() const override;
+  [[nodiscard]] virtual bool isDisplayed() const override;
+  [[nodiscard]] virtual bool canMove() const override;
+  [[nodiscard]] virtual bool isMoving() const override;
+  [[nodiscard]] virtual bool contains(int x, int y) const override;
+  virtual void onClick() override;
+  virtual void resetPosition() override;
+  virtual void changeMovingState() override;
+  virtual void changePosition(int loc_x, int loc_y) override;
+  virtual void changeState() override;
 
-  virtual short getId() { return id; }
+  virtual short getId() const;
 
 private:
-  Fl_PNG_Image *image;
-  Driver *driver;
-  int x;
-  int y;
-  short id; // 0, 1
-  bool displayed{false};
+  Fl_PNG_Image *_image;
+  Driver *_driver;
+  int _x;
+  int _y;
+  short _id; // 0, 1
+  bool _displayed{false};
 };
 
 #endif // SRC_RIGHTBUTTON_H

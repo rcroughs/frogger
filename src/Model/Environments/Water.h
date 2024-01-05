@@ -1,45 +1,38 @@
-#ifndef WATER_H
-#define WATER_H
+#ifndef FROGGER_WATER_H
+#define FROGGER_WATER_H
 
 #include "../Environment.h"
 #include "FL/Fl.H"
 #include "Props/Prop.h"
 #include "vector"
+#include <memory>
 #include <string>
 
 class Water : virtual public Environment {
 public:
-  Water() : isMoving{true}, color(FL_BLUE), flow(0) {
-    id += "10";
-  }
-  ~Water() {
-    for (int i = 0; i < props.size(); i++) {
-      delete props.at(i);
-    }
-  }
-  Water(float speed) : isMoving{true}, color(FL_BLUE), flow(speed) {
-  }
-  virtual Fl_Color getColor() { return color; }
-  void setColor(Fl_Color new_color) { color = new_color; }
-  void setFlow(float new_flow) { flow = new_flow; }
-
-  virtual void generateProps(short id) override;
+  Water(float speed);
+  Water();
+  [[nodiscard]] virtual Fl_Color getColor() const override;
+  virtual void setColor(Fl_Color new_color);
+  virtual void setFlow(float new_flow);
 
   virtual void generateLogs();
   virtual void generateLilyPads();
   virtual void generateTurtles(short id);
 
-  virtual std::vector<Prop *> &getProps() override;
+  virtual void generateProps(short id) override;
+
   virtual void handleGame(Game *currentGame) override;
-  void updateProps() override;
-  std::string getId() override { return id; }
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Prop>> getProps() const override;
+  virtual void updateProps() override;
+  [[nodiscard]] virtual std::string getId() const override; 
 
 private:
-  Fl_Color color;
-  std::vector<Prop *> props;
-  bool isMoving;
-  float flow;
-  std::string id;
+  Fl_Color _color;
+  std::vector<std::shared_ptr<Prop>> _props;
+  bool _isMoving;
+  float _flow;
+  std::string _id;
 };
 
-#endif
+#endif // FROGGER_WATER_H
