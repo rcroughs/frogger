@@ -7,16 +7,24 @@
 
 class MainWindow : public Fl_Window {
 public:
-  MainWindow() : Fl_Window(700, 750, 700, 750, "Frogger"), _driver{} {
-    Fl::add_timeout(1.0 / 60.0, timerHandler, this);
-    resizable(this);
-  }
+  MainWindow();
+
+  struct ScreenPosition {
+    int x;
+    int y;
+  };
+
   static void timerHandler(void *user_data);
   int handle(int event) override;
   void draw() override;
+  ScreenPosition getCenterPosition() const;
 
 private:
   Driver _driver;
+  constexpr const static int _timerInterval = 1.0 / 60.0;
+  constexpr const static int _width = 700;
+  constexpr const static int _height = 750;
+  constexpr const static char _title[] = "Frogger";
 };
 
 #endif // FROGGER_SRC_MAIN_WINDOW_H

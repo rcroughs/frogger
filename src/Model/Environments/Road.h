@@ -9,6 +9,7 @@
 
 class Road : virtual public Environment {
 public:
+  Road(char circulation, float speedLimit, short propsId);
   Road(char circulation, float speedLimit);
   ~Road() = default;
 

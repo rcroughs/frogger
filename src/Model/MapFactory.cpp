@@ -24,8 +24,7 @@ bool MapFactory::createLogEnvironment(std::string mapId, int &stringCount,
   default:
     return false;
   }
-  map->setEnvironment(environmentCount, std::make_shared<Water>(flow));
-  map->getEnvironment(environmentCount)->generateProps(0);
+  map->setEnvironment(environmentCount, std::make_shared<Water>(flow, 0));
   stringCount += 1;
   return true;
 }
@@ -33,13 +32,11 @@ bool MapFactory::createLogEnvironment(std::string mapId, int &stringCount,
 bool MapFactory::createTurtleEnvironment(std::string mapId, int &stringCount,
                                          std::shared_ptr<Map> map,
                                          int environmentCount) const {
-  map->setEnvironment(environmentCount,
-                      std::make_shared<Water>(
-                          std::stoi(std::string(&mapId.at(stringCount), 1))));
-  stringCount += 1;
-  map->getEnvironment(environmentCount)
-      ->generateProps(std::stoi(std::string(&mapId.at(stringCount), 1)));
-  stringCount += 1;
+  map->setEnvironment(
+      environmentCount,
+      std::make_shared<Water>(std::stoi(std::string(&mapId.at(stringCount), 1)),
+                              std::stoi(std::string(&mapId.at(stringCount + 1), 1))));
+  stringCount += 2;
   return true;
 }
 
@@ -64,8 +61,7 @@ bool MapFactory::createRoadEnvironment(std::string mapId, int &stringCount,
     return false;
   }
   map->setEnvironment(environmentCount,
-                      std::make_shared<Road>(direction, flow));
-  map->getEnvironment(environmentCount)->generateProps(0);
+                      std::make_shared<Road>(direction, flow, 0));
   stringCount += 1;
   return true;
 }

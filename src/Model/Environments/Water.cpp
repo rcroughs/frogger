@@ -6,6 +6,10 @@
 #include <memory>
 #include <string>
 
+Water::Water(float speed, short propsId): Water{speed} {
+  generateProps(propsId);
+}
+
 Water::Water(float speed) : _color(FL_BLUE), _isMoving{true}, _flow(speed) {}
 
 Water::Water() : Water{0} {}

@@ -10,6 +10,7 @@
 
 class Water : virtual public Environment {
 public:
+  Water(float speed, short propsId);
   Water(float speed);
   Water();
   [[nodiscard]] virtual Fl_Color getColor() const override;

@@ -3,6 +3,11 @@
 #include <ctime>
 #include <memory>
 
+Road::Road(char circulation, float speedLimit, short propsId)
+    : Road{circulation, speedLimit} {
+  generateProps(propsId);
+}
+
 Road::Road(char circulation, float speedLimit)
     : _color{FL_GRAY}, _props{}, _circulation{circulation},
       _speedLimit{speedLimit} {

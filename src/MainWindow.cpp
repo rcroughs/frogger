@@ -1,4 +1,13 @@
 #include "MainWindow.h"
+#include <FL/Fl.H>
+
+MainWindow::MainWindow()
+    : Fl_Window(getCenterPosition().x, getCenterPosition().y, _width, _height,
+                _title),
+      _driver{} {
+  Fl::add_timeout(_timerInterval, timerHandler, this);
+  resizable(this);
+}
 
 void MainWindow::timerHandler(void *user_data) {
   MainWindow *o = static_cast<MainWindow *>(user_data);
@@ -29,4 +38,9 @@ int MainWindow::handle(int event) {
 void MainWindow::draw() {
   Fl_Window::draw();
   _driver.refresh();
+}
+
+MainWindow::ScreenPosition MainWindow::getCenterPosition() const {
+  return ScreenPosition{static_cast<int>(Fl::w() / 2 - _width / 2),
+                        static_cast<int>(Fl::h() / 2 - h() / 2)};
 }
