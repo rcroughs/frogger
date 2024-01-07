@@ -21,10 +21,10 @@ public:
 
 private:
   Driver _driver;
-  constexpr const static int _timerInterval = 1.0 / 60.0;
-  constexpr const static int _width = 700;
-  constexpr const static int _height = 750;
-  constexpr const static char _title[] = "Frogger";
+  constexpr static int _timerInterval = 1.0 / 60.0;
+  constexpr static int _width = 700;
+  constexpr static int _height = 750;
+  constexpr static char _title[] = "Frogger";
 };
 
 #endif // FROGGER_SRC_MAIN_WINDOW_H

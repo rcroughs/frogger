@@ -15,7 +15,7 @@ class MapFactory {
 public:
   std::shared_ptr<Map> createMap(std::string mapId) const;
 
-private:
+protected:
   bool createLogEnvironment(std::string mapId, int &stringCount,
                             std::shared_ptr<Map> map, int environmentCount) const;
   bool createTurtleEnvironment(std::string mapId, int &stringCount,

@@ -74,8 +74,8 @@ private:
   enum ENVIRONMENT { ROAD, SIDEWALK, WATER };
 
   std::vector<Fl_Color *> colors;
-  int WINDOW_HEIGHT;
-  int WINDOW_WIDTH;
+  const int WINDOW_HEIGHT;
+  const int WINDOW_WIDTH;
 
   // Road Parameters
   char RoadCirculation{'\0'};

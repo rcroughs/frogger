@@ -19,8 +19,8 @@ public:
   [[nodiscard]] std::shared_ptr<Fl_PNG_Image> getImage() const;
 
 private:
-  int _x;
-  int _y;
+  const int _x;
+  const int _y;
   std::vector<std::shared_ptr<Button>> _buttons;
   std::shared_ptr<Fl_PNG_Image> _image;
   Driver *_driver;
