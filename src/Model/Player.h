@@ -16,10 +16,10 @@ public:
   virtual void setDirection(Direction new_direction);
   [[nodiscard]] virtual bool isInScreen() const;
 
-  virtual void move_up();
-  virtual void move_down();
-  virtual void move_right();
-  virtual void move_left();
+  virtual void moveUp();
+  virtual void moveDown();
+  virtual void moveRight();
+  virtual void moveLeft();
 
 private:
   Position current_position;

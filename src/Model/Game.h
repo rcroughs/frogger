@@ -1,5 +1,5 @@
-#ifndef GAME_H
-#define GAME_H
+#ifndef _FROGGER_GAME_H
+#define _FROGGER_GAME_H
 
 #include "../Components/GameOverMenu.h"
 #include "../Components/WinningMenu.h"
@@ -19,38 +19,22 @@ class WinningMenu;
 
 class Game {
 public:
-  Game(Driver *driver, std::shared_ptr<Map> map);
+  Game(Driver *driver, std::shared_ptr<Map> map, std::string filePath = "");
   Game(Driver *driver);
   ~Game();
-  [[nodiscard]] virtual std::shared_ptr<Player> getPlayer() const;
-  [[nodiscard]] virtual std::vector<std::shared_ptr<Player>> getWinnerPlayer() const;
-  virtual void setPlayer(std::shared_ptr<Player> new_player);
-  virtual void setMap(std::shared_ptr<Map> new_map);
-  virtual void setGameMenu(std::shared_ptr<GameMenu> new_gameMenu);
-  [[nodiscard]] virtual std::shared_ptr<GameMenu> getMenu() const;
-  [[nodiscard]] virtual bool isOnPause() const;
-  [[nodiscard]] virtual std::shared_ptr<Map> getMap() const;
-  [[nodiscard]] virtual float getTime() const;
-  [[nodiscard]] virtual std::shared_ptr<GameOverMenu> getGameOverMenu() const;
-  [[nodiscard]] virtual std::shared_ptr<WinningMenu> getWinningMenu() const;
-  [[nodiscard]] virtual float getFrameLeft() const;
+
+  /* Game handlers
+   * Does not take any args and returns nothing
+   */
   virtual void changeWinningState();
   virtual void changeLoosingState();
-  [[nodiscard]] virtual bool isWinning() const;
-  [[nodiscard]] virtual bool isLosing() const;
-  [[nodiscard]] virtual bool isRunning() const;
-  [[nodiscard]] virtual short getLives() const;
   virtual void addLife();
   virtual void restartGame();
   virtual void killPlayer();
   virtual void resetTime();
   virtual void decreaseTime();
-  [[nodiscard]] virtual short getCombo() const;
   virtual void addCombo();
   virtual void resetCombo();
-  [[nodiscard]] virtual int getScore() const;
-  [[nodiscard]] virtual int getTimeOut() const;
-  [[nodiscard]] virtual short getHighestPosition() const;
   virtual void handleScore();
   virtual void resetTimeOut();
   virtual void modifyHeight();
@@ -58,9 +42,52 @@ public:
   virtual void decreaseTimeOut();
   virtual void win();
   virtual void triggerMenu();
+
+  /* Getters
+   * Does not take any args and returns the corresponding value
+   */
+  [[nodiscard]] virtual std::shared_ptr<Player> getPlayer() const;
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Player>> getWinnerPlayer() const;
+  [[nodiscard]] virtual std::shared_ptr<GameMenu> getMenu() const;
+  [[nodiscard]] virtual std::shared_ptr<Map> getMap() const;
+  [[nodiscard]] virtual std::shared_ptr<GameOverMenu> getGameOverMenu() const;
+  [[nodiscard]] virtual std::shared_ptr<WinningMenu> getWinningMenu() const;
+  [[nodiscard]] virtual float getTime() const;
+  [[nodiscard]] virtual bool isOnPause() const;
+  [[nodiscard]] virtual float getFrameLeft() const;
+  [[nodiscard]] virtual bool isWinning() const;
+  [[nodiscard]] virtual bool isLosing() const;
+  [[nodiscard]] virtual bool isRunning() const;
+  [[nodiscard]] virtual short getLives() const;
+  [[nodiscard]] virtual short getCombo() const;
+  [[nodiscard]] virtual int getScore() const;
+  [[nodiscard]] virtual int getTimeOut() const;
+  [[nodiscard]] virtual short getHighestPosition() const;
+  [[nodiscard]] virtual std::string getFilePath() const;
+
+  /* Setters
+   * Does take the new value and returns nothing
+   */
+  virtual void setPlayer(std::shared_ptr<Player> new_player);
+  virtual void setMap(std::shared_ptr<Map> new_map);
+  virtual void setGameMenu(std::shared_ptr<GameMenu> new_gameMenu);
+
+  /* Update the game (move player, check collisions, etc)
+   * Does not take any args and returns nothing
+   */
   virtual void update();
 
+  /* Move player in the map
+   * Does not take any args and returns nothing
+   * Buffer method for the player
+   */
+  virtual void movePlayerUp();
+  virtual void movePlayerDown();
+  virtual void movePlayerLeft();
+  virtual void movePlayerRight();
+
 private:
+  std::string _filePath; // Path to the map file
   std::shared_ptr<Player> _player;
   std::shared_ptr<Map> _map;
   std::shared_ptr<GameMenu> _gameMenu;
@@ -78,6 +105,8 @@ private:
   short _combo;
   short _highestPosition;
   bool _inMenu;
+  int _highestScore;
+  
 };
 
 #endif

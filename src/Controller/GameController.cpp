@@ -47,23 +47,23 @@ void GameController::keyPressed(int keycode) {
     case 'd':
     case FL_Right:
       _rightPressed = true;
-      _game->getPlayer()->move_right();
+      _game->movePlayerRight();
       break;
     case 'a':
     case 'q':
     case FL_Left:
       _leftPressed = true;
-      _game->getPlayer()->move_left();
+      _game->movePlayerLeft();
       break;
     case 'w':
     case 'z':
     case FL_Up:
-      _game->getPlayer()->move_up();
+      _game->movePlayerUp();
       _game->handleScore();
       break;
     case 's':
     case FL_Down:
-      _game->getPlayer()->move_down();
+      _game->movePlayerDown();
       break;
     }
   }
@@ -88,9 +88,9 @@ void GameController::keyReleased(int keycode) {
 
 void GameController::updateMovement() {
   if (_rightPressed) {
-    _game->getPlayer()->move_right();
+    _game->movePlayerRight();
   }
   if (_leftPressed) {
-    _game->getPlayer()->move_left();
+    _game->movePlayerLeft();
   }
 }

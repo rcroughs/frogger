@@ -18,7 +18,7 @@ Fl_Color LilyPad::getColor() const { return FL_GREEN; }
 float LilyPad::getSize() const { return _size; }
 
 bool LilyPad::contains(float playerPosition) const {
-  return getPosition() < playerPosition && playerPosition < getRightCorner();
+  return getPosition() - 3 < playerPosition && playerPosition < getRightCorner() -2;
 }
 
 void LilyPad::move() { return; }

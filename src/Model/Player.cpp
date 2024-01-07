@@ -19,28 +19,28 @@ bool Player::isInScreen() const {
   return true;
 }
 
-void Player::move_up() {
+void Player::moveUp() {
   if (current_position.y < 12) {
     current_position.y = current_position.y + 1;
   }
   setDirection(up);
 }
 
-void Player::move_down() {
+void Player::moveDown() {
   if (current_position.y > 0) {
     current_position.y = current_position.y - 1;
   }
   setDirection(down);
 }
 
-void Player::move_right() {
+void Player::moveRight() {
   if (current_position.x < 93) {
     current_position.x = current_position.x + 0.5f;
   }
   setDirection(right);
 }
 
-void Player::move_left() {
+void Player::moveLeft() {
   if (current_position.x > 0) {
     current_position.x = current_position.x - 0.5f;
   }

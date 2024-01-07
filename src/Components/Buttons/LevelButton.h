@@ -26,6 +26,7 @@ public:
 
   [[nodiscard]] virtual std::string getName() const;
   [[nodiscard]] virtual std::string getAuthor() const;
+  [[nodiscard]] virtual std::string getHighestScore() const;
 
 private:
     Driver* _driver;

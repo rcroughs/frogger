@@ -14,6 +14,8 @@ void LevelSelectorDisplay::draw() const {
             button->getY() + 100);
     fl_draw(button->getAuthor().c_str(), button->getX() + 100,
             button->getY() + 175);
+    fl_draw(("Highest score:" + button->getHighestScore()).c_str(), button->getX() + 100,
+            button->getY() + 250);
   }
   _levelSelector->getMenuButton()->getImage()->draw(
       _levelSelector->getMenuButton()->getX(),

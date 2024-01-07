@@ -3,17 +3,33 @@
 #include "GameMenu.h"
 #include "Position.h"
 #include "vector"
+#include <fstream>
 #include <memory>
+#include <string>
 
-Game::Game(Driver *driver, std::shared_ptr<Map> map)
-    : _player{std::make_shared<Player>(Position{45, 0}, up)},
+Game::Game(Driver *driver, std::shared_ptr<Map> map, std::string filePath)
+    : _filePath{filePath},
+      _player{std::make_shared<Player>(Position{45, 0}, up)},
       _map{std::move(map)},
       _gameMenu{std::make_shared<GameMenu>(150, 100, driver)},
       _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
       _winningMenu{std::make_shared<WinningMenu>(driver)}, _driver{driver},
       _winning{false}, _loosing{false}, _lives{3}, _time{30},
       _frameLeft{30 * 60}, _score{0}, _timeOut{0}, _combo{1},
-      _highestPosition{0}, _inMenu{false} {}
+      _highestPosition{0}, _inMenu{false} {
+  std::ifstream inputFile(filePath);
+  for (int i = 0; i < 3; i++) {
+    inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+  }
+  std::string bf;
+  std::getline(inputFile, bf);
+  if (bf.empty()) {
+    _highestScore = 0;
+  } else {
+    _highestScore = std::stoi(bf);
+  }
+  inputFile.close();
+}
 
 Game::Game(Driver *driver) : Game{driver, std::make_shared<Map>()} {}
 
@@ -52,7 +68,24 @@ std::shared_ptr<WinningMenu> Game::getWinningMenu() const {
 
 float Game::getFrameLeft() const { return _frameLeft; }
 
-void Game::changeWinningState() { _winning = true; };
+void Game::changeWinningState() { 
+  _winning = true;
+  if (_highestScore < _score) {
+    std::string mapName, mapAuthor, mapId;
+    std::ifstream inputFile(_filePath);
+    std::getline(inputFile, mapName);
+    std::getline(inputFile, mapAuthor);
+    std::getline(inputFile, mapId);
+    inputFile.close();
+    std::ofstream outputFile(_filePath);
+    outputFile << mapName << std::endl;
+    outputFile << mapAuthor << std::endl;
+    outputFile << mapId << std::endl;
+    outputFile << _score << std::endl;
+    outputFile.close();
+  }
+   
+};
 
 void Game::changeLoosingState() { _loosing = true; };
 
@@ -150,3 +183,21 @@ void Game::update() {
   }
   decreaseTime();
 }
+
+void Game::movePlayerUp() {
+    _player->moveUp();
+}
+
+void Game::movePlayerDown() {
+    _player->moveDown();
+}
+
+void Game::movePlayerLeft() {
+    _player->moveLeft();
+}
+
+void Game::movePlayerRight() {
+    _player->moveRight();
+}
+
+std::string Game::getFilePath() const { return _filePath; }

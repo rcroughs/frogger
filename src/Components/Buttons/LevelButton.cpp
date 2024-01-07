@@ -7,11 +7,14 @@ LevelButton::LevelButton(Driver* driver, int x, int y, std::string levelPath, bo
 {
     _image = new Fl_PNG_Image("res/level.png");
     std::ifstream inputFile(levelPath);
-    std::string mapName, mapAuthor;
+    std::string mapName, mapAuthor, highestScore;
     std::getline(inputFile, mapName);
     std::getline(inputFile, mapAuthor);
+    inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+    std::getline(inputFile, highestScore);
     _levelName = mapName;
     _authorName = mapAuthor;
+    _highestScore = highestScore;
     inputFile.close();
     _isDisplayed = true;
     _isMoving = false;
@@ -80,4 +83,7 @@ std::string LevelButton::getAuthor() const {
     return _authorName;
 }
 
+std::string LevelButton::getHighestScore() const {
+    return _highestScore;
+}
 
