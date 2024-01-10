@@ -43,7 +43,7 @@ void Driver::LaunchGameFromFile(std::string filePath) {
   std::getline(inputFile, mapAuthor);
   std::getline(inputFile, mapId);
 
-  std::shared_ptr<Map> map = _mapFactory->createMap(mapId);
+  std::shared_ptr<Map> map = std::make_shared<Map>(mapId);
   _editor = nullptr;
   _game = std::make_shared<Game>(this, map, filePath);
   _view = std::make_shared<GameRenderer>(_game, 700,750);

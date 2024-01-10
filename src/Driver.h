@@ -5,8 +5,8 @@
 #include "Components/MenuComponents.h"
 #include "Model/GameEditor.h"
 #include "Controller/Controller.h"
-#include "Model/MapFactory.h"
 #include "View/View.h"
+#include "Model/Game.h"
 #include <memory>
 
 class MapFactory;
