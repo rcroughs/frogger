@@ -1,6 +1,8 @@
 #include "Map.h"
 #include <cstddef>
 
+Map::Map() : environments{} {}
+
 std::shared_ptr<Environment> Map::getEnvironment(int index) const {
   return environments.at(index);
 }

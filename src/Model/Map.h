@@ -10,7 +10,7 @@ class Game;
 
 class Map {
 public:
-  Map() : environments{} {}
+  Map();
   [[nodiscard]] virtual std::shared_ptr<Environment> getEnvironment(int index) const;
   virtual void deleteEnvironment(int index);
   virtual void setEnvironment(int index,
