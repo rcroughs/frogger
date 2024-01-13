@@ -30,7 +30,18 @@ bool PropButton::contains(int x, int y) const {
   return false;
 }
 
-void PropButton::onClick() { return; }
+void PropButton::onClick() {
+    if (_id == 0) {
+        _driver->getEditor()->modifyWaterPropId(0);
+    }
+    else if (_id == 1) {
+        int num = (rand() % 2) + 1;
+        _driver->getEditor()->modifyWaterPropId(1 + num); // 2 or 3
+    }
+    // Always for Water environment
+    _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),2);
+    _driver->getEditor()->triggerPropsButtons();
+}
 
 void PropButton::resetPosition() { return; }
 

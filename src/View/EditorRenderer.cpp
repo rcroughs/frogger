@@ -23,7 +23,7 @@ void EditorRenderer::draw() const {
     fl_frame("AAAA", 0, (_width - (_height / 13.0f)) - (i * (_height / 13.0)),
              _width, int(float(_height) / 13.0f));
   }
-  // Draw Buttons
+  // Draws Buttons
   for (auto &button : _editor->getMenu()->getButtons()) {
     if (button->isDisplayed()) {
       button->getImage()->draw(button->getX(), button->getY(), 46, 46);

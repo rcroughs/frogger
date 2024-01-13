@@ -6,7 +6,7 @@
 #include <memory>
 #include <string>
 
-Water::Water(float speed, short propsId): Water{speed} {
+Water::Water(float speed, short propsId): _color(FL_BLUE), _isMoving{true}, _flow(speed) {
   generateProps(propsId);
 }
 
@@ -43,11 +43,11 @@ void Water::generateLogs() {
   }
   _id += "1";
   std::string speedLimitId;
-  if (_flow == 1) {
+  if (_flow == 0.5f) {
     speedLimitId = "1";
-  } else if (_flow == 1.5f) {
+  } else if (_flow == 1) {
     speedLimitId = "2";
-  } else if (_flow == 2.0f) {
+  } else if (_flow == 1.5f) {
     speedLimitId = "3";
   }
   _id += speedLimitId;
@@ -65,11 +65,11 @@ void Water::generateTurtles(short turtleId) {
   }
   _id += "2";
   std::string speedLimitId;
-  if (_flow == 1.0f) {
+  if (_flow == 0.5f) {
     speedLimitId = "1";
-  } else if (_flow == 1.5f) {
+  } else if (_flow == 1) {
     speedLimitId = "2";
-  } else if (_flow == 2.0f) {
+  } else if (_flow == 1.5f) {
     speedLimitId = "3";
   }
   _id += speedLimitId;

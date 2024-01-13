@@ -18,6 +18,7 @@
 #include <memory>
 #include <fstream>
 #include <string>
+#include <dirent.h>
 
 void Driver::launchEditor() {
   _editor = std::make_shared<GameEditor>(this, 700, 700);
@@ -52,6 +53,44 @@ void Driver::LaunchGameFromFile(std::string filePath) {
   inputFile.close();
 }
 
+void Driver::launchLevelFromEditor() {
+    _game = _editor->getGame();
+    _view = std::make_shared<GameRenderer>(_game, 700, 700);
+    _controller = std::make_shared<GameController>(_game);
+    _gameState = ON_GAME;
+    saveLevelAsFile();
+}
+
+int Driver::countFiles(std::string directory) {
+    DIR *dir;
+    struct dirent *entry;
+    int fileCount = 0;
+    if ((dir = opendir(directory.c_str())) != nullptr) {
+        while ((entry = readdir(dir)) != nullptr) {
+            // On vérifie si c'est un fichier qui n'est pas caché
+            if (entry->d_type == DT_REG && entry->d_name[0] != '.') {
+                fileCount++;
+            }
+        }
+        closedir(dir);
+    }
+    return fileCount;
+}
+
+void Driver::saveLevelAsFile() {
+    std::string directory = "maps";
+    int filesNumber = countFiles(directory);
+
+    std::string filePath = "maps/editedLevelNumber" + std::to_string(filesNumber-3) + ".txt";
+    std::ofstream outputFile(filePath);
+
+    outputFile << "Edited level " + std::to_string(filesNumber-3) + "\n";
+    outputFile << "Editor\n";
+    outputFile << _game->getMap()->getMapId() << '\n';
+
+    _game->setFilePath(filePath);
+}
+
 void Driver::showMenu() {
   _menuComponents = std::make_shared<MenuComponents>(this);
   _view = std::make_shared<MenuDisplay>(_menuComponents);
@@ -78,9 +117,7 @@ void Driver::refresh() {
       showMenu();
     }
   } else if (_gameState == ON_EDIT) {
-    // Pour le moment
     _view->draw();
-    // updateMovement();
   } else if (_gameState == LEVEL_SELECTION) {
     _view->draw();
   }

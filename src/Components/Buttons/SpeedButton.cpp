@@ -50,6 +50,13 @@ void SpeedButton::onClick() {
     _driver->getEditor()->modifyWaterFlow(1.5);
     _driver->getEditor()->modifyRoadSpeedLimit(2.5);
   }
+  // Water or Road.
+  short currentEnviNumber = _driver->getEditor()->getEnviNumber();
+  _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),1);
+  if (currentEnviNumber == _driver->getEditor()->getEnviNumber()) {
+      _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),2);
+  }
+  _driver->getEditor()->triggerSpeedButtons();
 }
 void SpeedButton::resetPosition() { return; }
 

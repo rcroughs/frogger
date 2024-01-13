@@ -18,7 +18,7 @@ int DirectionButton::getX() const { return _x; }
 
 int DirectionButton::getY() const { return _y; }
 
-bool DirectionButton::isDisplayed() const { return false; }
+bool DirectionButton::isDisplayed() const { return _displayed; }
 
 bool DirectionButton::canMove() const { return false; }
 
@@ -31,13 +31,13 @@ bool DirectionButton::contains(int x, int y) const {
 }
 
 void DirectionButton::onClick() {
-  changeState();
   if (getId() == 0) {
     _driver->getEditor()->modifyRoadCirculation('l');
   } else {
     _driver->getEditor()->modifyRoadCirculation('r');
   }
   _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(), 1);
+  _driver->getEditor()->triggerDirectionButtons();
 }
 
 void DirectionButton::resetPosition() { return; }
@@ -49,6 +49,6 @@ void DirectionButton::changePosition(int loc_x, int loc_y) {
   _y = loc_y;
 }
 
-void DirectionButton::changeState() { return; }
+void DirectionButton::changeState() { _displayed = !_displayed;}
 
 short DirectionButton::getId() const { return _id; }

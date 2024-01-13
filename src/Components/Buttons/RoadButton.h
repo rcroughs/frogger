@@ -24,10 +24,11 @@ public:
   virtual void changeMovingState() override;
   virtual void changeState() override;
   virtual void changePosition(int loc_x, int loc_y) override;
+  virtual void showConfigurationButtons();
 
 private:
   Fl_PNG_Image *_image;
-  Driver *_driver;
+  std::shared_ptr<Driver> _driver;
   int _x;
   int _y;
   bool _displayed{true};
