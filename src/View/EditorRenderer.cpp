@@ -29,4 +29,14 @@ void EditorRenderer::draw() const {
       button->getImage()->draw(button->getX(), button->getY(), 46, 46);
     }
   }
+
+  if (_editor->isPaused()) {
+    _editor->getPauseMenu()->getImage()->draw(_editor->getPauseMenu()->getX(),
+                                              _editor->getPauseMenu()->getY());
+    for (auto &button : _editor->getPauseMenu()->getButtons()) {
+      if (button->isDisplayed()) {
+        button->getImage()->draw(button->getX(), button->getY());
+      }
+    }
+  }
 }

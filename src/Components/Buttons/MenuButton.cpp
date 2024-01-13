@@ -13,7 +13,7 @@ int MenuButton::getX() const { return _x; }
 
 int MenuButton::getY() const { return _y; }
 
-bool MenuButton::isDisplayed() const { return false; }
+bool MenuButton::isDisplayed() const { return true; }
 
 bool MenuButton::canMove() const { return false; }
 

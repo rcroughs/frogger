@@ -12,11 +12,11 @@ Game::Game(Driver *driver, std::shared_ptr<Map> map, std::string filePath)
       _player{std::make_shared<Player>(Position{45, 0}, up)},
       _map{std::move(map)},
       _gameMenu{std::make_shared<GameMenu>(150, 100, driver)},
-      _gameOverMenu(std::make_shared<GameOverMenu>(driver)),
-      _winningMenu{std::make_shared<WinningMenu>(driver)}, _driver{driver},
+      _gameOverMenu(std::make_shared<GameOverMenu>(driver, filePath)),
+      _winningMenu{std::make_shared<WinningMenu>(driver, filePath)}, _driver{driver},
       _winning{false}, _loosing{false}, _lives{3}, _time{30},
       _frameLeft{30 * 60}, _score{0}, _timeOut{0}, _combo{1},
-      _highestPosition{0}, _inMenu{false} {
+      _highestPosition{0} {
   std::ifstream inputFile(filePath);
   for (int i = 0; i < 3; i++) {
     inputFile.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
@@ -54,7 +54,7 @@ void Game::setGameMenu(std::shared_ptr<GameMenu> new_gameMenu) {
 
 std::shared_ptr<GameMenu> Game::getMenu() const { return _gameMenu; }
 
-bool Game::isOnPause() const { return _inMenu; }
+bool Game::isOnPause() const { return _gameMenu->isOpen(); }
 
 std::shared_ptr<Map> Game::getMap() const { return this->_map; }
 
@@ -169,7 +169,7 @@ void Game::win() {
   }
 }
 
-void Game::triggerMenu() { _inMenu = !_inMenu; }
+void Game::triggerMenu() { _gameMenu->triggerMenu(); }
 
 void Game::update() {
   decreaseTimeOut();

@@ -29,7 +29,7 @@ public:
 
 private:
   Fl_PNG_Image *_image;
-  std::shared_ptr<Driver> _driver;
+  Driver* _driver;
   int _x;
   int _y;
   bool _displayed{true};

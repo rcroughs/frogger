@@ -17,6 +17,8 @@ public:
   [[nodiscard]] int getY() const;
   [[nodiscard]] std::vector<std::shared_ptr<Button>> getButtons() const;
   [[nodiscard]] std::shared_ptr<Fl_PNG_Image> getImage() const;
+  [[nodiscard]] bool isOpen() const;
+  void triggerMenu();
 
 private:
   const int _x;
@@ -24,6 +26,7 @@ private:
   std::vector<std::shared_ptr<Button>> _buttons;
   std::shared_ptr<Fl_PNG_Image> _image;
   Driver *_driver;
+  bool _isOpen;
 };
 
 #endif // FROGGER_MENU_H

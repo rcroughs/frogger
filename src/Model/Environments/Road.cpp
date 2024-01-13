@@ -5,7 +5,7 @@
 
 Road::Road(char circulation, float speedLimit, short propsId)
     : Road{circulation, speedLimit} {
-    generateProps(0);
+    generateProps(propsId);
 }
 
 Road::Road(char circulation, float speedLimit)

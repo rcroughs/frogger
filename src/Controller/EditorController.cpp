@@ -1,19 +1,33 @@
 #include "EditorController.h"
+#include <FL/Enumerations.H>
 #include <memory>
 
 EditorController::EditorController(std::shared_ptr<GameEditor> editor)
     : _editor{std::move(editor)} {}
 
 void EditorController::mouseMove(short loc_x, short loc_y) {
-  _editor->changeCurrentRow((700 - (loc_y)) / (int(float(700) / 13.0f)));
-  for (auto &button : _editor->getMenu()->getButtons()) {
-    if (button->isDisplayed() && button->canMove() && button->isMoving()) {
-      button->changePosition(loc_x, loc_y);
+  if (!_editor->isPaused()) {
+    _editor->changeCurrentRow((700 - (loc_y)) / (int(float(700) / 13.0f)));
+    for (auto &button : _editor->getMenu()->getButtons()) {
+      if (button->isDisplayed() && button->canMove() && button->isMoving()) {
+        button->changePosition(loc_x, loc_y);
+      }
     }
   }
 }
 
 void EditorController::mouseClick(short loc_x, short loc_y) {
+
+  if (_editor->isPaused()) {
+    std::vector<std::shared_ptr<Button>> buttons = _editor->getPauseMenu()->getButtons();
+    for (auto &button : buttons) {
+      if (button->contains(loc_x, loc_y)) {
+        button->onClick();
+        return;
+      }
+    }
+    return;
+  }
 
   std::vector<std::shared_ptr<Button>> buttons = _editor->getMenu()->getButtons();
 
@@ -42,7 +56,11 @@ void EditorController::mouseClick(short loc_x, short loc_y) {
   }
 }
 
-void EditorController::keyPressed(int keycode) { static_cast<void>(keycode); }
+void EditorController::keyPressed(int keycode) { 
+  if (keycode == FL_Escape) {
+    _editor->triggerPauseMenu();
+  }
+ }
 
 void EditorController::keyReleased(int keycode) { static_cast<void>(keycode); }
 

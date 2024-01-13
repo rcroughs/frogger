@@ -12,7 +12,7 @@ int QuitButton::getX() const { return _x; }
 
 int QuitButton::getY() const { return _y; }
 
-bool QuitButton::isDisplayed() const { return false; }
+bool QuitButton::isDisplayed() const { return true; }
 
 bool QuitButton::canMove() const { return false; }
 

@@ -10,7 +10,7 @@ class Driver;
 
 class WinningMenu {
 public:
-  WinningMenu(Driver *driver);
+  WinningMenu(Driver *driver, std::string filePath);
   ~WinningMenu();
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;

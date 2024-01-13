@@ -1,8 +1,8 @@
 #include "PlayAgainButton.h"
 
 
-PlayAgainButton::PlayAgainButton(int x, int y, Driver *driver)
-    : _driver{driver}, _x{x}, _y{y} {
+PlayAgainButton::PlayAgainButton(int x, int y, Driver *driver, std::string filePath)
+    : _driver{driver}, _x{x}, _y{y} , _filePath{filePath} {
   _image = new Fl_PNG_Image("res/playagain.png");
 }
 
@@ -26,7 +26,7 @@ bool PlayAgainButton::contains(int x, int y) const {
   return false;
 }
 
-void PlayAgainButton::onClick() { _driver->LaunchGameFromFile("maps/1.map"); }
+void PlayAgainButton::onClick() { _driver->LaunchGameFromFile(_filePath); }
 
 void PlayAgainButton::resetPosition() { return; }
 

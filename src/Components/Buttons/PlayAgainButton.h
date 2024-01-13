@@ -8,7 +8,7 @@
 
 class PlayAgainButton : public Button {
 public:
-  PlayAgainButton(int x, int y, Driver *driver);
+  PlayAgainButton(int x, int y, Driver *driver, std::string filePath);
   ~PlayAgainButton();
 
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
@@ -29,6 +29,7 @@ private:
   Driver *_driver;
   int _x;
   int _y;
+  std::string _filePath;
 };
 
 #endif // _FROGGER_PLAYAGAINBUTTON_H_

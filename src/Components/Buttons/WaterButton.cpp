@@ -7,13 +7,13 @@ WaterButton::WaterButton(int x, int y, Driver* driver)
   _image = new Fl_PNG_Image("res/water_button.png");
 }
 
-  WaterButton::~WaterButton() { delete _image; }
+WaterButton::~WaterButton() { delete _image; }
 
-  Fl_PNG_Image *WaterButton::getImage() const { return _image; };
+Fl_PNG_Image *WaterButton::getImage() const { return _image; };
 
-  int WaterButton::getX() const { return _x; }
+int WaterButton::getX() const { return _x; }
 
-  int WaterButton::getY() const { return _y; }
+int WaterButton::getY() const { return _y; }
 
 bool WaterButton::contains(int x, int y) const {
   if (x > getX() - 5 && x < (getX() + 46 + 5) && y > getY() - 5 &&

@@ -105,7 +105,6 @@ private:
   int _timeOut;
   short _combo;
   short _highestPosition;
-  bool _inMenu;
   int _highestScore;
   
 };

@@ -3,6 +3,7 @@
 
 #include "../Driver.h"
 #include "../Model/Environment.h"
+#include "GameMenu.h"
 #include "EditorMenu.h"
 #include "Game.h"
 #include <memory>
@@ -63,15 +64,21 @@ public:
   virtual void triggerSpeedButtons();
   virtual void triggerPropsButtons();
   virtual void triggerDirectionButtons();
+  virtual void triggerPauseMenu();
 
   // Getters for the windows's dimensions
   [[nodiscard]] virtual int getWindowWidth() const;
   [[nodiscard]] virtual int getWindowHeight() const;
+
+  // Pause menu
+  [[nodiscard]] virtual std::shared_ptr<GameMenu> getPauseMenu() const;
+  [[nodiscard]] virtual bool isPaused() const;
   
 private:
   std::shared_ptr<Game> _game;
   Driver* _driver;
   std::shared_ptr<EditorMenu> _menu;
+  std::shared_ptr<GameMenu> _pauseMenu;
 
   int enviNumber{1}; // Must be 12 to start a game, counting from 0
 
