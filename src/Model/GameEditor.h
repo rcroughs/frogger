@@ -30,9 +30,10 @@ public:
   // Add & Delete & Get an environment
   virtual void addEnvironment(int index, short id);
   virtual void deleteEnvironment(int index);
+  virtual void checkEnvironment(int index);
   std::shared_ptr<Environment> getEnvironment(int index) const;
 
-  // Add a specific environment, use by addEnvironement()
+  // Add a specific environment, used by addEnvironment()
   virtual void addRoad(int index);
   virtual void addSideWalk(int index);
   virtual void addWater(int index);
@@ -57,8 +58,11 @@ public:
   virtual void changeCurrentRow(int new_row);
   [[nodiscard]] virtual int getCurrentRow() const;
 
-  // Shows/Hides Environment selection buttons
+  // Shows/Hides specific buttons
   virtual void triggerEnvironmentButton();
+  virtual void triggerSpeedButtons();
+  virtual void triggerPropsButtons();
+  virtual void triggerDirectionButtons();
 
   // Getters for the windows's dimensions
   [[nodiscard]] virtual int getWindowWidth() const;
@@ -69,7 +73,7 @@ private:
   Driver* _driver;
   std::shared_ptr<EditorMenu> _menu;
 
-  int enviNumber; // Doit être 12 pour lancer le jeu
+  int enviNumber{1}; // Must be 12 to start a game, counting from 0
 
   enum ENVIRONMENT { ROAD, SIDEWALK, WATER };
 
@@ -79,12 +83,12 @@ private:
 
   // Road Parameters
   char RoadCirculation{'\0'};
-  float RoadSpeedLimit{0};
+  float RoadSpeedLimit{-1};
 
   // Water Parameters --> PropId does not have to be modified, it will be used
   // for generateProps(id) and CAN be modified
-  float WaterFlow{0};
-  short WaterPropId{0};
+  float WaterFlow{-1};
+  short WaterPropId{-1};
 
   // Mouse on row
   int currentRow;

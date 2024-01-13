@@ -22,10 +22,12 @@ public:
   virtual void showMenu();
   virtual void showHomeScreen();
   virtual void launchLevelSelection();
+  virtual void saveLevelAsFile();
   virtual void refresh();
 
   // Levels
   void LaunchGameFromFile(std::string filePath);
+  virtual void launchLevelFromEditor();
 
   virtual void mouseMove(short loc_x, short loc_y);
   virtual void mouseClick(short loc_x, short loc_y);
@@ -35,6 +37,7 @@ public:
   virtual void updateMovement();
 
   virtual std::shared_ptr<GameEditor> getEditor();
+  virtual int countFiles(std::string directory);
 
 private:
   std::shared_ptr<View> _view;

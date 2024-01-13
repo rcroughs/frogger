@@ -11,8 +11,17 @@ GameEditor::GameEditor(Driver *driver, int width, int height)
   _game = std::make_shared<Game>(_driver);
   _menu = std::make_shared<EditorMenu>(_driver);
   for (int i = 0; i < 13; i++) {
-    colors.push_back(new Fl_Color(FL_WHITE));
+    if (i == 0) {
+        colors.push_back(new Fl_Color(FL_BLACK));
+    } else if (i == 12) {
+        colors.push_back(new Fl_Color(FL_BLUE));
+    } else {
+        colors.push_back(new Fl_Color(FL_WHITE));
+    }
   }
+  // Default environment configuration
+  _game->getMap()->setEnvironment(0, std::make_shared<SideWalk>(SideWalk()));
+  _game->getMap()->setEnvironment(12, std::make_shared<Water>(Water(0, 1)));
 }
 
 Driver* GameEditor::getDriver() const { return _driver; }
@@ -30,12 +39,6 @@ void GameEditor::setColor(Fl_Color *color) {
 }
 
 void GameEditor::addEnvironment(int index, short id) {
-  if (_game->getMap()->getEnvironment(index) != nullptr) {
-    _game->getMap()->deleteEnvironment(index);
-    decreaseEnviNumber();
-  }
-  // std::cout << "Envi number : " << getEnviNumber() << std::endl;  // --> Pour
-  // débug
   if (id == 0) { // SIDEWALK
     addSideWalk(index);
   } else if (id == 1) { // ROAD
@@ -43,6 +46,13 @@ void GameEditor::addEnvironment(int index, short id) {
   } else if (id == 2) { // WATER
     addWater(index);
   }
+}
+
+void GameEditor::checkEnvironment(int index) {
+    if (_game->getMap()->getEnvironment(index) != nullptr) {
+        _game->getMap()->deleteEnvironment(index);
+        decreaseEnviNumber();
+    }
 }
 
 void GameEditor::deleteEnvironment(int index) {
@@ -55,25 +65,33 @@ std::shared_ptr<Environment> GameEditor::getEnvironment(int index) const {
 }
 
 void GameEditor::addSideWalk(int index) {
+    checkEnvironment(index);
   getGame()->getMap()->setEnvironment(index, std::make_shared<SideWalk>());
   increaseEnviNumber();
 }
 
 void GameEditor::addRoad(int index) {
-  if (getRoadCirculation() != '\0' && getRoadSpeedLimit() != 0) {
+    checkEnvironment(index);
+  if (getRoadCirculation() != '\0' && getRoadSpeedLimit() != -1) {
     _game->getMap()->setEnvironment(
-        index, std::make_shared<Road>(getRoadCirculation(), getRoadSpeedLimit()));
+            index, std::make_shared<Road>(getRoadCirculation(), getRoadSpeedLimit(), 0));
     increaseEnviNumber();
+    modifyRoadSpeedLimit(-1);
+    modifyWaterFlow(-1);
     modifyRoadCirculation('\0');
-    modifyRoadSpeedLimit(0);
+    triggerEnvironmentButton();
   }
 }
 
 void GameEditor::addWater(int index) {
-  if (getWaterFlow() != 0) {
-    _game->getMap()->setEnvironment(index, std::make_shared<Water>(getWaterFlow()));
+    checkEnvironment(index);
+  if (getWaterFlow() != -1 && getWaterPropId() != -1) {
+    _game->getMap()->setEnvironment(index, std::make_shared<Water>(getWaterFlow(), getWaterPropId()));
     increaseEnviNumber();
-    modifyWaterFlow(0);
+    modifyWaterFlow(-1);
+    modifyRoadSpeedLimit(-1);
+    modifyWaterPropId(-1);
+    triggerEnvironmentButton();
   }
 }
 
@@ -114,9 +132,33 @@ int GameEditor::getCurrentRow() const { return currentRow; }
 void GameEditor::triggerEnvironmentButton() {
   std::vector<std::shared_ptr<Button>> buttons = getMenu()->getButtons();
   for (int i = 0; i < 3; i++) {
-    // On cache les boutons d'environnement
+    // On cache/montre les boutons d'environnement
     buttons.at(i)->changeState();
   }
+}
+
+void GameEditor::triggerSpeedButtons() {
+    std::vector<std::shared_ptr<Button>> buttons = getMenu()->getButtons();
+    for (int i = 3; i < 6; i++) {
+        // On cache/montre les boutons de vitesse
+        buttons.at(i)->changeState();
+    }
+}
+
+void GameEditor::triggerPropsButtons() {
+    std::vector<std::shared_ptr<Button>> buttons = getMenu()->getButtons();
+    for (int i = 6; i < 8; i++) {
+        // On cache/montre les boutons de props
+        buttons.at(i)->changeState();
+    }
+}
+
+void GameEditor::triggerDirectionButtons() {
+    std::vector<std::shared_ptr<Button>> buttons = getMenu()->getButtons();
+    for (int i = 8; i < 10; i++) {
+        // On cache/montre les boutons de direction
+        buttons.at(i)->changeState();
+    }
 }
 
 int GameEditor::getWindowWidth() const { return WINDOW_WIDTH; }

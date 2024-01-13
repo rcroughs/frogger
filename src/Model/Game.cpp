@@ -46,6 +46,8 @@ void Game::setPlayer(std::shared_ptr<Player> new_player) {
 }
 void Game::setMap(std::shared_ptr<Map> new_map) { _map = std::move(new_map); }
 
+void Game::setFilePath(std::string filePath) { _filePath = filePath; }
+
 void Game::setGameMenu(std::shared_ptr<GameMenu> new_gameMenu) {
   _gameMenu = new_gameMenu;
 }

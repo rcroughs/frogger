@@ -29,11 +29,10 @@ bool SideWalkButton::contains(int x, int y) const {
 }
 
 void SideWalkButton::onClick() {
-  if (_driver->getEditor()->getCurrentRow() >= 0 &&
-      _driver->getEditor()->getCurrentRow() <= 12) {
+  if (_driver->getEditor()->getCurrentRow() >= 1 &&
+      _driver->getEditor()->getCurrentRow() <= 11) {
     _driver->getEditor()->setColor(new Fl_Color(FL_BLACK));
-    _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),
-                                        2);
+    _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),0);
     _driver->getEditor()->triggerEnvironmentButton();
   }
 }

@@ -22,15 +22,22 @@ void EditorController::mouseClick(short loc_x, short loc_y) {
       // Cas des boutons d'environnement
       if (button->canMove()) {
         if (button->isMoving()) {
-          button->onClick();
-          _editor->triggerEnvironmentButton();
-          button->resetPosition();
+            if (_editor->getCurrentRow() >= 1 && _editor->getCurrentRow() <= 11) {
+                button->onClick();
+                _editor->triggerEnvironmentButton();
+                button->resetPosition();
+            }
         }
         button->changeMovingState();
       } else {
         // Boutons de configuration
         button->onClick();
       }
+        // Launch Mario Maker game
+        if (_editor->getEnviNumber() == 12) {
+            _editor->triggerEnvironmentButton();
+            _editor->getDriver()->launchLevelFromEditor();
+        }
     }
   }
 }

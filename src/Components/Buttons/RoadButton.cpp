@@ -41,9 +41,10 @@ bool RoadButton::contains(int x, int y) const {
 }
 
 void RoadButton::onClick() {
-    if (_driver->getEditor()->getCurrentRow() >= 0 && _driver->getEditor()->getCurrentRow() <= 12) {
+    if (_driver->getEditor()->getCurrentRow() >= 1 && _driver->getEditor()->getCurrentRow() <= 11) {
         _driver->getEditor()->setColor(new Fl_Color(FL_GRAY));
-        _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(), 2);
+        _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(), 1);
+        showConfigurationButtons();
     }
 }
 
@@ -62,4 +63,20 @@ void RoadButton::changeState() {
 void RoadButton::changePosition(int loc_x, int loc_y) {
     _x = loc_x;
     _y = loc_y;
+}
+
+void RoadButton::showConfigurationButtons() {
+    // Enables the configuration buttons to display at the right height
+    std::vector<std::shared_ptr<Button>> buttons = _driver->getEditor()->getMenu()->getButtons();
+    _driver->getEditor()->triggerSpeedButtons();
+    _driver->getEditor()->triggerDirectionButtons();
+    for (int i = 3; i < 10; i++) {
+        if (i != 6 && i != 7) {
+            int height = _driver->getEditor()->getWindowHeight();
+            buttons.at(i)->changePosition(
+                    buttons.at(i)->getX(),
+                    (height - (height / 13.0f)) -
+                    (_driver->getEditor()->getCurrentRow() * (height / 13.0) - ((height / 13.0) / 10)));
+        }
+    }
 }
