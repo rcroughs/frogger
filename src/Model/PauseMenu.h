@@ -9,10 +9,10 @@
 
 class Driver;
 
-class GameMenu {
+class PauseMenu {
 public:
-  GameMenu(int x, int y, Driver *driver);
-  ~GameMenu();
+  PauseMenu(int x, int y, Driver *driver);
+  ~PauseMenu();
   [[nodiscard]] int getX() const;
   [[nodiscard]] int getY() const;
   [[nodiscard]] std::vector<std::shared_ptr<Button>> getButtons() const;

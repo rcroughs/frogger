@@ -1,6 +1,6 @@
 #include "Game.h"
 #include "Environments/SideWalk.h"
-#include "GameMenu.h"
+#include "PauseMenu.h"
 #include "Position.h"
 #include "vector"
 #include <fstream>
@@ -11,7 +11,7 @@ Game::Game(Driver *driver, std::shared_ptr<Map> map, std::string filePath)
     : _filePath{filePath},
       _player{std::make_shared<Player>(Position{45, 0}, up)},
       _map{std::move(map)},
-      _gameMenu{std::make_shared<GameMenu>(150, 100, driver)},
+      _pauseMenu{std::make_shared<PauseMenu>(150, 100, driver)},
       _gameOverMenu(std::make_shared<GameOverMenu>(driver, filePath)),
       _winningMenu{std::make_shared<WinningMenu>(driver, filePath)}, _driver{driver},
       _winning{false}, _loosing{false}, _lives{3}, _time{30},
@@ -48,13 +48,13 @@ void Game::setMap(std::shared_ptr<Map> new_map) { _map = std::move(new_map); }
 
 void Game::setFilePath(std::string filePath) { _filePath = filePath; }
 
-void Game::setGameMenu(std::shared_ptr<GameMenu> new_gameMenu) {
-  _gameMenu = new_gameMenu;
+void Game::setPauseMenu(std::shared_ptr<PauseMenu> new_pauseMenu) {
+  _pauseMenu = new_pauseMenu;
 }
 
-std::shared_ptr<GameMenu> Game::getMenu() const { return _gameMenu; }
+std::shared_ptr<PauseMenu> Game::getMenu() const { return _pauseMenu; }
 
-bool Game::isOnPause() const { return _gameMenu->isOpen(); }
+bool Game::isOnPause() const { return _pauseMenu->isOpen(); }
 
 std::shared_ptr<Map> Game::getMap() const { return this->_map; }
 
@@ -169,7 +169,7 @@ void Game::win() {
   }
 }
 
-void Game::triggerMenu() { _gameMenu->triggerMenu(); }
+void Game::triggerMenu() { _pauseMenu->triggerMenu(); }
 
 void Game::update() {
   decreaseTimeOut();

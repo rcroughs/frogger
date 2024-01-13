@@ -1,6 +1,6 @@
 #include "GameRenderer.h"
 #include "../Model/Environment.h"
-#include "../Model/GameMenu.h"
+#include "../Model/PauseMenu.h"
 #include "../Model/Player.h"
 #include "FL/Fl_Image.H"
 #include "FL/Fl_PNG_Image.H"
@@ -154,7 +154,7 @@ void GameRenderer::drawHUD() const {
 }
 
 void GameRenderer::drawMenu() const {
-  std::shared_ptr<GameMenu> gameMenu = _game->getMenu();
+  std::shared_ptr<PauseMenu> gameMenu = _game->getMenu();
   gameMenu->getImage()->draw(gameMenu->getX(), gameMenu->getY());
   for (auto &button : gameMenu->getButtons()) {
     button->getImage()->draw(button->getX(), button->getY());

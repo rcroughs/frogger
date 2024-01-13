@@ -10,7 +10,7 @@ GameEditor::GameEditor(Driver *driver, int width, int height)
     : _driver{driver}, WINDOW_HEIGHT{height}, WINDOW_WIDTH{width} {
   _game = std::make_shared<Game>(_driver);
   _menu = std::make_shared<EditorMenu>(_driver);
-  _pauseMenu = std::make_shared<GameMenu>(150, 100, _driver);
+  _pauseMenu = std::make_shared<PauseMenu>(150, 100, _driver);
   for (int i = 0; i < 13; i++) {
     if (i == 0) {
         colors.push_back(new Fl_Color(FL_BLACK));
@@ -170,6 +170,6 @@ int GameEditor::getWindowWidth() const { return WINDOW_WIDTH; }
 
 int GameEditor::getWindowHeight() const { return WINDOW_HEIGHT; }
 
-std::shared_ptr<GameMenu> GameEditor::getPauseMenu() const { return _pauseMenu; }
+std::shared_ptr<PauseMenu> GameEditor::getPauseMenu() const { return _pauseMenu; }
 
 bool GameEditor::isPaused() const { return _pauseMenu->isOpen(); }

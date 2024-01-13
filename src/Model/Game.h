@@ -4,7 +4,7 @@
 #include "../Components/GameOverMenu.h"
 #include "../Components/WinningMenu.h"
 #include "../Driver.h"
-#include "GameMenu.h"
+#include "PauseMenu.h"
 #include "Map.h"
 #include "Player.h"
 #include "vector"
@@ -13,7 +13,7 @@
 class Water;
 class Map;
 class Driver;
-class GameMenu;
+class PauseMenu;
 class GameOverMenu;
 class WinningMenu;
 
@@ -48,7 +48,7 @@ public:
    */
   [[nodiscard]] virtual std::shared_ptr<Player> getPlayer() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Player>> getWinnerPlayer() const;
-  [[nodiscard]] virtual std::shared_ptr<GameMenu> getMenu() const;
+  [[nodiscard]] virtual std::shared_ptr<PauseMenu> getMenu() const;
   [[nodiscard]] virtual std::shared_ptr<Map> getMap() const;
   [[nodiscard]] virtual std::shared_ptr<GameOverMenu> getGameOverMenu() const;
   [[nodiscard]] virtual std::shared_ptr<WinningMenu> getWinningMenu() const;
@@ -70,7 +70,7 @@ public:
    */
   virtual void setPlayer(std::shared_ptr<Player> new_player);
   virtual void setMap(std::shared_ptr<Map> new_map);
-  virtual void setGameMenu(std::shared_ptr<GameMenu> new_gameMenu);
+  virtual void setPauseMenu(std::shared_ptr<PauseMenu> new_pauseMenu);
   virtual void setFilePath(std::string filePath);
 
   /* Update the game (move player, check collisions, etc)
@@ -91,7 +91,7 @@ private:
   std::string _filePath; // Path to the map file
   std::shared_ptr<Player> _player;
   std::shared_ptr<Map> _map;
-  std::shared_ptr<GameMenu> _gameMenu;
+  std::shared_ptr<PauseMenu> _pauseMenu;
   std::shared_ptr<GameOverMenu> _gameOverMenu;
   std::shared_ptr<WinningMenu> _winningMenu;
   Driver *_driver;
