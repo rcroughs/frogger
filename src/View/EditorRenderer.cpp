@@ -41,4 +41,6 @@ void EditorRenderer::draw() const {
       }
     }
   }
+  // Handles time out
+  _editor->handleTimeOut();
 }

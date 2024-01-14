@@ -61,12 +61,15 @@ public:
   virtual void changeCurrentRow(int new_row);
   [[nodiscard]] virtual int getCurrentRow() const;
 
-  // Shows/Hides specific buttons
+  // Shows/Hides specific buttons + handle time out
   virtual void triggerEnvironmentButton();
   virtual void triggerSpeedButtons();
   virtual void triggerPropsButtons();
   virtual void triggerDirectionButtons();
   virtual void triggerPauseMenu();
+  virtual bool timeOutValid();
+  virtual void handleTimeOut();
+  virtual void resetTimeOut();
 
   // Getters for the windows's dimensions
   [[nodiscard]] virtual int getWindowWidth() const;
@@ -101,6 +104,7 @@ private:
 
   // Mouse on row
   int currentRow;
+  float timeOut{0};
 
 };
 

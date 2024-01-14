@@ -35,6 +35,7 @@ void WaterButton::onClick() {
     _driver->getEditor()->setColor(new Fl_Color(FL_BLUE));
     showConfigurationButtons();
     _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),2);
+    _driver->getEditor()->resetTimeOut();
   }
 }
 

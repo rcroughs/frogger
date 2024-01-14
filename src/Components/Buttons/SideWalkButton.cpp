@@ -35,6 +35,7 @@ void SideWalkButton::onClick() {
     _driver->getEditor()->setColor(new Fl_Color(FL_BLACK));
     _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(),0);
     _driver->getEditor()->triggerEnvironmentButton();
+    _driver->getEditor()->resetTimeOut();
   }
 }
 

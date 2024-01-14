@@ -47,6 +47,7 @@ void RoadButton::onClick() {
         _driver->getEditor()->setColor(new Fl_Color(FL_GRAY));
         _driver->getEditor()->addEnvironment(_driver->getEditor()->getCurrentRow(), 1);
         showConfigurationButtons();
+        _driver->getEditor()->resetTimeOut();
     }
 }
 

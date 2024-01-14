@@ -165,6 +165,19 @@ void GameEditor::triggerDirectionButtons() {
     }
 }
 
+bool GameEditor::timeOutValid() {
+    if (timeOut == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+void GameEditor::handleTimeOut() { if (timeOut > 0) timeOut -= 0.5f;}
+
+void GameEditor::resetTimeOut() { timeOut = 10; }
+
 void GameEditor::triggerPauseMenu() {
     _pauseMenu->triggerMenu();
 }

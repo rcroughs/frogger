@@ -48,7 +48,9 @@ void EditorController::mouseClick(short loc_x, short loc_y) {
         button->changeMovingState();
       } else {
         // Boutons de configuration
-        button->onClick();
+          if (_editor->timeOutValid()) {
+              button->onClick();
+          }
       }
         // Launch Mario Maker game
         if (_editor->getEnviNumber() == 12) {
