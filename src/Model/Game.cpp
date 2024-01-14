@@ -9,10 +9,10 @@
 
 Game::Game(Driver *driver, std::shared_ptr<Map> map, std::string filePath)
     : _filePath{filePath},
-      _driver{driver},
       _player{std::make_shared<Player>(Position{45, 0}, up)},
       _map{std::move(map)},
       _pauseMenu{std::make_shared<PauseMenu>(150, 100, driver)},
+      _driver{driver},
       _winning{false}, _loosing{false}, _lives{3}, _time{30},
       _frameLeft{30 * 60}, _score{0}, _timeOut{0}, _combo{1},
       _highestPosition{0} {
