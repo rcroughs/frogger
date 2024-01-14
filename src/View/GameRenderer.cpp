@@ -34,14 +34,11 @@ void GameRenderer::drawVictory() const {
   std::string highestScore = std::to_string(_game->getHighestScore());
   std::string score = std::to_string(_game->getScore());
   if (_game->getHighestScore() < _game->getScore()) {
-      fl_draw("New High Score!", 220, 350);
-      fl_draw(highestScore.c_str(), 350, 390);
+      fl_draw(("New High Score! " + score).c_str(), 220, 350);
   }
   else {
-      fl_draw("Highest Score:", 10, 375);
-      fl_draw(highestScore.c_str(), 260, 375);
-      fl_draw("Your Score:", 390, 375);
-      fl_draw(score.c_str(), 590, 375);
+      fl_draw(("Highest Score: " + highestScore).c_str(), 10, 375);
+      fl_draw(("Your Score: " + score).c_str(), 390, 375);
   }
 }
 
@@ -53,8 +50,7 @@ void GameRenderer::drawGameOver() const {
   // Score
   fl_font(FL_HELVETICA_BOLD, 35);
   std::string score = std::to_string(_game->getScore());
-  fl_draw("Your Score:", 200, 385);
-  fl_draw(score.c_str(), 400, 385);
+  fl_draw(("Your Score: " + score).c_str(), 200, 385);
 }
 
 void GameRenderer::drawPlayer(std::shared_ptr<Player> player) const {
