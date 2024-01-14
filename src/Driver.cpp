@@ -47,6 +47,7 @@ void Driver::LaunchGameFromFile(std::string filePath) {
   std::shared_ptr<Map> map = std::make_shared<Map>(mapId);
   _editor = nullptr;
   _game = std::make_shared<Game>(this, map, filePath);
+  _game->generateMenu(filePath);
   _view = std::make_shared<GameRenderer>(_game, 700,750);
   _controller = std::make_shared<GameController>(_game);
   _gameState = ON_GAME;
@@ -89,6 +90,7 @@ void Driver::saveLevelAsFile() {
     outputFile << _game->getMap()->getMapId() << '\n';
 
     _game->setFilePath(filePath);
+    _game->generateMenu(filePath);
 }
 
 void Driver::showMenu() {

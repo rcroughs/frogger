@@ -72,6 +72,7 @@ public:
   virtual void setMap(std::shared_ptr<Map> new_map);
   virtual void setPauseMenu(std::shared_ptr<PauseMenu> new_pauseMenu);
   virtual void setFilePath(std::string filePath);
+  virtual void generateMenu(std::string filePath);
 
   /* Update the game (move player, check collisions, etc)
    * Does not take any args and returns nothing
