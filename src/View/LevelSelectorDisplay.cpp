@@ -11,11 +11,11 @@ void LevelSelectorDisplay::draw() const {
     button->getImage()->draw(button->getX(), button->getY());
     fl_font(FL_HELVETICA_BOLD, 35);
     fl_draw(button->getName().c_str(), button->getX() + 100,
-            button->getY() + 100);
+            button->getY() + 65);
     fl_draw(button->getAuthor().c_str(), button->getX() + 100,
-            button->getY() + 175);
+            button->getY() + 140);
     fl_draw(("Highest score:" + button->getHighestScore()).c_str(), button->getX() + 100,
-            button->getY() + 250);
+            button->getY() + 215);
   }
   _levelSelector->getMenuButton()->getImage()->draw(
       _levelSelector->getMenuButton()->getX(),

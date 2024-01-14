@@ -65,6 +65,7 @@ public:
   [[nodiscard]] virtual int getTimeOut() const;
   [[nodiscard]] virtual short getHighestPosition() const;
   [[nodiscard]] virtual std::string getFilePath() const;
+  [[nodiscard]] virtual int getHighestScore() const;
 
   // Setters
   // Does take the new value and returns nothing

@@ -44,6 +44,10 @@ std::vector<std::shared_ptr<Player>> Game::getWinnerPlayer() const {
   return _winnerPlayers;
 }
 
+int Game::getHighestScore() const {
+    return _highestScore;
+}
+
 void Game::setPlayer(std::shared_ptr<Player> new_player) {
   _player = std::move(new_player);
 }

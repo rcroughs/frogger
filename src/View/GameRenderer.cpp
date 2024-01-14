@@ -8,6 +8,7 @@
 #include "../Model/Map.h"
 #include "FL/Fl_Image.H"
 #include "FL/Fl_PNG_Image.H"
+#include <FL/fl_draw.H>
 #include "vector"
 #include <cstddef>
 #include <memory>
@@ -28,6 +29,20 @@ void GameRenderer::drawVictory() const {
   for (auto &button : _game->getWinningMenu()->getButtons()) {
     button->getImage()->draw(button->getX(), button->getY());
   }
+  // Score
+  fl_font(FL_HELVETICA_BOLD, 35);
+  std::string highestScore = std::to_string(_game->getHighestScore());
+  std::string score = std::to_string(_game->getScore());
+  if (_game->getHighestScore() < _game->getScore()) {
+      fl_draw("New High Score!", 220, 350);
+      fl_draw(highestScore.c_str(), 350, 390);
+  }
+  else {
+      fl_draw("Highest Score:", 10, 375);
+      fl_draw(highestScore.c_str(), 260, 375);
+      fl_draw("Your Score:", 390, 375);
+      fl_draw(score.c_str(), 590, 375);
+  }
 }
 
 void GameRenderer::drawGameOver() const {
@@ -35,6 +50,11 @@ void GameRenderer::drawGameOver() const {
   for (auto &button : _game->getGameOverMenu()->getButtons()) {
     button->getImage()->draw(button->getX(), button->getY());
   }
+  // Score
+  fl_font(FL_HELVETICA_BOLD, 35);
+  std::string score = std::to_string(_game->getScore());
+  fl_draw("Your Score:", 200, 385);
+  fl_draw(score.c_str(), 400, 385);
 }
 
 void GameRenderer::drawPlayer(std::shared_ptr<Player> player) const {

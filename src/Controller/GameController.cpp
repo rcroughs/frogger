@@ -45,33 +45,35 @@ void GameController::mouseRelease(short loc_x, short loc_y) {
 }
 
 void GameController::keyPressed(int keycode) {
-  if (!_game->isOnPause()) {
-    switch (keycode) {
-    case 'd':
-    case FL_Right:
-      _rightPressed = true;
-      _game->movePlayerRight();
-      break;
-    case 'a':
-    case 'q':
-    case FL_Left:
-      _leftPressed = true;
-      _game->movePlayerLeft();
-      break;
-    case 'w':
-    case 'z':
-    case FL_Up:
-      _game->movePlayerUp();
-      _game->handleScore();
-      break;
-    case 's':
-    case FL_Down:
-      _game->movePlayerDown();
-      break;
-    }
-  }
-  if (keycode == FL_Escape) {
-    _game->triggerMenu();
+  if (!(_game->isWinning() || _game->isLosing())) {
+      if (!_game->isOnPause()) {
+          switch (keycode) {
+              case 'd':
+              case FL_Right:
+                  _rightPressed = true;
+                  _game->movePlayerRight();
+                  break;
+              case 'a':
+              case 'q':
+              case FL_Left:
+                  _leftPressed = true;
+                  _game->movePlayerLeft();
+                  break;
+              case 'w':
+              case 'z':
+              case FL_Up:
+                  _game->movePlayerUp();
+                  _game->handleScore();
+                  break;
+              case 's':
+              case FL_Down:
+                  _game->movePlayerDown();
+                  break;
+          }
+      }
+      if (keycode == FL_Escape) {
+          _game->triggerMenu();
+      }
   }
 }
 
