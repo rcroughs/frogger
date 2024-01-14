@@ -13,6 +13,7 @@ public:
   WaterButton(int x, int y, Driver* driver);
   ~WaterButton();
 
+  // Getters
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
   [[nodiscard]] virtual int getX() const override;
   [[nodiscard]] virtual int getY() const override;
@@ -20,11 +21,16 @@ public:
   [[nodiscard]] virtual bool isDisplayed() const override;
   [[nodiscard]] virtual bool canMove() const override;
   [[nodiscard]] virtual bool isMoving() const override;
+
+  // onClick event
   virtual void onClick() override;
+
+  // Setters
   virtual void resetPosition() override;
   virtual void changeMovingState() override;
   virtual void changeState() override;
   virtual void changePosition(int loc_x, int loc_y) override;
+
   virtual void showConfigurationButtons();
 
 private:

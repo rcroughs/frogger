@@ -1,5 +1,9 @@
-#ifndef POSITION_H
-#define POSITION_H
+////////// Position Header File - src/Model/Position.h //////////
+// Description: This struct is used to store the position of the player
+////////// FROGGER ////////////////////////////////////////
+
+#ifndef _FROGGER_POSITION_H
+#define _FROGGER_POSITION_H
 
 struct Position {
 public:
@@ -7,4 +11,4 @@ public:
   int y;
 };
 
-#endif // POSITION_H
+#endif // _FROGGER_POSITION_H

@@ -1,3 +1,8 @@
+////////// Level Selector View - src/View/LevelSelectorDisplay.h //////////
+// Description: This class draw the level selector.
+// Constructor takes: Components of the level selector
+////////// FROGGER ///////////////////////////////////
+
 #ifndef _FROGGER_LEVEL_SELECTOR_DISPLAY_H_
 #define _FROGGER_LEVEL_SELECTOR_DISPLAY_H_
 

@@ -14,11 +14,14 @@ class MenuComponents {
 public:
   MenuComponents(Driver *driver);
   ~MenuComponents();
+
+  // Getters
   [[nodiscard]] virtual Fl_PNG_Image *getLogo() const;
   [[nodiscard]] virtual Fl_PNG_Image *getBackground() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Cloud>> getClouds() const;
 
+  // Update cloud positions
   void update();
 
 private:

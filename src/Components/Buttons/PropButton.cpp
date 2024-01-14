@@ -1,5 +1,6 @@
-#include "PropButton.h"
 #include "../../Driver.h"
+#include "../../Model/GameEditor.h"
+#include "PropButton.h"
 
 PropButton::PropButton(int x, int y, Driver *driver, short id)
     : _driver{driver}, _x{x}, _y{y}, _id{id} {

@@ -1,15 +1,18 @@
+////////// Game Header File - src/Model/Game.h //////////
+// Description: This class represents the game.
+// Constructor takes: A pointer to the driver, a map, a filePath.
+// Constructor only with a driver - without map (deprecated)
+////////// FROGGER ////////////////////////////////////////
+
 #ifndef _FROGGER_GAME_H
 #define _FROGGER_GAME_H
 
-#include "../Components/GameOverMenu.h"
-#include "../Components/WinningMenu.h"
-#include "../Driver.h"
-#include "PauseMenu.h"
-#include "Map.h"
 #include "Player.h"
-#include "vector"
 #include <memory>
+#include <string>
+#include <vector>
 
+// Forward declarations
 class Water;
 class Map;
 class Driver;
@@ -23,9 +26,8 @@ public:
   Game(Driver *driver);
   ~Game();
 
-  /* Game handlers
-   * Does not take any args and returns nothing
-   */
+  // Game handlers
+  // Does not take any args and returns nothing
   virtual void changeWinningState();
   virtual void changeLoosingState();
   virtual void addLife();
@@ -43,9 +45,8 @@ public:
   virtual void win();
   virtual void triggerMenu();
 
-  /* Getters
-   * Does not take any args and returns the corresponding value
-   */
+  // Getters
+  // Does not take any args and returns the corresponding value
   [[nodiscard]] virtual std::shared_ptr<Player> getPlayer() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Player>> getWinnerPlayer() const;
   [[nodiscard]] virtual std::shared_ptr<PauseMenu> getMenu() const;
@@ -65,24 +66,21 @@ public:
   [[nodiscard]] virtual short getHighestPosition() const;
   [[nodiscard]] virtual std::string getFilePath() const;
 
-  /* Setters
-   * Does take the new value and returns nothing
-   */
+  // Setters
+  // Does take the new value and returns nothing
   virtual void setPlayer(std::shared_ptr<Player> new_player);
   virtual void setMap(std::shared_ptr<Map> new_map);
   virtual void setPauseMenu(std::shared_ptr<PauseMenu> new_pauseMenu);
   virtual void setFilePath(std::string filePath);
   virtual void generateMenu(std::string filePath);
 
-  /* Update the game (move player, check collisions, etc)
-   * Does not take any args and returns nothing
-   */
+  // Update the game (move player, check collisions, etc)
+  // Does not take any args and returns nothing
   virtual void update();
 
-  /* Move player in the map
-   * Does not take any args and returns nothing
-   * Buffer method for the player
-   */
+  // Move player in the map
+  // Does not take any args and returns nothing
+  // Buffer method for the player
   virtual void movePlayerUp();
   virtual void movePlayerDown();
   virtual void movePlayerLeft();
@@ -107,7 +105,6 @@ private:
   short _combo;
   short _highestPosition;
   int _highestScore;
-  
 };
 
-#endif
+#endif // _FROGGER_GAME_H

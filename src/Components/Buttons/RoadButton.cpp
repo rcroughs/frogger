@@ -1,5 +1,7 @@
 #include "RoadButton.h"
 #include "../../Driver.h"
+#include "../../Model/GameEditor.h"
+#include "../../Model/EditorMenu.h"
 #include <FL/Fl_PNG_Image.H>
 
 RoadButton::RoadButton(int x, int y, Driver* driver) : _driver{driver}, _x{x}, _y{y} {

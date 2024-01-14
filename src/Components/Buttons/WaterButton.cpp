@@ -1,6 +1,7 @@
 #include "WaterButton.h"
 #include "../../Driver.h"
-#include <memory>
+#include "../../Model/GameEditor.h"
+#include "../../Model/EditorMenu.h"
 
 WaterButton::WaterButton(int x, int y, Driver* driver)
     : _driver{driver}, _x{x}, _y{y} {

@@ -1,5 +1,6 @@
 #include "DirectionButton.h"
 #include "../../Driver.h"
+#include "../../Model/GameEditor.h"
 
 DirectionButton::DirectionButton(int x, int y, Driver *driver, short id)
     : _driver{driver}, _x{x}, _y{y}, _id{id} {

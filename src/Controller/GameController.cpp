@@ -1,4 +1,7 @@
 #include "GameController.h"
+#include "../Model/PauseMenu.h"
+#include "../Components/WinningMenu.h"
+#include "../Components/GameOverMenu.h"
 #include <FL/Enumerations.H>
 #include <FL/Fl.H>
 

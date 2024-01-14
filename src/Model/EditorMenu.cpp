@@ -6,6 +6,7 @@
 #include "../Components/Buttons/SideWalkButton.h"
 #include "../Components/Buttons/SpeedButton.h"
 #include "../Components/Buttons/WaterButton.h"
+#include "../Driver.h"
 #include <memory>
 
 EditorMenu::EditorMenu(Driver* driver) : _driver{driver} {

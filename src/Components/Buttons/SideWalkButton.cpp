@@ -1,5 +1,6 @@
 #include "SideWalkButton.h"
 #include "../../Driver.h"
+#include "../../Model/GameEditor.h"
 #include <FL/Fl.H>
 
 SideWalkButton::SideWalkButton(int x, int y, Driver *driver)

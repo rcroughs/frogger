@@ -1,5 +1,7 @@
 #include "EditorRenderer.h"
 
+#include "../Model/EditorMenu.h"
+
 class button;
 
 EditorRenderer::EditorRenderer(std::shared_ptr<GameEditor> editor, int width,

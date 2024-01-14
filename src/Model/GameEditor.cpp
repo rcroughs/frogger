@@ -1,8 +1,11 @@
 #include "GameEditor.h"
+#include "../Driver.h"
+#include "../Model/Environment.h"
 #include "EditorMenu.h"
 #include "Environments/Road.h"
 #include "Environments/SideWalk.h"
 #include "Environments/Water.h"
+#include "Game.h"
 #include "Map.h"
 #include <memory>
 

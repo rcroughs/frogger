@@ -10,6 +10,7 @@ public:
   MenuController(std::shared_ptr<MenuComponents>menu);
   ~MenuController() = default;
 
+  // Controller methods
   virtual void mouseMove(short loc_x, short loc_y) override;
   virtual void mouseClick(short loc_x, short loc_y) override;
   virtual void mouseRelease(short loc_x, short loc_y) override;

@@ -13,6 +13,8 @@ class GameOverMenu {
 public:
   GameOverMenu(Driver *driver, std::string filePath);
   ~GameOverMenu();
+
+  // Getters
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;
 

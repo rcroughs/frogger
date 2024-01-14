@@ -1,6 +1,7 @@
 #include "PauseMenu.h"
 #include "../Components/Buttons/MenuButton.h"
 #include "../Components/Buttons/QuitButton.h"
+#include "../Driver.h"
 
 PauseMenu::PauseMenu(int x, int y, Driver *driver)
     : _x{x}, _y{y}, _driver{driver}, _isOpen{false} {

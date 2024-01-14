@@ -11,6 +11,7 @@ public:
   PlayAgainButton(int x, int y, Driver *driver, std::string filePath);
   ~PlayAgainButton();
 
+  // Getters
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
   [[nodiscard]] virtual int getX() const override;
   [[nodiscard]] virtual int getY() const override;
@@ -18,7 +19,11 @@ public:
   [[nodiscard]] virtual bool canMove() const override;
   [[nodiscard]] virtual bool isMoving() const override;
   [[nodiscard]] virtual bool contains(int x, int y) const override;
+
+  // onClick event
   virtual void onClick() override;
+
+  // Setters
   virtual void resetPosition() override;
   virtual void changeMovingState() override;
   virtual void changePosition(int loc_x, int loc_y) override;

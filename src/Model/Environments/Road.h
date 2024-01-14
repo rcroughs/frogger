@@ -1,11 +1,19 @@
-#ifndef SRC_ROAD_H
-#define SRC_ROAD_H
+////////// Road Header File - src/Model/Environments/Road.h //////////
+// Description: This class represents the road environment.
+// Inherited from Environment.
+// Constructor takes: a circulation direction , a speed limit and a propsId.
+// Constructor takes: a circulation direction and a speed limit and does not create props.
+////////// FROGGER ////////////////////////////////////////
+
+#ifndef _FROGGER_ROAD_H
+#define _FROGGER_ROAD_H
 
 #include "../Environment.h"
 #include "FL/Fl.H"
 #include "Props/Prop.h"
 #include "vector"
 #include <memory>
+#include <string>
 
 class Road : virtual public Environment {
 public:
@@ -13,15 +21,19 @@ public:
   Road(char circulation, float speedLimit);
   ~Road() = default;
 
+  // Getters
   [[nodiscard]] virtual Fl_Color getColor() const override;
   [[nodiscard]] virtual char getCirculation() const;
+  [[nodiscard]] virtual std::vector<std::shared_ptr<Prop>> getProps() const override;
+  [[nodiscard]] virtual std::string getId() const override;
 
+  // Generate props
   virtual void generateProps(short id) override;
 
-  [[nodiscard]] virtual std::vector<std::shared_ptr<Prop>> getProps() const override;
+  // Game handler
   virtual void handleGame(Game *currentGame) override;
+  // Update props on the environment
   virtual void updateProps() override;
-  [[nodiscard]] virtual std::string getId() const override;
 
 private:
   virtual void generateCars();
@@ -33,4 +45,4 @@ private:
   std::string _id;
 };
 
-#endif // SRC_ROAD_H
+#endif // _FROGGER_ROAD_H

@@ -11,6 +11,7 @@ class GameController : public Controller {
 public:
   GameController(std::shared_ptr<Game> game);
 
+  // Controller methods
   virtual void mouseMove(short loc_x, short loc_y) override;
   virtual void mouseClick(short loc_x, short loc_y) override;
   virtual void mouseRelease(short loc_x, short loc_y) override;

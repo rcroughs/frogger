@@ -11,6 +11,7 @@ public:
   LevelButton(Driver* driver, int x, int y, std::string levelPath, bool canMove = false);
   ~LevelButton();
 
+  // Getters 
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const override;
   [[nodiscard]] virtual int getX() const override;
   [[nodiscard]] virtual int getY() const override;
@@ -18,15 +19,18 @@ public:
   [[nodiscard]] virtual bool canMove() const override;
   [[nodiscard]] virtual bool isMoving() const override;
   [[nodiscard]] virtual bool contains(int x, int y) const override;
+  [[nodiscard]] virtual std::string getName() const;
+  [[nodiscard]] virtual std::string getAuthor() const;
+  [[nodiscard]] virtual std::string getHighestScore() const;
+
+  // onClick event
   virtual void onClick() override;
+
+  // Setters
   virtual void resetPosition() override;
   virtual void changeMovingState() override;
   virtual void changePosition(int loc_x, int loc_y) override;
   virtual void changeState() override;
-
-  [[nodiscard]] virtual std::string getName() const;
-  [[nodiscard]] virtual std::string getAuthor() const;
-  [[nodiscard]] virtual std::string getHighestScore() const;
 
 private:
     Driver* _driver;

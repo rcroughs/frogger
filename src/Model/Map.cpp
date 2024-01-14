@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Game.h"
 #include "Environments/Road.h"
 #include "Environments/SideWalk.h"
 #include "Environments/Water.h"

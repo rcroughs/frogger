@@ -1,13 +1,15 @@
-#ifndef SRC_GAMEEDITOR_H
-#define SRC_GAMEEDITOR_H
+////////// Game Editor Header File - src/Model/GameEditor.h //////////
+// Description: This class represents the game editor.
+// Constructor takes: A pointer to the driver, the window size.
+////////// FROGGER ////////////////////////////////////////
 
-#include "../Driver.h"
-#include "../Model/Environment.h"
+#ifndef _FROGGER_GAMEEDITOR_H
+#define _FROGGER_GAMEEDITOR_H
+
 #include "PauseMenu.h"
-#include "EditorMenu.h"
-#include "Game.h"
 #include <memory>
 
+// Forward declarations
 class Driver;
 class Environment;
 class EditorMenu;
@@ -102,4 +104,4 @@ private:
 
 };
 
-#endif // SRC_GAMEEDITOR_H
+#endif // _FROGGER_GAMEEDITOR_H

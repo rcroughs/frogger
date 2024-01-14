@@ -1,4 +1,7 @@
 #include "EditorController.h"
+#include "../Model/GameEditor.h"
+#include "../Model/EditorMenu.h"
+#include "../Driver.h"
 #include <FL/Enumerations.H>
 #include <memory>
 

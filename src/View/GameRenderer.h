@@ -1,3 +1,8 @@
+////////// Game Renderer - src/View/GameRenderer.h //////////
+// Description: This class renders the game.
+// Constructor takes: A game and the window size
+////////// FROGGER ///////////////////////////////////
+
 #ifndef _GAME_RENDERER_H
 #define _GAME_RENDERER_H
 
@@ -12,7 +17,14 @@ class GameRenderer : public View {
 public:
   GameRenderer(std::shared_ptr<Game> game, int h, int w);
 
-  virtual Position getWindowPosition(Position gamePosition) const;
+  // Getters
+  [[nodiscard]] virtual Position getWindowPosition(Position gamePosition) const;
+
+  // Global drawing method
+  void draw() const override;
+
+protected:
+  // protected drawing methods
   virtual void drawVictory() const;
   virtual void drawGameOver() const;
   virtual void drawPlayer(std::shared_ptr<Player> player) const;
@@ -22,7 +34,6 @@ public:
   virtual void drawTime() const;
   virtual void drawScore() const;
   virtual void drawMenu() const;
-  void draw() const override;
 
 private:
   std::shared_ptr<Game> _game;

@@ -2,23 +2,27 @@
 
 #include "Components/LevelSelector.h"
 #include "Components/MenuComponents.h"
-#include "Controller/LevelController.h"
-#include "Model/Environments/SideWalk.h"
 
 #include "Controller/EditorController.h"
 #include "Controller/GameController.h"
+#include "Controller/LevelController.h"
 #include "Controller/MenuController.h"
+
+#include "Model/Environments/SideWalk.h"
 #include "Model/GameEditor.h"
 #include "Model/Map.h"
+#include "Model/Game.h"
+
 #include "View/EditorRenderer.h"
 #include "View/GameRenderer.h"
 #include "View/LevelSelectorDisplay.h"
 #include "View/MenuDisplay.h"
 #include "View/ViewHomeScreen.h"
-#include <memory>
-#include <fstream>
-#include <string>
+
 #include <dirent.h>
+#include <fstream>
+#include <memory>
+#include <string>
 
 void Driver::launchEditor() {
   _editor = std::make_shared<GameEditor>(this, 700, 700);
@@ -59,7 +63,7 @@ void Driver::launchLevelFromEditor() {
     _view = std::make_shared<GameRenderer>(_game, 700, 700);
     _controller = std::make_shared<GameController>(_game);
     _gameState = ON_GAME;
-    saveLevelAsFile();
+    saveEditedLevelAsFile();
 }
 
 int Driver::countFiles(std::string directory) {
@@ -78,19 +82,27 @@ int Driver::countFiles(std::string directory) {
     return fileCount;
 }
 
-void Driver::saveLevelAsFile() {
-    std::string directory = "maps";
-    int filesNumber = countFiles(directory);
+void Driver::saveLevelAsFile(std::string fileName, std::string mapName, std::string mapAuthor, std::string mapId) {
+  std::ofstream outputFile("maps/" + fileName);
 
-    std::string filePath = "maps/editedLevelNumber" + std::to_string(filesNumber-3) + ".txt";
-    std::ofstream outputFile(filePath);
+  outputFile << mapName + "\n";
+  outputFile << mapAuthor + "\n";
+  outputFile << mapId << '\n';
 
-    outputFile << "Edited level " + std::to_string(filesNumber-3) + "\n";
-    outputFile << "Editor\n";
-    outputFile << _game->getMap()->getMapId() << '\n';
+  outputFile.close();
+}
 
-    _game->setFilePath(filePath);
-    _game->generateMenu(filePath);
+void Driver::saveEditedLevelAsFile() {
+  std::string directory = "maps";
+  int filesNumber = countFiles(directory);
+
+  std::string filePath =
+      "editedLevelNumber" + std::to_string(filesNumber - 3) + ".txt";
+
+  saveLevelAsFile(filePath, "Edited level " + std::to_string(filesNumber-3), "Editor", _game->getMap()->getMapId());
+
+  _game->setFilePath(filePath);
+  _game->generateMenu(filePath);
 }
 
 void Driver::showMenu() {

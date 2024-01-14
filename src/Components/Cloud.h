@@ -8,6 +8,7 @@ public:
   Cloud(int y, bool goingRight);
   ~Cloud();
 
+  // Getters
   [[nodiscard]] virtual int getX() const;
   [[nodiscard]] virtual int getY() const;
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const;

@@ -14,6 +14,7 @@ class EditorController : public Controller {
 public:
   EditorController(std::shared_ptr<GameEditor> editor);
 
+  // Controller methods
   virtual void mouseMove(short loc_x, short loc_y) override;
   virtual void mouseClick(short loc_x, short loc_y) override;
   virtual void keyPressed(int keycode) override;

@@ -12,6 +12,8 @@ class WinningMenu {
 public:
   WinningMenu(Driver *driver, std::string filePath);
   ~WinningMenu();
+
+  // Getters
   [[nodiscard]] virtual Fl_PNG_Image *getImage() const;
   [[nodiscard]] virtual std::vector<std::shared_ptr<Button>> getButtons() const;
 

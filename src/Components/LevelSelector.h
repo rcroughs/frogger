@@ -18,13 +18,14 @@ public:
   LevelSelector(Driver* driver);
   ~LevelSelector();
 
+  // Getters
   [[nodiscard]] virtual std::vector<std::shared_ptr<LevelButton>> getButtons() const;
   [[nodiscard]] virtual std::shared_ptr<MenuButton> getMenuButton() const;
   [[nodiscard]] virtual Fl_PNG_Image *getBg() const;
+
+  // Scroll up and down
   virtual void scrollUp();
   virtual void scrollDown();
-
-  virtual void update();
 
 private:
   std::vector<std::string> getFiles(std::string path);

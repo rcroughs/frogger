@@ -58,5 +58,3 @@ std::vector<std::string> LevelSelector::getFiles(std::string path) {
   }
   return files;
 }
-
-void LevelSelector::update() { return; }
