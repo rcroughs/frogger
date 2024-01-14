@@ -97,7 +97,7 @@ void Driver::saveEditedLevelAsFile() {
   int filesNumber = countFiles(directory);
 
   std::string filePath =
-      "editedLevelNumber" + std::to_string(filesNumber - 3) + ".txt";
+      "editedLevelNumber" + std::to_string(filesNumber - 6) + ".txt";
 
   saveLevelAsFile(filePath, "Edited level " + std::to_string(filesNumber-3), "Editor", _game->getMap()->getMapId());
 
