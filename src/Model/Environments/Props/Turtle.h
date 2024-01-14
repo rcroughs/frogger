@@ -16,7 +16,7 @@
 
 class Turtle : public Prop {
 public:
-  Turtle(float position, short turtleNumber);
+  Turtle(float position, short turtleNumber, float speed);
   ~Turtle();
 
   // Getters
@@ -43,6 +43,7 @@ private:
   Fl_PNG_Image *_img;
   bool _visible;
   unsigned int _invisibleTimer;
+  float _speed;
 };
 
 #endif // FROGGER_TURTLE_H
