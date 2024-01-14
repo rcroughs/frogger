@@ -27,13 +27,13 @@ void Log::move() {
   if (getRightCorner() >= 130) {
     _leftCorner = 0 - _size;
   } else {
-    _leftCorner = _leftCorner + _speed * (0.2f);
+    _leftCorner = _leftCorner + _speed * (0.13f);
   }
 }
 
 void Log::handleGame(Game *currentGame) {
   std::shared_ptr<Player> player = currentGame->getPlayer();
-  player->setPosition(Position{player->getPosition().x + (_speed * 0.2f),
+  player->setPosition(Position{player->getPosition().x + (_speed * 0.13f),
                                player->getPosition().y});
 }
 

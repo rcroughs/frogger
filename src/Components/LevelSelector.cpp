@@ -2,6 +2,7 @@
 #include "Buttons/MenuButton.h"
 #include <FL/Fl.H>
 #include <dirent.h>
+#include <algorithm>
 #include <memory>
 #include <vector>
 
@@ -56,5 +57,6 @@ std::vector<std::string> LevelSelector::getFiles(std::string path) {
   } else {
     perror("");
   }
+  sort(files.begin(), files.end());
   return files;
 }

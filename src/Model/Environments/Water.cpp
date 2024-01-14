@@ -61,7 +61,7 @@ void Water::generateLilyPads() {
 
 void Water::generateTurtles(short turtleId) {
   for (int i = 0; i < 3; i++) {
-    _props.push_back(std::make_shared<Turtle>(i * 30, turtleId));
+    _props.push_back(std::make_shared<Turtle>(i * 30, turtleId, _flow));
   }
   _id += "2";
   std::string speedLimitId;

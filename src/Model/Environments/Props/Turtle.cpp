@@ -2,9 +2,9 @@
 #include <ctime>
 #include <memory>
 
-Turtle::Turtle(float position, short turtleNumber)
+Turtle::Turtle(float position, short turtleNumber, float speed)
     : _position{position}, _turtleNumber{turtleNumber}, _visible{true},
-      _invisibleTimer{0} {
+      _invisibleTimer{0}, _speed{speed} {
   if (turtleNumber == 2) {
     _img = new Fl_PNG_Image("res/two_turtles.png");
     if (_img->fail() == Fl_Image::ERR_NO_IMAGE) {
@@ -40,14 +40,14 @@ void Turtle::move() {
   if (getRightCorner() < 0) {
     _position = 100;
   } else {
-    _position -= 0.2f;
+    _position -= _speed * 0.13f;
   }
 }
 
 void Turtle::handleGame(Game *currentGame) {
   std::shared_ptr<Player> player = currentGame->getPlayer();
   player->setPosition(
-      Position{player->getPosition().x - 0.2f, player->getPosition().y});
+      Position{player->getPosition().x - (_speed * 0.13f), player->getPosition().y});
 }
 
 bool Turtle::hasImage() const { return true; }
